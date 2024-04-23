@@ -3,8 +3,10 @@ ARG NODE_VERSION=20
 FROM node:${NODE_VERSION}-alpine AS base
 
 ENV APP_NAME="web"
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable pnpm
-RUN npm i -g turbo
+RUN pnpm install turbo --global
 RUN apk add --no-cache libc6-compat python3 g++ make
 RUN apk update
 
@@ -39,11 +41,11 @@ ENV NODE_ENV production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/apps/$APP_NAME/public ./apps/$APP_NAME/public
 COPY --from=installer /app/apps/$APP_NAME/next.config.js .
 COPY --from=installer /app/apps/$APP_NAME/package.json .
 COPY --from=installer --chown=nextjs:nodejs /app/apps/$APP_NAME/.next/standalone ./
 COPY --from=installer --chown=nextjs:nodejs /app/apps/$APP_NAME/.next/static ./apps/$APP_NAME/.next/static
+COPY --from=installer --chown=nextjs:nodejs /app/apps/$APP_NAME/public ./apps/$APP_NAME/public
 
 USER nextjs
 
