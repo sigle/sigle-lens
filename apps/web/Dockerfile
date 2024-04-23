@@ -7,8 +7,8 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable pnpm
 RUN pnpm install turbo --global
-RUN apk add --no-cache libc6-compat python3 g++ make
-RUN apk update
+RUN apk update && apk add --no-cache libc6-compat python3 g++ make
+
 
 FROM base AS builder
 # Set working directory
@@ -26,7 +26,7 @@ COPY .gitignore .gitignore
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 COPY --from=builder /app/out/pnpm-workspace.yaml ./pnpm-workspace.yaml
-RUN pnpm install --frozen-lockfile
+RUN pnpm install
 
 # Build the project and its dependencies
 COPY --from=builder /app/out/full/ .
