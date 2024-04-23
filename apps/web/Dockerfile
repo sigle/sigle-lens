@@ -7,10 +7,11 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable pnpm
 RUN pnpm install turbo --global
-RUN apk update && apk add --no-cache libc6-compat python3 g++ make
 
 
 FROM base AS builder
+RUN apk add --no-cache libc6-compat
+RUN apk update
 # Set working directory
 WORKDIR /app
 COPY . .
@@ -18,6 +19,7 @@ RUN turbo prune --scope=@sigle/$APP_NAME --docker
 
 # Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
+RUN apk add --no-cache libc6-compat
 RUN apk update
 WORKDIR /app
 
@@ -31,6 +33,7 @@ RUN pnpm install
 # Build the project and its dependencies
 COPY --from=builder /app/out/full/ .
 RUN pnpm turbo run build --filter=@sigle/$APP_NAME...
+
 
 FROM base AS runner
 WORKDIR /app
