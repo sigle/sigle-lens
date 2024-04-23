@@ -26,6 +26,7 @@ COPY .gitignore .gitignore
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 COPY --from=builder /app/out/pnpm-workspace.yaml ./pnpm-workspace.yaml
+RUN cat pnpm-lock.yaml
 RUN pnpm install
 
 # Build the project and its dependencies
@@ -41,7 +42,7 @@ ENV NODE_ENV production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-COPY --from=installer /app/apps/$APP_NAME/next.config.js .
+COPY --from=installer /app/apps/$APP_NAME/next.config.mjs .
 COPY --from=installer /app/apps/$APP_NAME/package.json .
 COPY --from=installer --chown=nextjs:nodejs /app/apps/$APP_NAME/.next/standalone ./
 COPY --from=installer --chown=nextjs:nodejs /app/apps/$APP_NAME/.next/static ./apps/$APP_NAME/.next/static
