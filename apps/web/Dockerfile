@@ -1,4 +1,5 @@
 ARG NODE_VERSION=20
+ARG RELEASE_ENV=testnet
 
 FROM node:${NODE_VERSION}-alpine AS base
 
@@ -32,6 +33,7 @@ RUN pnpm install
 
 # Build the project and its dependencies
 COPY --from=builder /app/out/full/ .
+RUN mv .env.$RELEASE_ENV .env.production
 RUN pnpm turbo run build --filter=@sigle/$APP_NAME...
 
 
