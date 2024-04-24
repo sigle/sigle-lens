@@ -34,7 +34,7 @@ RUN pnpm install
 
 # Build the project and its dependencies
 COPY --from=builder /app/out/full/ .
-RUN mv .env.$RELEASE_ENV .env.production
+RUN cp ./apps/$APP_NAME/.env.$RELEASE_ENV ./apps/$APP_NAME/.env.production
 RUN pnpm turbo run build --filter=@sigle/$APP_NAME...
 
 
