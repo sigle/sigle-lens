@@ -6,7 +6,7 @@ const nextConfig = {
 
   sentry: {
     // Prevents source maps from being exposed in production
-    hideSourceMaps: true,
+    hideSourceMaps: false,
     // Upload large source maps to Sentry
     widenClientFileUpload: true,
     // Disable logger to save bundle size
