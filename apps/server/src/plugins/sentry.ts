@@ -3,11 +3,12 @@ import * as Sentry from "@sentry/node";
 import { H3Error } from "h3";
 
 export default defineNitroPlugin((nitroApp) => {
-  const { sentry } = useRuntimeConfig();
+  const { SENTRY_DSN } = useRuntimeConfig();
 
   Sentry.init({
-    dsn: sentry.dsn,
-    environment: sentry.environment,
+    dsn: SENTRY_DSN,
+    // TODO setup correct environment
+    environment: "testnet",
   });
 
   nitroApp.hooks.hook("error", (error) => {

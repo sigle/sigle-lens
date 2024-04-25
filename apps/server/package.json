@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "build": "nitro build",
-    "dev": "nitro dev",
+    "dev": "dotenvx run --env-file=.env.development -- nitro dev",
     "prepare": "nitro prepare",
     "preview": "node .output/server/index.mjs"
   },
   "dependencies": {
+    "@dotenvx/dotenvx": "0.35.1",
     "@sentry/node": "7.112.2",
     "h3": "1.11.1"
   },
