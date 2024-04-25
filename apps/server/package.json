@@ -16,6 +16,6 @@
     "zod": "3.23.4"
   },
   "devDependencies": {
-    "nitropack": "2.9.6"
+    "nitropack": "npm:nitropack-nightly@2.10.0-28555945.eedc041e"
   }
 }
