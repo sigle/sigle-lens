@@ -45,6 +45,15 @@ export const Routes = {
       username: z.string(),
     })
   ),
+  publication: makeRoute(
+    ({ id }) => `/p/${id}`,
+    z.object({
+      id: z.string(),
+    }),
+    z.object({
+      referral: z.string().optional().nullable(),
+    })
+  ),
 };
 
 type RouteBuilder<Params extends z.ZodSchema, Search extends z.ZodSchema> = {
