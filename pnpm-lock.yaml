@@ -16,6 +16,13 @@ importers:
         version: 1.13.3-canary.3
 
   apps/server:
+    dependencies:
+      '@sentry/node':
+        specifier: 7.112.2
+        version: 7.112.2
+      h3:
+        specifier: 1.11.1
+        version: 1.11.1
     devDependencies:
       nitropack:
         specifier: 2.9.6

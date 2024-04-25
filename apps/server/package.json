@@ -8,6 +8,10 @@
     "prepare": "nitro prepare",
     "preview": "node .output/server/index.mjs"
   },
+  "dependencies": {
+    "@sentry/node": "7.112.2",
+    "h3": "1.11.1"
+  },
   "devDependencies": {
     "nitropack": "2.9.6"
   }
