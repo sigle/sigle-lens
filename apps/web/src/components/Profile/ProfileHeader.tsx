@@ -77,49 +77,46 @@ export const ProfileHeader = ({ profile }: ProfileHeaderProps) => {
             />
           </div>
 
-          {isCurrentUser ? (
-            <Button className="mt-5" color="gray" variant="soft" asChild>
-              <Link href="/dashboard/settings">
-                Edit profile <IconPencil size={16} />
-              </Link>
-            </Button>
-          ) : null}
+          <div className="mt-4 flex items-center gap-4">
+            {isCurrentUser ? (
+              <Button color="gray" variant="soft" asChild>
+                <Link href="/dashboard/settings">
+                  Edit profile <IconPencil size={16} />
+                </Link>
+              </Button>
+            ) : (
+              <>
+                {!profile.operations.isFollowedByMe.value ? (
+                  <FollowButton profile={profile} />
+                ) : (
+                  <UnfollowButton profile={profile} />
+                )}
+              </>
+            )}
 
-          {!isCurrentUser ? (
-            <div className="mt-4 flex items-center gap-4">
-              {!profile.operations.isFollowedByMe.value ? (
-                <FollowButton profile={profile} />
-              ) : (
-                <UnfollowButton profile={profile} />
-              )}
-              {!isCurrentUser ? (
-                <DropdownMenu.Root>
-                  <DropdownMenu.Trigger>
-                    <IconButton variant="ghost" color="gray" size="2">
-                      <IconDotsVertical size={16} />
-                    </IconButton>
-                  </DropdownMenu.Trigger>
-                  <DropdownMenu.Content
-                    align="end"
-                    variant="soft"
-                    color="gray"
-                    highContrast
-                  >
-                    <DropdownMenu.Item onClick={onCopyLink}>
-                      Copy link to profile
-                    </DropdownMenu.Item>
-                    {session?.type === SessionType.WithProfile ? (
-                      <DropdownMenu.Item
-                        onClick={() => setReportDialogOpen(true)}
-                      >
-                        Report profile
-                      </DropdownMenu.Item>
-                    ) : null}
-                  </DropdownMenu.Content>
-                </DropdownMenu.Root>
-              ) : null}
-            </div>
-          ) : null}
+            <DropdownMenu.Root>
+              <DropdownMenu.Trigger>
+                <IconButton variant="ghost" color="gray" size="2">
+                  <IconDotsVertical size={16} />
+                </IconButton>
+              </DropdownMenu.Trigger>
+              <DropdownMenu.Content
+                align="end"
+                variant="soft"
+                color="gray"
+                highContrast
+              >
+                <DropdownMenu.Item onClick={onCopyLink}>
+                  Copy link to profile
+                </DropdownMenu.Item>
+                {session?.type === SessionType.WithProfile && !isCurrentUser ? (
+                  <DropdownMenu.Item onClick={() => setReportDialogOpen(true)}>
+                    Report profile
+                  </DropdownMenu.Item>
+                ) : null}
+              </DropdownMenu.Content>
+            </DropdownMenu.Root>
+          </div>
         </div>
       </Container>
 
