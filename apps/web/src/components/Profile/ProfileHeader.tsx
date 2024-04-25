@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { cn } from "@/lib/cn";
 import {
   getProfileAvatarUrl,
@@ -20,6 +21,7 @@ import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 import { Routes } from "@/lib/routes";
 import { env } from "@/env";
 import { usePostHog } from "posthog-js/react";
+import { ReportProfileDialog } from "../Shared/Profile/ReportProfileDialog";
 
 interface ProfileHeaderProps {
   profile: Profile;
@@ -29,6 +31,7 @@ export const ProfileHeader = ({ profile }: ProfileHeaderProps) => {
   const posthog = usePostHog();
   const { copyToClipboard } = useCopyToClipboard();
   const { data: session } = useSession();
+  const [reportDialogOpen, setReportDialogOpen] = useState(false);
 
   const onCopyLink = () => {
     copyToClipboard(
@@ -105,10 +108,13 @@ export const ProfileHeader = ({ profile }: ProfileHeaderProps) => {
                     <DropdownMenu.Item onClick={onCopyLink}>
                       Copy link to profile
                     </DropdownMenu.Item>
-                    {/* TODO add report profile once Lens react SDK supports it */}
-                    {/* <DropdownMenu.Item>
-                  Report profile
-                </DropdownMenu.Item> */}
+                    {session?.type === SessionType.WithProfile ? (
+                      <DropdownMenu.Item
+                        onClick={() => setReportDialogOpen(true)}
+                      >
+                        Report profile
+                      </DropdownMenu.Item>
+                    ) : null}
                   </DropdownMenu.Content>
                 </DropdownMenu.Root>
               ) : null}
@@ -116,6 +122,12 @@ export const ProfileHeader = ({ profile }: ProfileHeaderProps) => {
           ) : null}
         </div>
       </Container>
+
+      <ReportProfileDialog
+        profile={profile}
+        open={reportDialogOpen}
+        onOpenChange={setReportDialogOpen}
+      />
     </>
   );
 };
