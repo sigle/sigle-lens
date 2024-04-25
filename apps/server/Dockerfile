@@ -2,7 +2,7 @@ ARG NODE_VERSION=20
 
 FROM node:${NODE_VERSION}-alpine AS base
 
-ENV APP_NAME="api-lens"
+ENV APP_NAME="server"
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable pnpm
