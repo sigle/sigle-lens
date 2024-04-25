@@ -1,3 +1,3 @@
-# Nitro starter
+# @sigle/server
 
-Look at the [nitro quick start](https://nitro.unjs.io/guide#quick-start) to learn more how to get started.
+- Swagger API documentation: [http://localhost:3001/\_nitro/swagger](http://localhost:3001/_nitro/swagger)
