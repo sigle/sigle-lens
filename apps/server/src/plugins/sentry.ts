@@ -1,14 +1,16 @@
 // Inspired by https://www.lichter.io/articles/nuxt3-sentry-recipe/
 import * as Sentry from "@sentry/node";
 import { H3Error } from "h3";
+import { env } from "~/env";
 
 export default defineNitroPlugin((nitroApp) => {
-  const { SENTRY_DSN } = useRuntimeConfig();
-
   Sentry.init({
-    dsn: SENTRY_DSN,
-    // TODO setup correct environment
-    environment: "testnet",
+    dsn: env.SENTRY_DSN,
+    environment: env.LENS_ENV === "production" ? "production" : "testnet",
+  });
+
+  nitroApp.hooks.hook("request", (event) => {
+    event.context.$sentry = Sentry;
   });
 
   nitroApp.hooks.hook("error", (error) => {
