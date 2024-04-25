@@ -1,19 +1,14 @@
 ARG NODE_VERSION=20
-ARG RELEASE_ENV=testnet
 
 FROM node:${NODE_VERSION}-alpine AS base
 
-ARG RELEASE_ENV
-ENV APP_NAME="web"
+ENV APP_NAME="api-lens"
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable pnpm
 RUN pnpm install turbo --global
 
-
 FROM base AS builder
-RUN apk add --no-cache libc6-compat
-RUN apk update
 # Set working directory
 WORKDIR /app
 COPY . .
@@ -36,25 +31,18 @@ RUN pnpm install
 # Build the project and its dependencies
 COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
-RUN cp ./apps/$APP_NAME/.env.$RELEASE_ENV ./apps/$APP_NAME/.env.production
 RUN pnpm turbo run build --filter=@sigle/$APP_NAME...
 
 
 FROM base AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
-
 # Don't run production as root
 RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+RUN adduser --system --uid 1001 nitro
 
-COPY --from=installer /app/apps/$APP_NAME/next.config.mjs .
-COPY --from=installer /app/apps/$APP_NAME/package.json .
-COPY --from=installer --chown=nextjs:nodejs /app/apps/$APP_NAME/.next/standalone ./
-COPY --from=installer --chown=nextjs:nodejs /app/apps/$APP_NAME/.next/static ./apps/$APP_NAME/.next/static
-COPY --from=installer --chown=nextjs:nodejs /app/apps/$APP_NAME/public ./apps/$APP_NAME/public
+COPY --from=installer --chown=nitro:nodejs /app/apps/$APP_NAME/.output ./.output
 
-USER nextjs
+USER nitro
 
-CMD node apps/$APP_NAME/server.js
+CMD node apps/$APP_NAME/.output/server/index.mjs
