@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { radixThemePreset } from "radix-themes-tw";
 
 const config: Config = {
   content: [
@@ -7,8 +8,16 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        white: "#ffffff",
+      },
+      borderRadius: {
+        none: "0px",
+      },
+    },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  presets: [radixThemePreset],
 };
 export default config;
