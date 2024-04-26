@@ -1,0 +1,36 @@
+services:
+  core_server:
+    build:
+      context: ./
+      dockerfile: ./apps/server/Dockerfile.dev
+    restart: always
+    ports:
+      - "3001:3001"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - NODE_ENV=development
+    develop:
+      watch:
+        - path: ./apps/server/package.json
+          action: rebuild
+        - path: ./apps/server/
+          target: /app/apps/server
+          action: sync
+
+  core_web:
+    build:
+      context: .
+      dockerfile: ./apps/web/Dockerfile.dev
+    restart: always
+    ports:
+      - 3000:3000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    develop:
+      watch:
+        - path: ./apps/web/package.json
+          action: rebuild
+        - path: ./apps/web/
+          target: /app/apps/web
+          action: sync
