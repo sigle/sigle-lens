@@ -10,7 +10,6 @@ export default defineNitroPlugin((nitroApp) => {
     event.context.$posthog = posthog;
   });
 
-  // closing Sentry on shutdown
   nitroApp.hooks.hookOnce("close", async () => {
     await posthog.shutdown();
   });

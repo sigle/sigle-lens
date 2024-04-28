@@ -2,3 +2,4 @@ pnpm-lock.yaml
 .next
 .nitro
 .output
+__generated__
