@@ -2,6 +2,7 @@
 
 import { Heading } from "@radix-ui/themes";
 import { SessionType, useSession } from "@lens-protocol/react-web";
+import { ProfileMetadata } from "@/components/Dashboard/Settings/ProfileMetadata/ProfileMetadata";
 import { ProfileManagers } from "@/components/Dashboard/Settings/ProfileManagers/ProfileManagers";
 
 export default function Settings() {
@@ -16,6 +17,7 @@ export default function Settings() {
     <div className="space-y-8 py-5">
       <Heading>Settings</Heading>
 
+      <ProfileMetadata profile={session.profile} />
       <ProfileManagers profile={session.profile} />
     </div>
   );
