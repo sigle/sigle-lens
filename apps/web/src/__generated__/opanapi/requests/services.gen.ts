@@ -35,9 +35,10 @@ export class ProfileService {
      * Upload profile metadata to Arweave.
      * @param data The data for the request.
      * @param data.requestBody
+     * @returns unknown Metadata uploaded
      * @throws ApiError
      */
-    public static postProfileUploadMetadata(data: $OpenApiTs['/profile/upload-metadata']['post']['req']): CancelablePromise<void> {
+    public static postProfileUploadMetadata(data: $OpenApiTs['/profile/upload-metadata']['post']['req']): CancelablePromise<$OpenApiTs['/profile/upload-metadata']['post']['res'][200]> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/profile/upload-metadata',

@@ -33,6 +33,17 @@ export type $OpenApiTs = {
                     };
                 };
             };
+            res: {
+                /**
+                 * Metadata uploaded
+                 */
+                200: {
+                    /**
+                     * Arweave transaction ID
+                     */
+                    id: string;
+                };
+            };
         };
     };
     '/_nitro/openapi.json': {

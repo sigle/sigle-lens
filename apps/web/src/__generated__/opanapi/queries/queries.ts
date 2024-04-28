@@ -32,6 +32,7 @@ export const useInternalServiceGetNitroSwagger = <TData = Common.InternalService
 * Upload profile metadata to Arweave.
 * @param data The data for the request.
 * @param data.requestBody
+* @returns unknown Metadata uploaded
 * @throws ApiError
 */
 export const useProfileServicePostProfileUploadMetadata = <TData = Common.ProfileServicePostProfileUploadMetadataMutationResult, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<TData, TError, {
