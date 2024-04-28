@@ -10,7 +10,7 @@ import {
 } from "@lens-protocol/metadata";
 import { IconBrandX } from "@tabler/icons-react";
 import { toast } from "sonner";
-import { useProfileServicePostProfileUploadMetadata } from "@/__generated__/opanapi/queries";
+import { useProfileServicePostApiProfileUploadMetadata } from "@/__generated__/opanapi/queries";
 
 const updateProfileMetadataSchema = z.object({
   name: z.string().optional(),
@@ -35,7 +35,7 @@ export const UpdateProfileMetadata = ({
   setEditingProfileMetadata,
 }: UpdateProfileMetadataProps) => {
   const { mutateAsync: uploadMetadata } =
-    useProfileServicePostProfileUploadMetadata();
+    useProfileServicePostApiProfileUploadMetadata();
   const { execute: updateProfileMetadata } = useSetProfileMetadata();
 
   const {
@@ -88,7 +88,7 @@ export const UpdateProfileMetadata = ({
       bio: formValues.bio || undefined,
       picture: formValues.picture || undefined,
       coverPicture: formValues.coverPicture || undefined,
-      attributes,
+      attributes: attributes.length ? attributes : undefined,
     });
     const uploadedMetadata = await uploadMetadata({
       requestBody: {

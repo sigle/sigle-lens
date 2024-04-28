@@ -17,4 +17,4 @@ export const useInternalServiceGetNitroScalarKey = "InternalServiceGetNitroScala
 export type InternalServiceGetNitroSwaggerDefaultResponse = Awaited<ReturnType<typeof InternalService.getNitroSwagger>>;
 export type InternalServiceGetNitroSwaggerQueryResult<TData = InternalServiceGetNitroSwaggerDefaultResponse, TError = unknown> = UseQueryResult<TData, TError>;
 export const useInternalServiceGetNitroSwaggerKey = "InternalServiceGetNitroSwagger";
-export type ProfileServicePostProfileUploadMetadataMutationResult = Awaited<ReturnType<typeof ProfileService.postProfileUploadMetadata>>;
+export type ProfileServicePostApiProfileUploadMetadataMutationResult = Awaited<ReturnType<typeof ProfileService.postApiProfileUploadMetadata>>;

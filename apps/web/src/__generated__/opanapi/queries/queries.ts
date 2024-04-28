@@ -35,8 +35,8 @@ export const useInternalServiceGetNitroSwagger = <TData = Common.InternalService
 * @returns unknown Metadata uploaded
 * @throws ApiError
 */
-export const useProfileServicePostProfileUploadMetadata = <TData = Common.ProfileServicePostProfileUploadMetadataMutationResult, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<TData, TError, {
+export const useProfileServicePostApiProfileUploadMetadata = <TData = Common.ProfileServicePostApiProfileUploadMetadataMutationResult, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<TData, TError, {
   requestBody: { metadata?: { [key: string]: unknown; }; };
 }, TContext>, "mutationFn">) => useMutation<TData, TError, {
   requestBody: { metadata?: { [key: string]: unknown; }; };
-}, TContext>({ mutationFn: ({ requestBody }) => ProfileService.postProfileUploadMetadata({ requestBody }) as unknown as Promise<TData>, ...options });
+}, TContext>({ mutationFn: ({ requestBody }) => ProfileService.postApiProfileUploadMetadata({ requestBody }) as unknown as Promise<TData>, ...options });

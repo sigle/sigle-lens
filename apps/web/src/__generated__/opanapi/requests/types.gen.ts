@@ -21,7 +21,7 @@ export type $OpenApiTs = {
             };
         };
     };
-    '/profile/upload-metadata': {
+    '/api/profile/upload-metadata': {
         post: {
             req: {
                 requestBody: {

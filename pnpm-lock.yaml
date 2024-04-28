@@ -35,6 +35,9 @@ importers:
       h3:
         specifier: 1.11.1
         version: 1.11.1
+      nitro-cors:
+        specifier: 0.7.1
+        version: 0.7.1
       posthog-node:
         specifier: 4.0.1
         version: 4.0.1
@@ -6016,6 +6019,9 @@ packages:
         optional: true
       sass:
         optional: true
+
+  nitro-cors@0.7.1:
+    resolution: {integrity: sha512-c/3d6L2vsGWtCdCwxbiItmnxTQZFE4+iUclvC7q4QBEEwPefBPmxCNiUNgNvtNmPhFkTmUf7LVfMeByvuv+6Ow==}
 
   nitropack-nightly@2.10.0-28555945.eedc041e:
     resolution: {integrity: sha512-7/G6hJ0WlzPXqHmQErEzIY/8svHdcfT5h+Awhyn6mj+qcLMXhHwqeM4CvHZn6dYINizimvbx3olEaIKRwJHbZQ==}
@@ -15875,6 +15881,13 @@ snapshots:
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
+
+  nitro-cors@0.7.1:
+    dependencies:
+      h3: 1.11.1
+      ufo: 1.5.3
+    transitivePeerDependencies:
+      - uWebSockets.js
 
   nitropack-nightly@2.10.0-28555945.eedc041e(idb-keyval@6.2.1):
     dependencies:

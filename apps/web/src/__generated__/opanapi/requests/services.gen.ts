@@ -38,10 +38,10 @@ export class ProfileService {
      * @returns unknown Metadata uploaded
      * @throws ApiError
      */
-    public static postProfileUploadMetadata(data: $OpenApiTs['/profile/upload-metadata']['post']['req']): CancelablePromise<$OpenApiTs['/profile/upload-metadata']['post']['res'][200]> {
+    public static postApiProfileUploadMetadata(data: $OpenApiTs['/api/profile/upload-metadata']['post']['req']): CancelablePromise<$OpenApiTs['/api/profile/upload-metadata']['post']['res'][200]> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/profile/upload-metadata',
+            url: '/api/profile/upload-metadata',
             body: data.requestBody,
             mediaType: 'undefined'
         });
