@@ -7,6 +7,7 @@
     "dev": "dotenvx run --env-file=.env.development.local --env-file=.env.development -- nitro dev",
     "prepare": "nitro prepare",
     "preview": "node .output/server/index.mjs",
+    "db:studio": "dotenvx run --env-file=.env.development -- drizzle-kit studio",
     "db:generate": "drizzle-kit generate:sqlite",
     "db:push": "dotenvx run --env-file=.env.development -- drizzle-kit push:sqlite"
   },
