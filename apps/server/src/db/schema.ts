@@ -5,6 +5,7 @@ import { nanoid } from "nanoid";
 export const users = sqliteTable("users", {
   // id refers to the user evm address
   id: text("id").primaryKey(),
+
   createdAt: text("created_at")
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
@@ -16,6 +17,7 @@ export type SelectUser = typeof users.$inferSelect;
 export const profiles = sqliteTable("profiles", {
   // id refers to the lens id
   id: text("id").primaryKey(),
+
   createdAt: text("created_at")
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
@@ -38,14 +40,15 @@ export const posts = sqliteTable("posts", {
   metaTitle: text("meta_title"),
   metaDescription: text("meta_description"),
   coverImage: text("cover_image"),
+
+  profileId: text("profile_id").notNull(),
+
   createdAt: integer("created_at", { mode: "timestamp" })
     .$defaultFn(() => new Date())
     .notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp" }).$onUpdate(
     () => new Date()
   ),
-
-  profileId: text("profile_id").notNull(),
 });
 
 export const postsRelations = relations(posts, ({ one }) => ({
