@@ -64,7 +64,7 @@ export default defineEventHandler(async (event) => {
     event: "metadata uploaded",
     properties: {
       profileId: event.context.user.profileId,
-      txId: id,
+      arweaveTxId: id,
       type: "profile",
     },
   });
