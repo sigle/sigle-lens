@@ -21,6 +21,21 @@ export type $OpenApiTs = {
             };
         };
     };
+    '/api/posts/{postId}': {
+        get: {
+            req: {
+                postId: string;
+            };
+            res: {
+                /**
+                 * Post entry.
+                 */
+                200: {
+                    id: string;
+                };
+            };
+        };
+    };
     '/api/posts/create': {
         post: {
             res: {

@@ -32,6 +32,23 @@ export class AppRoutesService {
 
 export class PostsService {
     /**
+     * Get post for the current profile.
+     * @param data The data for the request.
+     * @param data.postId
+     * @returns unknown Post entry.
+     * @throws ApiError
+     */
+    public static getApiPostsByPostId(data: $OpenApiTs['/api/posts/{postId}']['get']['req']): CancelablePromise<$OpenApiTs['/api/posts/{postId}']['get']['res'][200]> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/posts/{postId}',
+            path: {
+                postId: data.postId
+            }
+        });
+    }
+    
+    /**
      * Create a new post for the current profile.
      * @returns unknown Post created.
      * @throws ApiError
