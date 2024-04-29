@@ -11,6 +11,7 @@ export const OpenAPIInterceptor = () => {
     const doSomethingWithRequest = (request: RequestInit) => {
       request.headers = {
         ...request.headers,
+        "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
       };
       return request;
