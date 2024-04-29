@@ -1,4 +1,6 @@
 "use client";
+
+import dynamic from "next/dynamic";
 import { polygonAmoy, polygon } from "viem/chains";
 import { createConfig, WagmiProvider } from "wagmi";
 import {
@@ -12,6 +14,7 @@ import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { PostHogProvider } from "posthog-js/react";
 import posthog from "posthog-js";
+import { Toaster } from "sonner";
 import { ThemeProvider } from "next-themes";
 import { Theme } from "@radix-ui/themes";
 import { env } from "@/env";
@@ -44,6 +47,19 @@ const lensConfig: LensConfig = {
     env.NEXT_PUBLIC_LENS_ENV === "production" ? production : development,
 };
 
+/**
+ *
+ */
+const OpenAPIInterceptor = dynamic(
+  () =>
+    import("@/components/Authentication/OpenAPIInterceptor").then(
+      (mod) => mod.OpenAPIInterceptor
+    ),
+  {
+    ssr: false,
+  }
+);
+
 export const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
@@ -59,7 +75,9 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
               <ConnectKitProvider>
                 <LensProvider config={lensConfig}>
                   {children}
+                  <OpenAPIInterceptor />
                   <PostHogInit />
+                  <Toaster closeButton />
                 </LensProvider>
               </ConnectKitProvider>
             </WagmiProvider>
