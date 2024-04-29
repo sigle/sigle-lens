@@ -32,6 +32,12 @@ export type $OpenApiTs = {
                  */
                 200: {
                     id: string;
+                    title: string;
+                    content?: string;
+                    metaTitle?: string;
+                    metaDescription?: string;
+                    coverImage?: string;
+                    createdAt?: string;
                 };
             };
         };

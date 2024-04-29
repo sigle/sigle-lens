@@ -1,10 +1,12 @@
 "use client";
 
-import { Callout, Container, Flex } from "@radix-ui/themes";
+import { Callout, Flex } from "@radix-ui/themes";
 import { notFound, useParams } from "next/navigation";
 import { IconInfoCircle } from "@tabler/icons-react";
 import { PageEditorSkeleton } from "../../new/loading";
 import { usePostsServiceGetApiPostsByPostId } from "@/__generated__/opanapi/queries";
+import { EditorFormProvider } from "@/components/Editor/EditorFormProvider";
+import { EditorHeader } from "@/components/Editor/Header/EditorHeader";
 
 export default function PostEdit() {
   const params = useParams();
@@ -49,18 +51,16 @@ const PostEditDraft = ({ postId }: { postId: string }) => {
     notFound();
   }
 
-  return null;
-
-  // return (
-  //   <EditorFormProvider type="draft" post={post}>
-  //     <EditorHeader />
-  //     <Container size="2">
-  //       <EditorTitle />
-  //       <EditorCoverImage />
-  //       <EditorTipTap />
-  //     </Container>
-  //     <EditorSettings />
-  //     <PublishDialog postId={postId} />
-  //   </EditorFormProvider>
-  // );
+  return (
+    <EditorFormProvider type="draft" post={post}>
+      <EditorHeader />
+      {/* <Container size="2">
+        <EditorTitle />
+        <EditorCoverImage />
+        <EditorTipTap />
+      </Container>
+      <EditorSettings />
+      <PublishDialog postId={postId} /> */}
+    </EditorFormProvider>
+  );
 };
