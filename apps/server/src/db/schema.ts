@@ -1,5 +1,5 @@
 import { relations, sql } from "drizzle-orm";
-import { sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
 import { nanoid } from "nanoid";
 
 export const users = sqliteTable("users", {
@@ -38,11 +38,12 @@ export const posts = sqliteTable("posts", {
   metaTitle: text("meta_title"),
   metaDescription: text("meta_description"),
   coverImage: text("cover_image"),
-  createdAt: text("created_at")
-    .default(sql`CURRENT_TIMESTAMP`)
+  createdAt: integer("created_at", { mode: "timestamp" })
+    .$defaultFn(() => new Date())
     .notNull(),
-  // TODO - add updatedAt
-  // updatedAt: text("updated_at").$onUpdate(() => new Date().getTime()),
+  updatedAt: integer("updated_at", { mode: "timestamp" }).$onUpdate(
+    () => new Date()
+  ),
 
   profileId: text("profile_id").notNull(),
 });
