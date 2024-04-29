@@ -1,7 +1,7 @@
 // generated with @7nohe/openapi-react-query-codegen@1.2.0 
 
 import { UseMutationOptions, UseQueryOptions, useMutation, useQuery } from "@tanstack/react-query";
-import { AppRoutesService, InternalService, ProfileService } from "../requests/services.gen";
+import { AppRoutesService, InternalService, PostsService, ProfileService } from "../requests/services.gen";
 import * as Common from "./common";
 /**
 * @returns unknown OK
@@ -28,6 +28,12 @@ export const useInternalServiceGetNitroScalar = <TData = Common.InternalServiceG
 * @throws ApiError
 */
 export const useInternalServiceGetNitroSwagger = <TData = Common.InternalServiceGetNitroSwaggerDefaultResponse, TError = unknown, TQueryKey extends Array<unknown> = unknown[]>(queryKey?: TQueryKey, options?: Omit<UseQueryOptions<TData, TError>, "queryKey" | "queryFn">) => useQuery<TData, TError>({ queryKey: [Common.useInternalServiceGetNitroSwaggerKey, ...(queryKey ?? [])], queryFn: () => InternalService.getNitroSwagger() as TData, ...options });
+/**
+* Create a new post for the current profile.
+* @returns unknown Post created.
+* @throws ApiError
+*/
+export const usePostsServicePostApiPostsCreate = <TData = Common.PostsServicePostApiPostsCreateMutationResult, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<TData, TError, void, TContext>, "mutationFn">) => useMutation<TData, TError, void, TContext>({ mutationFn: () => PostsService.postApiPostsCreate() as unknown as Promise<TData>, ...options });
 /**
 * Upload profile metadata to Arweave.
 * @param data The data for the request.

@@ -30,6 +30,21 @@ export class AppRoutesService {
     
 }
 
+export class PostsService {
+    /**
+     * Create a new post for the current profile.
+     * @returns unknown Post created.
+     * @throws ApiError
+     */
+    public static postApiPostsCreate(): CancelablePromise<$OpenApiTs['/api/posts/create']['post']['res'][200]> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/posts/create'
+        });
+    }
+    
+}
+
 export class ProfileService {
     /**
      * Upload profile metadata to Arweave.

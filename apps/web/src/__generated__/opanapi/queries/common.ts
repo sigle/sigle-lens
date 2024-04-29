@@ -1,7 +1,7 @@
 // generated with @7nohe/openapi-react-query-codegen@1.2.0 
 
 import { UseQueryResult } from "@tanstack/react-query";
-import { AppRoutesService, InternalService, ProfileService } from "../requests/services.gen";
+import { AppRoutesService, InternalService, PostsService, ProfileService } from "../requests/services.gen";
 export type AppRoutesServiceGetDefaultResponse = Awaited<ReturnType<typeof AppRoutesService.get>>;
 export type AppRoutesServiceGetQueryResult<TData = AppRoutesServiceGetDefaultResponse, TError = unknown> = UseQueryResult<TData, TError>;
 export const useAppRoutesServiceGetKey = "AppRoutesServiceGet";
@@ -17,4 +17,5 @@ export const useInternalServiceGetNitroScalarKey = "InternalServiceGetNitroScala
 export type InternalServiceGetNitroSwaggerDefaultResponse = Awaited<ReturnType<typeof InternalService.getNitroSwagger>>;
 export type InternalServiceGetNitroSwaggerQueryResult<TData = InternalServiceGetNitroSwaggerDefaultResponse, TError = unknown> = UseQueryResult<TData, TError>;
 export const useInternalServiceGetNitroSwaggerKey = "InternalServiceGetNitroSwagger";
+export type PostsServicePostApiPostsCreateMutationResult = Awaited<ReturnType<typeof PostsService.postApiPostsCreate>>;
 export type ProfileServicePostApiProfileUploadMetadataMutationResult = Awaited<ReturnType<typeof ProfileService.postApiProfileUploadMetadata>>;

@@ -21,6 +21,18 @@ export type $OpenApiTs = {
             };
         };
     };
+    '/api/posts/create': {
+        post: {
+            res: {
+                /**
+                 * Post created.
+                 */
+                200: {
+                    id: string;
+                };
+            };
+        };
+    };
     '/api/profile/upload-metadata': {
         post: {
             req: {
