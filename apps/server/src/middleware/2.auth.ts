@@ -20,6 +20,11 @@ export interface AuthenticatedUser {
  * The address and lens profile id are extracted from the token and injected into the event context.
  */
 export default defineEventHandler(async (event) => {
+  // Only apply middleware for /api/** routes
+  if (!event.path.startsWith("/api")) {
+    return;
+  }
+
   const accessToken = event.headers
     .get("authorization")
     ?.replace("Bearer ", "");
