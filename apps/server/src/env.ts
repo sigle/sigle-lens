@@ -3,6 +3,7 @@ import { z } from "zod";
 
 export const env = createEnv({
   server: {
+    NODE_ENV: z.enum(["development", "production"]),
     SENTRY_DSN: z.string().url().optional(),
     POSTHOG_API_KEY: z.string().optional(),
     LENS_ENV: z.enum(["development", "production"]),

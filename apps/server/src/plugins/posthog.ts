@@ -2,10 +2,11 @@
 import { PostHog } from "posthog-node";
 import { env } from "~/env";
 
-// TODO test that this is not creating unrelated issues on dev
-const posthog = new PostHog(env.POSTHOG_API_KEY || "dev", {
-  // TODO enable debug on dev
-});
+const posthog = new PostHog(env.POSTHOG_API_KEY || "dev");
+
+// if (env.NODE_ENV === "development") {
+//   posthog.debug(true);
+// }
 
 export default defineNitroPlugin((nitroApp) => {
   nitroApp.hooks.hook("request", (event) => {
