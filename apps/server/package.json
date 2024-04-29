@@ -12,7 +12,7 @@
     "db:push": "dotenvx run --env-file=.env.development -- drizzle-kit push:sqlite"
   },
   "dependencies": {
-    "@dotenvx/dotenvx": "0.35.1",
+    "@dotenvx/dotenvx": "0.37.0",
     "@irys/sdk": "0.1.22",
     "@lens-protocol/client": "2.1.1",
     "@lens-protocol/metadata": "1.1.6",
