@@ -33,7 +33,10 @@ export default defineEventHandler(async (event) => {
 
   const isTokenValid = await lensClient.authentication.verify(accessToken);
   if (!isTokenValid) {
-    return false;
+    throw createError({
+      status: 401,
+      message: "Unauthorized",
+    });
   }
 
   const decoded = jwtDecode<LensJwtPayload>(accessToken);

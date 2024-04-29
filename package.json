@@ -7,5 +7,10 @@
   "devDependencies": {
     "prettier": "3.2.5",
     "turbo": "1.13.3-canary.3"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "jwt-decode@4.0.0": "patches/jwt-decode@4.0.0.patch"
+    }
   }
 }

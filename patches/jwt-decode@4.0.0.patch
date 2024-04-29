@@ -1,0 +1,9 @@
+diff --git a/build/esm/index.js b/build/esm/index.js
+index 42f50f05a82dc51e38a2d56ce79e505329b42198..5085447a0f59ba033bedbc2459b36da0d39feb2f 100644
+--- a/build/esm/index.js
++++ b/build/esm/index.js
+@@ -55,3 +55,4 @@ export function jwtDecode(token, options) {
+         throw new InvalidTokenError(`Invalid token specified: invalid json for part #${pos + 1} (${e.message})`);
+     }
+ }
++export default jwtDecode;

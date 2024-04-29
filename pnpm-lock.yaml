@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  jwt-decode@4.0.0:
+    hash: 6hgjsi6xoayjihtfkohso4nifa
+    path: patches/jwt-decode@4.0.0.patch
+
 importers:
 
   .:
@@ -46,7 +51,7 @@ importers:
         version: 1.11.1
       jwt-decode:
         specifier: 4.0.0
-        version: 4.0.0
+        version: 4.0.0(patch_hash=6hgjsi6xoayjihtfkohso4nifa)
       nitro-cors:
         specifier: 0.7.1
         version: 0.7.1
@@ -66,9 +71,6 @@ importers:
 
   apps/web:
     dependencies:
-      '@7nohe/openapi-react-query-codegen':
-        specifier: 1.2.0
-        version: 1.2.0(@hey-api/openapi-ts@0.42.1(typescript@5.4.5))(commander@12.0.0)(glob@10.3.12)(ts-morph@22.0.0)(typescript@5.4.5)
       '@hookform/resolvers':
         specifier: 3.3.4
         version: 3.3.4(react-hook-form@7.51.3(react@18.2.0))
@@ -151,6 +153,9 @@ importers:
         specifier: 4.5.2
         version: 4.5.2(@types/react@18.2.79)(react@18.2.0)
     devDependencies:
+      '@7nohe/openapi-react-query-codegen':
+        specifier: 1.2.0
+        version: 1.2.0(@hey-api/openapi-ts@0.42.1(typescript@5.4.5))(commander@12.0.0)(glob@10.3.12)(ts-morph@22.0.0)(typescript@5.4.5)
       '@tailwindcss/typography':
         specifier: 0.5.12
         version: 0.5.12(tailwindcss@3.4.3)
@@ -16926,7 +16931,7 @@ snapshots:
 
   jwt-decode@3.1.2: {}
 
-  jwt-decode@4.0.0: {}
+  jwt-decode@4.0.0(patch_hash=6hgjsi6xoayjihtfkohso4nifa): {}
 
   keccak@3.0.4:
     dependencies:

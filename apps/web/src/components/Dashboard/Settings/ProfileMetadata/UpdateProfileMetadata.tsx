@@ -35,7 +35,13 @@ export const UpdateProfileMetadata = ({
   setEditingProfileMetadata,
 }: UpdateProfileMetadataProps) => {
   const { mutateAsync: uploadMetadata } =
-    useProfileServicePostApiProfileUploadMetadata();
+    useProfileServicePostApiProfileUploadMetadata({
+      onError: (error: { message: string }) => {
+        toast.error("Failed to upload metadata", {
+          description: error.message,
+        });
+      },
+    });
   const { execute: updateProfileMetadata } = useSetProfileMetadata();
 
   const {
