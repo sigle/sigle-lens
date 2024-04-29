@@ -6,3 +6,7 @@ dist
 .output
 .env
 .env*.local
+
+# Local Database
+sqlite.db
+sqlite.db-*

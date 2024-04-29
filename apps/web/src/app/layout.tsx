@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Toaster } from "sonner";
 import "./globals.css";
 import { Providers } from "./providers";
 import { cn } from "@/lib/cn";
@@ -39,10 +38,7 @@ export default function RootLayout({
         className={cn(inter.className, "antialiased")}
         suppressHydrationWarning
       >
-        <Providers>
-          <Toaster closeButton />
-          {children}
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

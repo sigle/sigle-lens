@@ -6,11 +6,13 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "codegen": "openapi-rq -i http://localhost:3001/_nitro/openapi.json --output ./src/__generated__/opanapi"
   },
   "dependencies": {
     "@hookform/resolvers": "3.3.4",
     "@lens-protocol/client": "2.1.1",
+    "@lens-protocol/metadata": "1.1.6",
     "@lens-protocol/react-web": "2.1.1",
     "@lens-protocol/wagmi": "4.1.1",
     "@radix-ui/themes": "3.0.2",
@@ -23,7 +25,7 @@
     "date-fns": "3.6.0",
     "next": "14.2.3",
     "next-themes": "0.3.0",
-    "posthog-js": "1.129.0",
+    "posthog-js": "1.130.1",
     "query-string": "9.0.0",
     "react": "18.2.0",
     "react-cool-inview": "3.0.1",
@@ -31,13 +33,14 @@
     "react-hook-form": "7.51.3",
     "sonner": "1.4.41",
     "tailwind-merge": "2.3.0",
-    "viem": "2.9.26",
-    "wagmi": "2.5.22",
+    "viem": "2.9.28",
+    "wagmi": "2.7.0",
     "zod": "3.23.4",
     "zustand": "4.5.2"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "0.5.12",
+    "@7nohe/openapi-react-query-codegen": "1.2.0",
+    "@tailwindcss/typography": "0.5.13",
     "@types/node": "20.12.7",
     "@types/react": "18.2.79",
     "@types/react-dom": "18.2.25",
