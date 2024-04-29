@@ -1,3 +1,7 @@
+import { and, eq } from "drizzle-orm";
+import { db } from "~/db/db";
+import { posts } from "~/db/schema";
+
 defineRouteMeta({
   openAPI: {
     tags: ["posts"],
@@ -19,9 +23,6 @@ defineRouteMeta({
           },
         },
       },
-      404: {
-        description: "Post not found.",
-      },
     },
   },
 });
@@ -29,5 +30,18 @@ defineRouteMeta({
 export default defineEventHandler((event) => {
   const postId = getRouterParam(event, "postId");
 
-  return { id: "todo" };
+  const post = db
+    .select({
+      id: posts.id,
+    })
+    .from(posts)
+    .where(
+      and(
+        eq(posts.id as any, postId),
+        eq(posts.profileId, event.context.user.profileId)
+      )
+    )
+    .then((rows) => rows[0]);
+
+  return post;
 });

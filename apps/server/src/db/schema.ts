@@ -32,9 +32,7 @@ export type SelectProfile = typeof profiles.$inferSelect;
 
 export const posts = sqliteTable("posts", {
   // id refers to the lens id
-  id: text("id")
-    .primaryKey()
-    .$defaultFn(() => nanoid()),
+  id: text("id").primaryKey().$defaultFn(nanoid),
   title: text("title").notNull(),
   content: text("content").notNull(),
   metaTitle: text("meta_title"),
