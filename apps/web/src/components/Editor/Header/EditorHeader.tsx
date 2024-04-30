@@ -11,6 +11,7 @@ import { cn } from "@/lib/cn";
 import { useEditorStore } from "../store";
 import { EditorPostFormData } from "../EditorFormProvider";
 import { EditorPublish } from "./EditorPublish";
+import { EditorSave } from "./EditorSave";
 
 const headerIconSize = 20;
 
@@ -69,7 +70,7 @@ export const EditorHeader = () => {
               <IconArrowLeft size={headerIconSize} />
             </Link>
           </IconButton>
-          {/* {type === "draft" ? <EditorSave /> : null} */}
+          {type === "draft" ? <EditorSave /> : null}
         </Flex>
         <Flex align="center" gap="6">
           <EditorPublish />
