@@ -49,6 +49,26 @@ export class PostsService {
     }
     
     /**
+     * Update the post for the current profile.
+     * @param data The data for the request.
+     * @param data.postId
+     * @param data.requestBody
+     * @returns unknown Post updated.
+     * @throws ApiError
+     */
+    public static postApiPostsByPostIdUpdate(data: $OpenApiTs['/api/posts/{postId}/update']['post']['req']): CancelablePromise<$OpenApiTs['/api/posts/{postId}/update']['post']['res'][200]> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/posts/{postId}/update',
+            path: {
+                postId: data.postId
+            },
+            body: data.requestBody,
+            mediaType: 'undefined'
+        });
+    }
+    
+    /**
      * Create a new post for the current profile.
      * @returns unknown Post created.
      * @throws ApiError

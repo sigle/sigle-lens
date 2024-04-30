@@ -10,6 +10,7 @@ import { useFormContext } from "react-hook-form";
 import { cn } from "@/lib/cn";
 import { useEditorStore } from "../store";
 import { EditorPostFormData } from "../EditorFormProvider";
+import { EditorPublish } from "./EditorPublish";
 
 const headerIconSize = 20;
 
@@ -71,7 +72,7 @@ export const EditorHeader = () => {
           {/* {type === "draft" ? <EditorSave /> : null} */}
         </Flex>
         <Flex align="center" gap="6">
-          {/* <EditorPublish /> */}
+          <EditorPublish />
           <IconButton
             size="2"
             variant="ghost"

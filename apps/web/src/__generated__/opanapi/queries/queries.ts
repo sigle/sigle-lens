@@ -39,6 +39,21 @@ export const useInternalServiceGetNitroScalar = <TData = Common.InternalServiceG
 */
 export const useInternalServiceGetNitroSwagger = <TData = Common.InternalServiceGetNitroSwaggerDefaultResponse, TError = unknown, TQueryKey extends Array<unknown> = unknown[]>(queryKey?: TQueryKey, options?: Omit<UseQueryOptions<TData, TError>, "queryKey" | "queryFn">) => useQuery<TData, TError>({ queryKey: [Common.useInternalServiceGetNitroSwaggerKey, ...(queryKey ?? [])], queryFn: () => InternalService.getNitroSwagger() as TData, ...options });
 /**
+* Update the post for the current profile.
+* @param data The data for the request.
+* @param data.postId
+* @param data.requestBody
+* @returns unknown Post updated.
+* @throws ApiError
+*/
+export const usePostsServicePostApiPostsByPostIdUpdate = <TData = Common.PostsServicePostApiPostsByPostIdUpdateMutationResult, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<TData, TError, {
+  postId: string;
+  requestBody: { title: string; content: string; metaTitle?: string; metaDescription?: string; coverImage?: string; };
+}, TContext>, "mutationFn">) => useMutation<TData, TError, {
+  postId: string;
+  requestBody: { title: string; content: string; metaTitle?: string; metaDescription?: string; coverImage?: string; };
+}, TContext>({ mutationFn: ({ postId, requestBody }) => PostsService.postApiPostsByPostIdUpdate({ postId, requestBody }) as unknown as Promise<TData>, ...options });
+/**
 * Create a new post for the current profile.
 * @returns unknown Post created.
 * @throws ApiError

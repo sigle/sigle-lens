@@ -42,6 +42,28 @@ export type $OpenApiTs = {
             };
         };
     };
+    '/api/posts/{postId}/update': {
+        post: {
+            req: {
+                postId: string;
+                requestBody: {
+                    title: string;
+                    content: string;
+                    metaTitle?: string;
+                    metaDescription?: string;
+                    coverImage?: string;
+                };
+            };
+            res: {
+                /**
+                 * Post updated.
+                 */
+                200: {
+                    id: string;
+                };
+            };
+        };
+    };
     '/api/posts/create': {
         post: {
             res: {
