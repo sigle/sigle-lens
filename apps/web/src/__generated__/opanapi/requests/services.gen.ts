@@ -3,7 +3,7 @@
 import type { CancelablePromise } from './core/CancelablePromise';
 import { OpenAPI } from './core/OpenAPI';
 import { request as __request } from './core/request';
-import type { GetResponse, GetHealthResponse, GetApiPostsByPostIdData, GetApiPostsByPostIdResponse, PostApiPostsByPostIdUpdateData, PostApiPostsByPostIdUpdateResponse, PostApiPostsCreateResponse, GetApiPostsListResponse, PostApiProfileUploadMetadataData, PostApiProfileUploadMetadataResponse, GetNitroOpenapiJsonResponse, GetNitroScalarResponse, GetNitroSwaggerResponse } from './types.gen';
+import type { GetResponse, GetHealthResponse, GetApiPostsByPostIdData, GetApiPostsByPostIdResponse, PostApiPostsByPostIdDeleteData, PostApiPostsByPostIdDeleteResponse, PostApiPostsByPostIdUpdateData, PostApiPostsByPostIdUpdateResponse, PostApiPostsCreateResponse, GetApiPostsListResponse, PostApiProfileUploadMetadataData, PostApiProfileUploadMetadataResponse, GetNitroOpenapiJsonResponse, GetNitroScalarResponse, GetNitroSwaggerResponse } from './types.gen';
 
 export class AppRoutesService {
     /**
@@ -42,6 +42,23 @@ export class PostsService {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/posts/{postId}',
+            path: {
+                postId: data.postId
+            }
+        });
+    }
+    
+    /**
+     * Delete the post for the current profile.
+     * @param data The data for the request.
+     * @param data.postId
+     * @returns unknown OK
+     * @throws ApiError
+     */
+    public static postApiPostsByPostIdDelete(data: PostApiPostsByPostIdDeleteData): CancelablePromise<PostApiPostsByPostIdDeleteResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/posts/{postId}/delete',
             path: {
                 postId: data.postId
             }

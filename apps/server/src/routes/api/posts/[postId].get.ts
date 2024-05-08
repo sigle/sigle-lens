@@ -13,7 +13,7 @@ defineRouteMeta({
           "application/json": {
             schema: {
               type: "object",
-              required: ["id", "title"],
+              required: ["id", "title", "createdAt"],
               properties: {
                 id: {
                   type: "string",

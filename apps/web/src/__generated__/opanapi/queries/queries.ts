@@ -45,6 +45,18 @@ export const useInternalServiceGetNitroScalar = <TData = Common.InternalServiceG
 */
 export const useInternalServiceGetNitroSwagger = <TData = Common.InternalServiceGetNitroSwaggerDefaultResponse, TError = unknown, TQueryKey extends Array<unknown> = unknown[]>(queryKey?: TQueryKey, options?: Omit<UseQueryOptions<TData, TError>, "queryKey" | "queryFn">) => useQuery<TData, TError>({ queryKey: Common.UseInternalServiceGetNitroSwaggerKeyFn(), queryFn: () => InternalService.getNitroSwagger() as TData, ...options });
 /**
+* Delete the post for the current profile.
+* @param data The data for the request.
+* @param data.postId
+* @returns unknown OK
+* @throws ApiError
+*/
+export const usePostsServicePostApiPostsByPostIdDelete = <TData = Common.PostsServicePostApiPostsByPostIdDeleteMutationResult, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<TData, TError, {
+  postId: string;
+}, TContext>, "mutationFn">) => useMutation<TData, TError, {
+  postId: string;
+}, TContext>({ mutationFn: ({ postId }) => PostsService.postApiPostsByPostIdDelete({ postId }) as unknown as Promise<TData>, ...options });
+/**
 * Update the post for the current profile.
 * @param data The data for the request.
 * @param data.postId

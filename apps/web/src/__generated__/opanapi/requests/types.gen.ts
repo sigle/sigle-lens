@@ -15,8 +15,14 @@ export type GetApiPostsByPostIdResponse = {
     metaTitle?: string;
     metaDescription?: string;
     coverImage?: string;
-    createdAt?: string;
+    createdAt: string;
 };
+
+export type PostApiPostsByPostIdDeleteData = {
+    postId: string;
+};
+
+export type PostApiPostsByPostIdDeleteResponse = unknown;
 
 export type PostApiPostsByPostIdUpdateData = {
     postId: string;
@@ -44,7 +50,7 @@ export type GetApiPostsListResponse = Array<{
     metaTitle?: string;
     metaDescription?: string;
     coverImage?: string;
-    createdAt?: string;
+    createdAt: string;
     updatedAt?: string;
 }>;
 
@@ -109,8 +115,21 @@ export type $OpenApiTs = {
                     metaTitle?: string;
                     metaDescription?: string;
                     coverImage?: string;
-                    createdAt?: string;
+                    createdAt: string;
                 };
+            };
+        };
+    };
+    '/api/posts/{postId}/delete': {
+        post: {
+            req: {
+                postId: string;
+            };
+            res: {
+                /**
+                 * OK
+                 */
+                200: unknown;
             };
         };
     };
@@ -161,7 +180,7 @@ export type $OpenApiTs = {
                     metaTitle?: string;
                     metaDescription?: string;
                     coverImage?: string;
-                    createdAt?: string;
+                    createdAt: string;
                     updatedAt?: string;
                 }>;
             };
