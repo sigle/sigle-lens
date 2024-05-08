@@ -12,23 +12,23 @@
     "db:push": "dotenvx run --env-file=.env.development -- drizzle-kit push:sqlite"
   },
   "dependencies": {
-    "@dotenvx/dotenvx": "0.37.0",
-    "@irys/sdk": "0.1.22",
+    "@dotenvx/dotenvx": "0.37.1",
+    "@irys/sdk": "0.1.24",
     "@lens-protocol/client": "2.1.1",
     "@lens-protocol/metadata": "1.1.6",
     "@libsql/client": "0.6.0",
-    "@sentry/node": "7.112.2",
+    "@sentry/node": "7.114.0",
     "@t3-oss/env-core": "0.10.1",
-    "drizzle-orm": "0.30.9",
+    "drizzle-orm": "0.30.10",
     "h3": "1.11.1",
     "jwt-decode": "4.0.0",
     "nanoid": "5.0.7",
     "nitro-cors": "0.7.1",
     "posthog-node": "4.0.1",
-    "zod": "3.23.4"
+    "zod": "3.23.7"
   },
   "devDependencies": {
-    "drizzle-kit": "0.20.17",
+    "drizzle-kit": "0.20.18",
     "nitropack": "npm:nitropack-nightly@2.10.0-28555945.eedc041e"
   }
 }
