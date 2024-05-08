@@ -1,4 +1,4 @@
-import { and, eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { db } from "~/db/db";
 import { posts } from "~/db/schema";
 
@@ -38,6 +38,9 @@ defineRouteMeta({
                   createdAt: {
                     type: "string",
                   },
+                  updatedAt: {
+                    type: "string",
+                  },
                 },
               },
             },
@@ -48,10 +51,9 @@ defineRouteMeta({
   },
 });
 
-export default defineEventHandler((event) => {
-  const postId = getRouterParam(event, "postId");
-
-  const post = db
+export default defineEventHandler(async (event) => {
+  // TODO limit param
+  const postsList = await db
     .select({
       id: posts.id,
       title: posts.title,
@@ -60,15 +62,11 @@ export default defineEventHandler((event) => {
       metaDescription: posts.metaDescription,
       coverImage: posts.coverImage,
       createdAt: posts.createdAt,
+      updatedAt: posts.updatedAt,
     })
     .from(posts)
-    .where(
-      and(
-        eq(posts.id as any, postId),
-        eq(posts.profileId, event.context.user.profileId)
-      )
-    )
-    .then((rows) => rows[0]);
+    .where(eq(posts.profileId, event.context.user.profileId))
+    .orderBy(desc(posts.updatedAt));
 
-  return post;
+  return postsList;
 });

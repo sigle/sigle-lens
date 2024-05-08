@@ -45,6 +45,7 @@ export type GetApiPostsListResponse = Array<{
     metaDescription?: string;
     coverImage?: string;
     createdAt?: string;
+    updatedAt?: string;
 }>;
 
 export type PostApiProfileUploadMetadataData = {
@@ -161,6 +162,7 @@ export type $OpenApiTs = {
                     metaDescription?: string;
                     coverImage?: string;
                     createdAt?: string;
+                    updatedAt?: string;
                 }>;
             };
         };
