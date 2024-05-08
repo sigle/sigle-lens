@@ -4,7 +4,10 @@ import { Callout, Flex } from "@radix-ui/themes";
 import { notFound, useParams } from "next/navigation";
 import { IconInfoCircle } from "@tabler/icons-react";
 import { PageEditorSkeleton } from "../../new/loading";
-import { usePostsServiceGetApiPostsByPostId } from "@/__generated__/opanapi/queries";
+import {
+  PostsServiceGetApiPostsByPostIdDefaultResponse,
+  usePostsServiceGetApiPostsByPostId,
+} from "@/__generated__/opanapi/queries";
 import { EditorFormProvider } from "@/components/Editor/EditorFormProvider";
 import { EditorHeader } from "@/components/Editor/Header/EditorHeader";
 
@@ -35,7 +38,10 @@ const PostEditDraft = ({ postId }: { postId: string }) => {
     data: post,
     isLoading: isLoadingPost,
     error: errorPost,
-  } = usePostsServiceGetApiPostsByPostId({
+  } = usePostsServiceGetApiPostsByPostId<
+    PostsServiceGetApiPostsByPostIdDefaultResponse,
+    Error
+  >({
     postId,
   });
 

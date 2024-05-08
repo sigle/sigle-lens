@@ -29,6 +29,6 @@
   },
   "devDependencies": {
     "drizzle-kit": "0.20.18",
-    "nitropack": "npm:nitropack-nightly@2.10.0-28555945.eedc041e"
+    "nitropack": "npm:nitropack-nightly@2.10.0-28585081.346a4950"
   }
 }
