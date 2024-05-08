@@ -1,11 +1,25 @@
 import { desc, eq } from "drizzle-orm";
+import { z } from "zod";
 import { db } from "~/db/db";
 import { posts } from "~/db/schema";
+import { getValidatedQueryZod } from "~/utils/getValidatedQueryZod";
 
 defineRouteMeta({
   openAPI: {
     tags: ["posts"],
     description: "Get posts for the current profile.",
+    parameters: [
+      {
+        in: "query",
+        name: "limit",
+        schema: {
+          type: "integer",
+          minimum: 1,
+          maximum: 100,
+        },
+        description: "Limit the number of posts returned.",
+      },
+    ],
     responses: {
       default: {
         description: "Posts list.",
@@ -15,7 +29,7 @@ defineRouteMeta({
               type: "array",
               items: {
                 type: "object",
-                required: ["id", "title"],
+                required: ["id", "title", "createdAt"],
                 properties: {
                   id: {
                     type: "string",
@@ -51,8 +65,13 @@ defineRouteMeta({
   },
 });
 
+const listQuerySchema = z.object({
+  limit: z.coerce.number().min(1).max(100),
+});
+
 export default defineEventHandler(async (event) => {
-  // TODO limit param
+  const query = await getValidatedQueryZod(event, listQuerySchema);
+
   const postsList = await db
     .select({
       id: posts.id,
@@ -66,7 +85,8 @@ export default defineEventHandler(async (event) => {
     })
     .from(posts)
     .where(eq(posts.profileId, event.context.user.profileId))
-    .orderBy(desc(posts.updatedAt));
+    .orderBy(desc(posts.updatedAt))
+    .limit(query.limit);
 
   return postsList;
 });

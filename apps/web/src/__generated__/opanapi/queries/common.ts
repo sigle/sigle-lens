@@ -19,7 +19,9 @@ export const UsePostsServiceGetApiPostsByPostIdKeyFn = ({ postId }: {
 export type PostsServiceGetApiPostsListDefaultResponse = Awaited<ReturnType<typeof PostsService.getApiPostsList>>;
 export type PostsServiceGetApiPostsListQueryResult<TData = PostsServiceGetApiPostsListDefaultResponse, TError = unknown> = UseQueryResult<TData, TError>;
 export const usePostsServiceGetApiPostsListKey = "PostsServiceGetApiPostsList";
-export const UsePostsServiceGetApiPostsListKeyFn = () => [usePostsServiceGetApiPostsListKey];
+export const UsePostsServiceGetApiPostsListKeyFn = ({ limit }: {
+  limit?: number;
+} = {}, queryKey?: Array<unknown>) => [usePostsServiceGetApiPostsListKey, ...(queryKey ?? [{ limit }])];
 export type InternalServiceGetNitroOpenapiJsonDefaultResponse = Awaited<ReturnType<typeof InternalService.getNitroOpenapiJson>>;
 export type InternalServiceGetNitroOpenapiJsonQueryResult<TData = InternalServiceGetNitroOpenapiJsonDefaultResponse, TError = unknown> = UseQueryResult<TData, TError>;
 export const useInternalServiceGetNitroOpenapiJsonKey = "InternalServiceGetNitroOpenapiJson";

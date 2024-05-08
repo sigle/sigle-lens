@@ -25,10 +25,14 @@ export const prefetchUsePostsServiceGetApiPostsByPostId = (queryClient: QueryCli
 }) => queryClient.prefetchQuery({ queryKey: [Common.usePostsServiceGetApiPostsByPostIdKey, [{ postId }]], queryFn: () => PostsService.getApiPostsByPostId({ postId }) });
 /**
 * Get posts for the current profile.
+* @param data The data for the request.
+* @param data.limit Limit the number of posts returned.
 * @returns unknown Posts list.
 * @throws ApiError
 */
-export const prefetchUsePostsServiceGetApiPostsList = (queryClient: QueryClient) => queryClient.prefetchQuery({ queryKey: [Common.usePostsServiceGetApiPostsListKey, []], queryFn: () => PostsService.getApiPostsList() });
+export const prefetchUsePostsServiceGetApiPostsList = (queryClient: QueryClient, { limit }: {
+  limit?: number;
+} = {}) => queryClient.prefetchQuery({ queryKey: [Common.usePostsServiceGetApiPostsListKey, [{ limit }]], queryFn: () => PostsService.getApiPostsList({ limit }) });
 /**
 * @returns unknown OK
 * @throws ApiError

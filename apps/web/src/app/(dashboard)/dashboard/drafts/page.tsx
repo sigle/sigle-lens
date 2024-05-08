@@ -27,13 +27,9 @@ export default function DashboardDrafts() {
     isLoading: loadingDrafts,
     error: errorDrafts,
     refetch: refetchDrafts,
-  } = usePostsServiceGetApiPostsList();
-  // TODO
-  //   {
-  //   queryParams: {
-  //     limit: 100,
-  //   },
-  // }
+  } = usePostsServiceGetApiPostsList({
+    limit: 100,
+  });
 
   return (
     <div className="py-5">

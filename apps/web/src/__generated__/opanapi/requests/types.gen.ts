@@ -43,6 +43,13 @@ export type PostApiPostsCreateResponse = {
     id: string;
 };
 
+export type GetApiPostsListData = {
+    /**
+     * Limit the number of posts returned.
+     */
+    limit?: number;
+};
+
 export type GetApiPostsListResponse = Array<{
     id: string;
     title: string;
@@ -169,6 +176,12 @@ export type $OpenApiTs = {
     };
     '/api/posts/list': {
         get: {
+            req: {
+                /**
+                 * Limit the number of posts returned.
+                 */
+                limit?: number;
+            };
             res: {
                 /**
                  * Posts list.

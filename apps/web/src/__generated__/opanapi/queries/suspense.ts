@@ -25,10 +25,14 @@ export const usePostsServiceGetApiPostsByPostIdSuspense = <TData = Common.PostsS
 }, queryKey?: TQueryKey, options?: Omit<UseQueryOptions<TData, TError>, "queryKey" | "queryFn">) => useSuspenseQuery<TData, TError>({ queryKey: Common.UsePostsServiceGetApiPostsByPostIdKeyFn({ postId }, queryKey), queryFn: () => PostsService.getApiPostsByPostId({ postId }) as TData, ...options });
 /**
 * Get posts for the current profile.
+* @param data The data for the request.
+* @param data.limit Limit the number of posts returned.
 * @returns unknown Posts list.
 * @throws ApiError
 */
-export const usePostsServiceGetApiPostsListSuspense = <TData = Common.PostsServiceGetApiPostsListDefaultResponse, TError = unknown, TQueryKey extends Array<unknown> = unknown[]>(queryKey?: TQueryKey, options?: Omit<UseQueryOptions<TData, TError>, "queryKey" | "queryFn">) => useSuspenseQuery<TData, TError>({ queryKey: Common.UsePostsServiceGetApiPostsListKeyFn(), queryFn: () => PostsService.getApiPostsList() as TData, ...options });
+export const usePostsServiceGetApiPostsListSuspense = <TData = Common.PostsServiceGetApiPostsListDefaultResponse, TError = unknown, TQueryKey extends Array<unknown> = unknown[]>({ limit }: {
+  limit?: number;
+} = {}, queryKey?: TQueryKey, options?: Omit<UseQueryOptions<TData, TError>, "queryKey" | "queryFn">) => useSuspenseQuery<TData, TError>({ queryKey: Common.UsePostsServiceGetApiPostsListKeyFn({ limit }, queryKey), queryFn: () => PostsService.getApiPostsList({ limit }) as TData, ...options });
 /**
 * @returns unknown OK
 * @throws ApiError

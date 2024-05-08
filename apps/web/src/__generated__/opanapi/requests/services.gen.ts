@@ -3,7 +3,7 @@
 import type { CancelablePromise } from './core/CancelablePromise';
 import { OpenAPI } from './core/OpenAPI';
 import { request as __request } from './core/request';
-import type { GetResponse, GetHealthResponse, GetApiPostsByPostIdData, GetApiPostsByPostIdResponse, PostApiPostsByPostIdDeleteData, PostApiPostsByPostIdDeleteResponse, PostApiPostsByPostIdUpdateData, PostApiPostsByPostIdUpdateResponse, PostApiPostsCreateResponse, GetApiPostsListResponse, PostApiProfileUploadMetadataData, PostApiProfileUploadMetadataResponse, GetNitroOpenapiJsonResponse, GetNitroScalarResponse, GetNitroSwaggerResponse } from './types.gen';
+import type { GetResponse, GetHealthResponse, GetApiPostsByPostIdData, GetApiPostsByPostIdResponse, PostApiPostsByPostIdDeleteData, PostApiPostsByPostIdDeleteResponse, PostApiPostsByPostIdUpdateData, PostApiPostsByPostIdUpdateResponse, PostApiPostsCreateResponse, GetApiPostsListData, GetApiPostsListResponse, PostApiProfileUploadMetadataData, PostApiProfileUploadMetadataResponse, GetNitroOpenapiJsonResponse, GetNitroScalarResponse, GetNitroSwaggerResponse } from './types.gen';
 
 export class AppRoutesService {
     /**
@@ -99,13 +99,18 @@ export class PostsService {
     
     /**
      * Get posts for the current profile.
+     * @param data The data for the request.
+     * @param data.limit Limit the number of posts returned.
      * @returns unknown Posts list.
      * @throws ApiError
      */
-    public static getApiPostsList(): CancelablePromise<GetApiPostsListResponse> {
+    public static getApiPostsList(data: GetApiPostsListData = {}): CancelablePromise<GetApiPostsListResponse> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/posts/list'
+            url: '/api/posts/list',
+            query: {
+                limit: data.limit
+            }
         });
     }
     
