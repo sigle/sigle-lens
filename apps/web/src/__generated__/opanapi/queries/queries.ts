@@ -24,6 +24,16 @@ export const usePostsServiceGetApiPostsByPostId = <TData = Common.PostsServiceGe
   postId: string;
 }, queryKey?: TQueryKey, options?: Omit<UseQueryOptions<TData, TError>, "queryKey" | "queryFn">) => useQuery<TData, TError>({ queryKey: Common.UsePostsServiceGetApiPostsByPostIdKeyFn({ postId }, queryKey), queryFn: () => PostsService.getApiPostsByPostId({ postId }) as TData, ...options });
 /**
+* Get posts for the current profile.
+* @param data The data for the request.
+* @param data.limit Limit the number of posts returned.
+* @returns unknown Posts list.
+* @throws ApiError
+*/
+export const usePostsServiceGetApiPostsList = <TData = Common.PostsServiceGetApiPostsListDefaultResponse, TError = unknown, TQueryKey extends Array<unknown> = unknown[]>({ limit }: {
+  limit?: number;
+} = {}, queryKey?: TQueryKey, options?: Omit<UseQueryOptions<TData, TError>, "queryKey" | "queryFn">) => useQuery<TData, TError>({ queryKey: Common.UsePostsServiceGetApiPostsListKeyFn({ limit }, queryKey), queryFn: () => PostsService.getApiPostsList({ limit }) as TData, ...options });
+/**
 * @returns unknown OK
 * @throws ApiError
 */
@@ -38,6 +48,18 @@ export const useInternalServiceGetNitroScalar = <TData = Common.InternalServiceG
 * @throws ApiError
 */
 export const useInternalServiceGetNitroSwagger = <TData = Common.InternalServiceGetNitroSwaggerDefaultResponse, TError = unknown, TQueryKey extends Array<unknown> = unknown[]>(queryKey?: TQueryKey, options?: Omit<UseQueryOptions<TData, TError>, "queryKey" | "queryFn">) => useQuery<TData, TError>({ queryKey: Common.UseInternalServiceGetNitroSwaggerKeyFn(), queryFn: () => InternalService.getNitroSwagger() as TData, ...options });
+/**
+* Delete the post for the current profile.
+* @param data The data for the request.
+* @param data.postId
+* @returns unknown OK
+* @throws ApiError
+*/
+export const usePostsServicePostApiPostsByPostIdDelete = <TData = Common.PostsServicePostApiPostsByPostIdDeleteMutationResult, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<TData, TError, {
+  postId: string;
+}, TContext>, "mutationFn">) => useMutation<TData, TError, {
+  postId: string;
+}, TContext>({ mutationFn: ({ postId }) => PostsService.postApiPostsByPostIdDelete({ postId }) as unknown as Promise<TData>, ...options });
 /**
 * Update the post for the current profile.
 * @param data The data for the request.

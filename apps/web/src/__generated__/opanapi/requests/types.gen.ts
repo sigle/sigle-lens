@@ -15,8 +15,14 @@ export type GetApiPostsByPostIdResponse = {
     metaTitle?: string;
     metaDescription?: string;
     coverImage?: string;
-    createdAt?: string;
+    createdAt: string;
 };
+
+export type PostApiPostsByPostIdDeleteData = {
+    postId: string;
+};
+
+export type PostApiPostsByPostIdDeleteResponse = unknown;
 
 export type PostApiPostsByPostIdUpdateData = {
     postId: string;
@@ -36,6 +42,24 @@ export type PostApiPostsByPostIdUpdateResponse = {
 export type PostApiPostsCreateResponse = {
     id: string;
 };
+
+export type GetApiPostsListData = {
+    /**
+     * Limit the number of posts returned.
+     */
+    limit?: number;
+};
+
+export type GetApiPostsListResponse = Array<{
+    id: string;
+    title: string;
+    content?: string;
+    metaTitle?: string;
+    metaDescription?: string;
+    coverImage?: string;
+    createdAt: string;
+    updatedAt?: string;
+}>;
 
 export type PostApiProfileUploadMetadataData = {
     requestBody: {
@@ -98,8 +122,21 @@ export type $OpenApiTs = {
                     metaTitle?: string;
                     metaDescription?: string;
                     coverImage?: string;
-                    createdAt?: string;
+                    createdAt: string;
                 };
+            };
+        };
+    };
+    '/api/posts/{postId}/delete': {
+        post: {
+            req: {
+                postId: string;
+            };
+            res: {
+                /**
+                 * OK
+                 */
+                200: unknown;
             };
         };
     };
@@ -134,6 +171,31 @@ export type $OpenApiTs = {
                 default: {
                     id: string;
                 };
+            };
+        };
+    };
+    '/api/posts/list': {
+        get: {
+            req: {
+                /**
+                 * Limit the number of posts returned.
+                 */
+                limit?: number;
+            };
+            res: {
+                /**
+                 * Posts list.
+                 */
+                default: Array<{
+                    id: string;
+                    title: string;
+                    content?: string;
+                    metaTitle?: string;
+                    metaDescription?: string;
+                    coverImage?: string;
+                    createdAt: string;
+                    updatedAt?: string;
+                }>;
             };
         };
     };

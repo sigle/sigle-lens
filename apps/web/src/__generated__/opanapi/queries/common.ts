@@ -16,6 +16,12 @@ export const usePostsServiceGetApiPostsByPostIdKey = "PostsServiceGetApiPostsByP
 export const UsePostsServiceGetApiPostsByPostIdKeyFn = ({ postId }: {
   postId: string;
 }, queryKey?: Array<unknown>) => [usePostsServiceGetApiPostsByPostIdKey, ...(queryKey ?? [{ postId }])];
+export type PostsServiceGetApiPostsListDefaultResponse = Awaited<ReturnType<typeof PostsService.getApiPostsList>>;
+export type PostsServiceGetApiPostsListQueryResult<TData = PostsServiceGetApiPostsListDefaultResponse, TError = unknown> = UseQueryResult<TData, TError>;
+export const usePostsServiceGetApiPostsListKey = "PostsServiceGetApiPostsList";
+export const UsePostsServiceGetApiPostsListKeyFn = ({ limit }: {
+  limit?: number;
+} = {}, queryKey?: Array<unknown>) => [usePostsServiceGetApiPostsListKey, ...(queryKey ?? [{ limit }])];
 export type InternalServiceGetNitroOpenapiJsonDefaultResponse = Awaited<ReturnType<typeof InternalService.getNitroOpenapiJson>>;
 export type InternalServiceGetNitroOpenapiJsonQueryResult<TData = InternalServiceGetNitroOpenapiJsonDefaultResponse, TError = unknown> = UseQueryResult<TData, TError>;
 export const useInternalServiceGetNitroOpenapiJsonKey = "InternalServiceGetNitroOpenapiJson";
@@ -28,6 +34,7 @@ export type InternalServiceGetNitroSwaggerDefaultResponse = Awaited<ReturnType<t
 export type InternalServiceGetNitroSwaggerQueryResult<TData = InternalServiceGetNitroSwaggerDefaultResponse, TError = unknown> = UseQueryResult<TData, TError>;
 export const useInternalServiceGetNitroSwaggerKey = "InternalServiceGetNitroSwagger";
 export const UseInternalServiceGetNitroSwaggerKeyFn = () => [useInternalServiceGetNitroSwaggerKey];
+export type PostsServicePostApiPostsByPostIdDeleteMutationResult = Awaited<ReturnType<typeof PostsService.postApiPostsByPostIdDelete>>;
 export type PostsServicePostApiPostsByPostIdUpdateMutationResult = Awaited<ReturnType<typeof PostsService.postApiPostsByPostIdUpdate>>;
 export type PostsServicePostApiPostsCreateMutationResult = Awaited<ReturnType<typeof PostsService.postApiPostsCreate>>;
 export type ProfileServicePostApiProfileUploadMetadataMutationResult = Awaited<ReturnType<typeof ProfileService.postApiProfileUploadMetadata>>;

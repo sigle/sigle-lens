@@ -41,6 +41,7 @@ export const posts = sqliteTable("posts", {
 
   profileId: text("profile_id").notNull(),
 
+  // TODO apply the same to other tables
   createdAt: integer("created_at", { mode: "timestamp" })
     .$defaultFn(() => new Date())
     .notNull(),

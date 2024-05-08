@@ -4,6 +4,7 @@ import { Grid, Heading } from "@radix-ui/themes";
 import { SessionType, useSession } from "@lens-protocol/react-web";
 import { GetFamiliarCards } from "@/components/Dashboard/GetFamiliarCards";
 import { LatestPublication } from "@/components/Dashboard/LatestPublication";
+import { LatestDrafts } from "@/components/Dashboard/LatestDrafts";
 
 export default function Dashboard() {
   const { data: session } = useSession();
@@ -26,6 +27,7 @@ export default function Dashboard() {
         width="auto"
       >
         <LatestPublication profile={session.profile} />
+        <LatestDrafts />
       </Grid>
 
       <GetFamiliarCards />

@@ -3,7 +3,7 @@
 import type { CancelablePromise } from './core/CancelablePromise';
 import { OpenAPI } from './core/OpenAPI';
 import { request as __request } from './core/request';
-import type { GetResponse, GetHealthResponse, GetApiPostsByPostIdData, GetApiPostsByPostIdResponse, PostApiPostsByPostIdUpdateData, PostApiPostsByPostIdUpdateResponse, PostApiPostsCreateResponse, PostApiProfileUploadMetadataData, PostApiProfileUploadMetadataResponse, GetNitroOpenapiJsonResponse, GetNitroScalarResponse, GetNitroSwaggerResponse } from './types.gen';
+import type { GetResponse, GetHealthResponse, GetApiPostsByPostIdData, GetApiPostsByPostIdResponse, PostApiPostsByPostIdDeleteData, PostApiPostsByPostIdDeleteResponse, PostApiPostsByPostIdUpdateData, PostApiPostsByPostIdUpdateResponse, PostApiPostsCreateResponse, GetApiPostsListData, GetApiPostsListResponse, PostApiProfileUploadMetadataData, PostApiProfileUploadMetadataResponse, GetNitroOpenapiJsonResponse, GetNitroScalarResponse, GetNitroSwaggerResponse } from './types.gen';
 
 export class AppRoutesService {
     /**
@@ -49,6 +49,23 @@ export class PostsService {
     }
     
     /**
+     * Delete the post for the current profile.
+     * @param data The data for the request.
+     * @param data.postId
+     * @returns unknown OK
+     * @throws ApiError
+     */
+    public static postApiPostsByPostIdDelete(data: PostApiPostsByPostIdDeleteData): CancelablePromise<PostApiPostsByPostIdDeleteResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/posts/{postId}/delete',
+            path: {
+                postId: data.postId
+            }
+        });
+    }
+    
+    /**
      * Update the post for the current profile.
      * @param data The data for the request.
      * @param data.postId
@@ -77,6 +94,23 @@ export class PostsService {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/posts/create'
+        });
+    }
+    
+    /**
+     * Get posts for the current profile.
+     * @param data The data for the request.
+     * @param data.limit Limit the number of posts returned.
+     * @returns unknown Posts list.
+     * @throws ApiError
+     */
+    public static getApiPostsList(data: GetApiPostsListData = {}): CancelablePromise<GetApiPostsListResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/posts/list',
+            query: {
+                limit: data.limit
+            }
         });
     }
     
