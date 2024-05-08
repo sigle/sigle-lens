@@ -3,14 +3,14 @@
 import type { CancelablePromise } from './core/CancelablePromise';
 import { OpenAPI } from './core/OpenAPI';
 import { request as __request } from './core/request';
-import type { $OpenApiTs } from './types.gen';
+import type { GetResponse, GetHealthResponse, GetApiPostsByPostIdData, GetApiPostsByPostIdResponse, PostApiPostsByPostIdUpdateData, PostApiPostsByPostIdUpdateResponse, PostApiPostsCreateResponse, PostApiProfileUploadMetadataData, PostApiProfileUploadMetadataResponse, GetNitroOpenapiJsonResponse, GetNitroScalarResponse, GetNitroSwaggerResponse } from './types.gen';
 
 export class AppRoutesService {
     /**
      * @returns unknown OK
      * @throws ApiError
      */
-    public static get(): CancelablePromise<$OpenApiTs['']['get']['res'][200]> {
+    public static get(): CancelablePromise<GetResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: ''
@@ -21,10 +21,62 @@ export class AppRoutesService {
      * @returns unknown OK
      * @throws ApiError
      */
-    public static getHealth(): CancelablePromise<$OpenApiTs['/health']['get']['res'][200]> {
+    public static getHealth(): CancelablePromise<GetHealthResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/health'
+        });
+    }
+    
+}
+
+export class PostsService {
+    /**
+     * Get post for the current profile.
+     * @param data The data for the request.
+     * @param data.postId
+     * @returns unknown Post entry.
+     * @throws ApiError
+     */
+    public static getApiPostsByPostId(data: GetApiPostsByPostIdData): CancelablePromise<GetApiPostsByPostIdResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/posts/{postId}',
+            path: {
+                postId: data.postId
+            }
+        });
+    }
+    
+    /**
+     * Update the post for the current profile.
+     * @param data The data for the request.
+     * @param data.postId
+     * @param data.requestBody
+     * @returns unknown Post updated.
+     * @throws ApiError
+     */
+    public static postApiPostsByPostIdUpdate(data: PostApiPostsByPostIdUpdateData): CancelablePromise<PostApiPostsByPostIdUpdateResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/posts/{postId}/update',
+            path: {
+                postId: data.postId
+            },
+            body: data.requestBody,
+            mediaType: 'undefined'
+        });
+    }
+    
+    /**
+     * Create a new post for the current profile.
+     * @returns unknown Post created.
+     * @throws ApiError
+     */
+    public static postApiPostsCreate(): CancelablePromise<PostApiPostsCreateResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/posts/create'
         });
     }
     
@@ -38,7 +90,7 @@ export class ProfileService {
      * @returns unknown Metadata uploaded
      * @throws ApiError
      */
-    public static postApiProfileUploadMetadata(data: $OpenApiTs['/api/profile/upload-metadata']['post']['req']): CancelablePromise<$OpenApiTs['/api/profile/upload-metadata']['post']['res'][200]> {
+    public static postApiProfileUploadMetadata(data: PostApiProfileUploadMetadataData): CancelablePromise<PostApiProfileUploadMetadataResponse> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/profile/upload-metadata',
@@ -54,7 +106,7 @@ export class InternalService {
      * @returns unknown OK
      * @throws ApiError
      */
-    public static getNitroOpenapiJson(): CancelablePromise<$OpenApiTs['/_nitro/openapi.json']['get']['res'][200]> {
+    public static getNitroOpenapiJson(): CancelablePromise<GetNitroOpenapiJsonResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/_nitro/openapi.json'
@@ -65,7 +117,7 @@ export class InternalService {
      * @returns unknown OK
      * @throws ApiError
      */
-    public static getNitroScalar(): CancelablePromise<$OpenApiTs['/_nitro/scalar']['get']['res'][200]> {
+    public static getNitroScalar(): CancelablePromise<GetNitroScalarResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/_nitro/scalar'
@@ -76,7 +128,7 @@ export class InternalService {
      * @returns unknown OK
      * @throws ApiError
      */
-    public static getNitroSwagger(): CancelablePromise<$OpenApiTs['/_nitro/swagger']['get']['res'][200]> {
+    public static getNitroSwagger(): CancelablePromise<GetNitroSwaggerResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/_nitro/swagger'
