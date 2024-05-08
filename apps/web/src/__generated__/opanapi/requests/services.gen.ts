@@ -3,7 +3,7 @@
 import type { CancelablePromise } from './core/CancelablePromise';
 import { OpenAPI } from './core/OpenAPI';
 import { request as __request } from './core/request';
-import type { GetResponse, GetHealthResponse, GetApiPostsByPostIdData, GetApiPostsByPostIdResponse, PostApiPostsByPostIdUpdateData, PostApiPostsByPostIdUpdateResponse, PostApiPostsCreateResponse, PostApiProfileUploadMetadataData, PostApiProfileUploadMetadataResponse, GetNitroOpenapiJsonResponse, GetNitroScalarResponse, GetNitroSwaggerResponse } from './types.gen';
+import type { GetResponse, GetHealthResponse, GetApiPostsByPostIdData, GetApiPostsByPostIdResponse, PostApiPostsByPostIdUpdateData, PostApiPostsByPostIdUpdateResponse, PostApiPostsCreateResponse, GetApiPostsListResponse, PostApiProfileUploadMetadataData, PostApiProfileUploadMetadataResponse, GetNitroOpenapiJsonResponse, GetNitroScalarResponse, GetNitroSwaggerResponse } from './types.gen';
 
 export class AppRoutesService {
     /**
@@ -77,6 +77,18 @@ export class PostsService {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/posts/create'
+        });
+    }
+    
+    /**
+     * Get posts for the current profile.
+     * @returns unknown Posts list.
+     * @throws ApiError
+     */
+    public static getApiPostsList(): CancelablePromise<GetApiPostsListResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/posts/list'
         });
     }
     

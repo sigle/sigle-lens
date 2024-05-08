@@ -24,6 +24,12 @@ export const prefetchUsePostsServiceGetApiPostsByPostId = (queryClient: QueryCli
   postId: string;
 }) => queryClient.prefetchQuery({ queryKey: [Common.usePostsServiceGetApiPostsByPostIdKey, [{ postId }]], queryFn: () => PostsService.getApiPostsByPostId({ postId }) });
 /**
+* Get posts for the current profile.
+* @returns unknown Posts list.
+* @throws ApiError
+*/
+export const prefetchUsePostsServiceGetApiPostsList = (queryClient: QueryClient) => queryClient.prefetchQuery({ queryKey: [Common.usePostsServiceGetApiPostsListKey, []], queryFn: () => PostsService.getApiPostsList() });
+/**
 * @returns unknown OK
 * @throws ApiError
 */

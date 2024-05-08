@@ -24,6 +24,12 @@ export const usePostsServiceGetApiPostsByPostIdSuspense = <TData = Common.PostsS
   postId: string;
 }, queryKey?: TQueryKey, options?: Omit<UseQueryOptions<TData, TError>, "queryKey" | "queryFn">) => useSuspenseQuery<TData, TError>({ queryKey: Common.UsePostsServiceGetApiPostsByPostIdKeyFn({ postId }, queryKey), queryFn: () => PostsService.getApiPostsByPostId({ postId }) as TData, ...options });
 /**
+* Get posts for the current profile.
+* @returns unknown Posts list.
+* @throws ApiError
+*/
+export const usePostsServiceGetApiPostsListSuspense = <TData = Common.PostsServiceGetApiPostsListDefaultResponse, TError = unknown, TQueryKey extends Array<unknown> = unknown[]>(queryKey?: TQueryKey, options?: Omit<UseQueryOptions<TData, TError>, "queryKey" | "queryFn">) => useSuspenseQuery<TData, TError>({ queryKey: Common.UsePostsServiceGetApiPostsListKeyFn(), queryFn: () => PostsService.getApiPostsList() as TData, ...options });
+/**
 * @returns unknown OK
 * @throws ApiError
 */

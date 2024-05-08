@@ -37,6 +37,16 @@ export type PostApiPostsCreateResponse = {
     id: string;
 };
 
+export type GetApiPostsListResponse = Array<{
+    id: string;
+    title: string;
+    content?: string;
+    metaTitle?: string;
+    metaDescription?: string;
+    coverImage?: string;
+    createdAt?: string;
+}>;
+
 export type PostApiProfileUploadMetadataData = {
     requestBody: {
         /**
@@ -134,6 +144,24 @@ export type $OpenApiTs = {
                 default: {
                     id: string;
                 };
+            };
+        };
+    };
+    '/api/posts/list': {
+        get: {
+            res: {
+                /**
+                 * Posts list.
+                 */
+                default: Array<{
+                    id: string;
+                    title: string;
+                    content?: string;
+                    metaTitle?: string;
+                    metaDescription?: string;
+                    coverImage?: string;
+                    createdAt?: string;
+                }>;
             };
         };
     };
