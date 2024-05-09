@@ -21,6 +21,7 @@ export default function PostCreate({}) {
 
   useEffect(() => {
     createPost();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <PageEditorSkeleton />;
