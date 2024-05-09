@@ -9,11 +9,19 @@ export const OpenAPIInterceptor = () => {
 
   useEffect(() => {
     const doSomethingWithRequest = (request: RequestInit) => {
+      const isMultiPartRequest = request.body
+        ? request.body instanceof FormData
+        : false;
+
       request.headers = {
         ...request.headers,
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
       };
+      // For file uploads to work we need to remove the Content-Type header
+      if (isMultiPartRequest) {
+        delete (request.headers as any)["Content-Type"];
+      }
       return request;
     };
 

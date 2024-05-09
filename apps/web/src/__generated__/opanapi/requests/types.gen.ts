@@ -61,6 +61,21 @@ export type GetApiPostsListResponse = Array<{
     updatedAt?: string;
 }>;
 
+export type PostApiProfileUploadAvatarData = {
+    requestBody: {
+        /**
+         * Profile media
+         */
+        file: (Blob | File);
+    };
+};
+
+export type PostApiProfileUploadAvatarResponse = {
+    cid: string;
+    url: string;
+    gatewayUrl: string;
+};
+
 export type PostApiProfileUploadMetadataData = {
     requestBody: {
         /**
@@ -196,6 +211,28 @@ export type $OpenApiTs = {
                     createdAt: string;
                     updatedAt?: string;
                 }>;
+            };
+        };
+    };
+    '/api/profile/upload-avatar': {
+        post: {
+            req: {
+                requestBody: {
+                    /**
+                     * Profile media
+                     */
+                    file: (Blob | File);
+                };
+            };
+            res: {
+                /**
+                 * Metadata uploaded
+                 */
+                default: {
+                    cid: string;
+                    url: string;
+                    gatewayUrl: string;
+                };
             };
         };
     };

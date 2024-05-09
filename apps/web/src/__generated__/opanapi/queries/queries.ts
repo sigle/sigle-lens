@@ -82,6 +82,18 @@ export const usePostsServicePostApiPostsByPostIdUpdate = <TData = Common.PostsSe
 */
 export const usePostsServicePostApiPostsCreate = <TData = Common.PostsServicePostApiPostsCreateMutationResult, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<TData, TError, void, TContext>, "mutationFn">) => useMutation<TData, TError, void, TContext>({ mutationFn: () => PostsService.postApiPostsCreate() as unknown as Promise<TData>, ...options });
 /**
+* Upload avatar for a profile.
+* @param data The data for the request.
+* @param data.requestBody
+* @returns unknown Metadata uploaded
+* @throws ApiError
+*/
+export const useProfileServicePostApiProfileUploadAvatar = <TData = Common.ProfileServicePostApiProfileUploadAvatarMutationResult, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<TData, TError, {
+  requestBody: { file: Blob | File; };
+}, TContext>, "mutationFn">) => useMutation<TData, TError, {
+  requestBody: { file: Blob | File; };
+}, TContext>({ mutationFn: ({ requestBody }) => ProfileService.postApiProfileUploadAvatar({ requestBody }) as unknown as Promise<TData>, ...options });
+/**
 * Upload profile metadata to Arweave.
 * @param data The data for the request.
 * @param data.requestBody

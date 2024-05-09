@@ -11,6 +11,7 @@ import {
 import { IconBrandX } from "@tabler/icons-react";
 import { toast } from "sonner";
 import { useProfileServicePostApiProfileUploadMetadata } from "@/__generated__/opanapi/queries";
+import { UploadProfilePicture } from "./UploadProfilePicture";
 
 const updateProfileMetadataSchema = z.object({
   name: z.string().optional(),
@@ -197,6 +198,13 @@ export const UpdateProfileMetadata = ({
           )}
         </div>
       </div>
+
+      <UploadProfilePicture
+        picture={getValues("picture")}
+        setPicture={(value) =>
+          setValue("picture", value, { shouldValidate: true })
+        }
+      />
 
       <Flex gap="3" justify="end">
         <Button
