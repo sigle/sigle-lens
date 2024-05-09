@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { env } from "~/env";
 import { uploadImage } from "~/utils/fleek";
 import {
   allowedFormats,
@@ -101,7 +102,6 @@ export default defineEventHandler(async (event) => {
   return {
     cid,
     url: `ipfs://${cid}`,
-    // TODO internal fleek gateway
-    gatewayUrl: `https://ipfs.io/ipfs/${cid}`,
+    gatewayUrl: `${env.IPFS_GATEWAY_URL}/ipfs/${cid}`,
   };
 });

@@ -44,6 +44,7 @@ defineRouteMeta({
 });
 
 export default defineEventHandler(async (event) => {
+  // TODO rate limit route 2 / minute / user
   const body = await readBody(event);
 
   // Validate metadata against the Lens schema
