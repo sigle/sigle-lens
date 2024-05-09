@@ -8,7 +8,7 @@ import {
   MetadataAttributeType,
   profile as profileMetadata,
 } from "@lens-protocol/metadata";
-import { IconBrandX } from "@tabler/icons-react";
+import { IconAt, IconBrandX } from "@tabler/icons-react";
 import { toast } from "sonner";
 import { useProfileServicePostApiProfileUploadMetadata } from "@/__generated__/opanapi/queries";
 import { UploadProfilePicture } from "./UploadProfilePicture";
@@ -191,7 +191,11 @@ export const UpdateProfileMetadata = ({
             placeholder="username"
             {...register("x")}
             onChange={handleXChange}
-          />
+          >
+            <TextField.Slot>
+              <IconAt height="16" width="16" />
+            </TextField.Slot>
+          </TextField.Root>
           {errors.x && (
             <Text as="div" size="1" color="red" mt="1">
               {errors.x.message}
