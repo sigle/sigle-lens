@@ -1,10 +1,10 @@
 **/.turbo
 **/node_modules
 node_modules
-\*\*/dist
+**/dist
 
-\*\*/.nitro
+**/.nitro
 sqlite.db
 sqlite.db-\*
 
-\*\*/.next
+**/.next

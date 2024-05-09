@@ -3,7 +3,7 @@
 import type { CancelablePromise } from './core/CancelablePromise';
 import { OpenAPI } from './core/OpenAPI';
 import { request as __request } from './core/request';
-import type { GetResponse, GetHealthResponse, GetApiPostsByPostIdData, GetApiPostsByPostIdResponse, PostApiPostsByPostIdDeleteData, PostApiPostsByPostIdDeleteResponse, PostApiPostsByPostIdUpdateData, PostApiPostsByPostIdUpdateResponse, PostApiPostsCreateResponse, GetApiPostsListData, GetApiPostsListResponse, PostApiProfileUploadMetadataData, PostApiProfileUploadMetadataResponse, GetNitroOpenapiJsonResponse, GetNitroScalarResponse, GetNitroSwaggerResponse } from './types.gen';
+import type { GetResponse, GetHealthResponse, GetApiPostsByPostIdData, GetApiPostsByPostIdResponse, PostApiPostsByPostIdDeleteData, PostApiPostsByPostIdDeleteResponse, PostApiPostsByPostIdUpdateData, PostApiPostsByPostIdUpdateResponse, PostApiPostsCreateResponse, GetApiPostsListData, GetApiPostsListResponse, PostApiProfileUploadAvatarData, PostApiProfileUploadAvatarResponse, PostApiProfileUploadCoverData, PostApiProfileUploadCoverResponse, PostApiProfileUploadMetadataData, PostApiProfileUploadMetadataResponse, GetNitroOpenapiJsonResponse, GetNitroScalarResponse, GetNitroSwaggerResponse } from './types.gen';
 
 export class AppRoutesService {
     /**
@@ -117,6 +117,38 @@ export class PostsService {
 }
 
 export class ProfileService {
+    /**
+     * Upload avatar for a profile.
+     * @param data The data for the request.
+     * @param data.requestBody
+     * @returns unknown Metadata uploaded
+     * @throws ApiError
+     */
+    public static postApiProfileUploadAvatar(data: PostApiProfileUploadAvatarData): CancelablePromise<PostApiProfileUploadAvatarResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/profile/upload-avatar',
+            body: data.requestBody,
+            mediaType: 'undefined'
+        });
+    }
+    
+    /**
+     * Upload cover for a profile.
+     * @param data The data for the request.
+     * @param data.requestBody
+     * @returns unknown Metadata uploaded
+     * @throws ApiError
+     */
+    public static postApiProfileUploadCover(data: PostApiProfileUploadCoverData): CancelablePromise<PostApiProfileUploadCoverResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/profile/upload-cover',
+            body: data.requestBody,
+            mediaType: 'undefined'
+        });
+    }
+    
     /**
      * Upload profile metadata to Arweave.
      * @param data The data for the request.

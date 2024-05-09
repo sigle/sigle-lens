@@ -37,4 +37,6 @@ export const UseInternalServiceGetNitroSwaggerKeyFn = () => [useInternalServiceG
 export type PostsServicePostApiPostsByPostIdDeleteMutationResult = Awaited<ReturnType<typeof PostsService.postApiPostsByPostIdDelete>>;
 export type PostsServicePostApiPostsByPostIdUpdateMutationResult = Awaited<ReturnType<typeof PostsService.postApiPostsByPostIdUpdate>>;
 export type PostsServicePostApiPostsCreateMutationResult = Awaited<ReturnType<typeof PostsService.postApiPostsCreate>>;
+export type ProfileServicePostApiProfileUploadAvatarMutationResult = Awaited<ReturnType<typeof ProfileService.postApiProfileUploadAvatar>>;
+export type ProfileServicePostApiProfileUploadCoverMutationResult = Awaited<ReturnType<typeof ProfileService.postApiProfileUploadCover>>;
 export type ProfileServicePostApiProfileUploadMetadataMutationResult = Awaited<ReturnType<typeof ProfileService.postApiProfileUploadMetadata>>;

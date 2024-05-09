@@ -11,6 +11,9 @@ export const env = createEnv({
     IRYS_PRIVATE_KEY: z.string().min(1),
     TURSO_CONNECTION_URL: z.string().url(),
     TURSO_AUTH_TOKEN: z.string().min(1).optional(),
+    FLEEK_API_KEY: z.string().min(1),
+    FLEEK_PROJECT_ID: z.string().min(1),
+    IPFS_GATEWAY_URL: z.string().url().optional().default("https://ipfs.io"),
   },
 
   // @ts-expect-error types are not properly inferred by nitro

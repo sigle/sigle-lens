@@ -8,9 +8,11 @@ import {
   MetadataAttributeType,
   profile as profileMetadata,
 } from "@lens-protocol/metadata";
-import { IconBrandX } from "@tabler/icons-react";
+import { IconAt, IconBrandX } from "@tabler/icons-react";
 import { toast } from "sonner";
 import { useProfileServicePostApiProfileUploadMetadata } from "@/__generated__/opanapi/queries";
+import { UploadProfilePicture } from "./UploadProfilePicture";
+import { UploadProfileCoverPicture } from "./UploadProfileCoverPicture";
 
 const updateProfileMetadataSchema = z.object({
   name: z.string().optional(),
@@ -189,7 +191,11 @@ export const UpdateProfileMetadata = ({
             placeholder="username"
             {...register("x")}
             onChange={handleXChange}
-          />
+          >
+            <TextField.Slot>
+              <IconAt height="16" width="16" />
+            </TextField.Slot>
+          </TextField.Root>
           {errors.x && (
             <Text as="div" size="1" color="red" mt="1">
               {errors.x.message}
@@ -197,6 +203,20 @@ export const UpdateProfileMetadata = ({
           )}
         </div>
       </div>
+
+      <UploadProfilePicture
+        picture={getValues("picture")}
+        setPicture={(value) =>
+          setValue("picture", value, { shouldValidate: true })
+        }
+      />
+
+      <UploadProfileCoverPicture
+        picture={getValues("coverPicture")}
+        setPicture={(value) =>
+          setValue("coverPicture", value, { shouldValidate: true })
+        }
+      />
 
       <Flex gap="3" justify="end">
         <Button
