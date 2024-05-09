@@ -1,8 +1,6 @@
 {
-  "version": "5",
+  "version": "6",
   "dialect": "sqlite",
-  "id": "74e081fa-4dd9-4bd4-8ea0-f53f66a89957",
-  "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "posts": {
       "name": "posts",
@@ -127,8 +125,9 @@
   },
   "enums": {},
   "_meta": {
-    "schemas": {},
     "tables": {},
     "columns": {}
-  }
+  },
+  "id": "74e081fa-4dd9-4bd4-8ea0-f53f66a89957",
+  "prevId": "00000000-0000-0000-0000-000000000000"
 }

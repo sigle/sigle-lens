@@ -14,8 +14,8 @@
   "dependencies": {
     "@dotenvx/dotenvx": "0.37.1",
     "@irys/sdk": "0.1.24",
-    "@lens-protocol/client": "2.1.1",
-    "@lens-protocol/metadata": "1.1.6",
+    "@lens-protocol/client": "2.2.0",
+    "@lens-protocol/metadata": "1.2.0",
     "@libsql/client": "0.6.0",
     "@sentry/node": "7.114.0",
     "@t3-oss/env-core": "0.10.1",
@@ -25,10 +25,10 @@
     "nanoid": "5.0.7",
     "nitro-cors": "0.7.1",
     "posthog-node": "4.0.1",
-    "zod": "3.23.7"
+    "zod": "3.23.8"
   },
   "devDependencies": {
-    "drizzle-kit": "0.20.18",
+    "drizzle-kit": "0.21.0",
     "nitropack": "npm:nitropack-nightly@2.10.0-28585081.346a4950"
   }
 }
