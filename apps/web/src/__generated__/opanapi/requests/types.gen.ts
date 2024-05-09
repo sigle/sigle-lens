@@ -76,6 +76,21 @@ export type PostApiProfileUploadAvatarResponse = {
     gatewayUrl: string;
 };
 
+export type PostApiProfileUploadCoverData = {
+    requestBody: {
+        /**
+         * Profile cover
+         */
+        file: (Blob | File);
+    };
+};
+
+export type PostApiProfileUploadCoverResponse = {
+    cid: string;
+    url: string;
+    gatewayUrl: string;
+};
+
 export type PostApiProfileUploadMetadataData = {
     requestBody: {
         /**
@@ -220,6 +235,28 @@ export type $OpenApiTs = {
                 requestBody: {
                     /**
                      * Profile media
+                     */
+                    file: (Blob | File);
+                };
+            };
+            res: {
+                /**
+                 * Metadata uploaded
+                 */
+                default: {
+                    cid: string;
+                    url: string;
+                    gatewayUrl: string;
+                };
+            };
+        };
+    };
+    '/api/profile/upload-cover': {
+        post: {
+            req: {
+                requestBody: {
+                    /**
+                     * Profile cover
                      */
                     file: (Blob | File);
                 };

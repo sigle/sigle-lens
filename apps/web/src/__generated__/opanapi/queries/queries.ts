@@ -94,6 +94,18 @@ export const useProfileServicePostApiProfileUploadAvatar = <TData = Common.Profi
   requestBody: { file: Blob | File; };
 }, TContext>({ mutationFn: ({ requestBody }) => ProfileService.postApiProfileUploadAvatar({ requestBody }) as unknown as Promise<TData>, ...options });
 /**
+* Upload cover for a profile.
+* @param data The data for the request.
+* @param data.requestBody
+* @returns unknown Metadata uploaded
+* @throws ApiError
+*/
+export const useProfileServicePostApiProfileUploadCover = <TData = Common.ProfileServicePostApiProfileUploadCoverMutationResult, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<TData, TError, {
+  requestBody: { file: Blob | File; };
+}, TContext>, "mutationFn">) => useMutation<TData, TError, {
+  requestBody: { file: Blob | File; };
+}, TContext>({ mutationFn: ({ requestBody }) => ProfileService.postApiProfileUploadCover({ requestBody }) as unknown as Promise<TData>, ...options });
+/**
 * Upload profile metadata to Arweave.
 * @param data The data for the request.
 * @param data.requestBody
