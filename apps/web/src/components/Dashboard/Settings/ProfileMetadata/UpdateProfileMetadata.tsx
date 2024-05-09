@@ -12,6 +12,7 @@ import { IconBrandX } from "@tabler/icons-react";
 import { toast } from "sonner";
 import { useProfileServicePostApiProfileUploadMetadata } from "@/__generated__/opanapi/queries";
 import { UploadProfilePicture } from "./UploadProfilePicture";
+import { UploadProfileCoverPicture } from "./UploadProfileCoverPicture";
 
 const updateProfileMetadataSchema = z.object({
   name: z.string().optional(),
@@ -203,6 +204,13 @@ export const UpdateProfileMetadata = ({
         picture={getValues("picture")}
         setPicture={(value) =>
           setValue("picture", value, { shouldValidate: true })
+        }
+      />
+
+      <UploadProfileCoverPicture
+        picture={getValues("coverPicture")}
+        setPicture={(value) =>
+          setValue("coverPicture", value, { shouldValidate: true })
         }
       />
 
