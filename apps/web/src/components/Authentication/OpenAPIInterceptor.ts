@@ -20,7 +20,7 @@ export const OpenAPIInterceptor = () => {
       };
       // For file uploads to work we need to remove the Content-Type header
       if (isMultiPartRequest) {
-        delete (request.headers as any)["Content-Type"];
+        (request.headers as any)["Content-Type"] = undefined;
       }
       return request;
     };
