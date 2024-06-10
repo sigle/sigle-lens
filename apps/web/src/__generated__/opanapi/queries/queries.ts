@@ -91,6 +91,21 @@ export const usePostsServicePostApiPostsByPostIdUploadMedia = <TData = Common.Po
   requestBody: { file: Blob | File; };
 }, TContext>({ mutationFn: ({ postId, requestBody }) => PostsService.postApiPostsByPostIdUploadMedia({ postId, requestBody }) as unknown as Promise<TData>, ...options });
 /**
+* Upload post metadata to Arweave.
+* @param data The data for the request.
+* @param data.postId
+* @param data.requestBody
+* @returns unknown Metadata uploaded.
+* @throws ApiError
+*/
+export const usePostsServicePostApiPostsByPostIdUploadMetadata = <TData = Common.PostsServicePostApiPostsByPostIdUploadMetadataMutationResult, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<TData, TError, {
+  postId: string;
+  requestBody: { metadata: { [key: string]: unknown; }; };
+}, TContext>, "mutationFn">) => useMutation<TData, TError, {
+  postId: string;
+  requestBody: { metadata: { [key: string]: unknown; }; };
+}, TContext>({ mutationFn: ({ postId, requestBody }) => PostsService.postApiPostsByPostIdUploadMetadata({ postId, requestBody }) as unknown as Promise<TData>, ...options });
+/**
 * Create a new post for the current profile.
 * @returns unknown Post created.
 * @throws ApiError

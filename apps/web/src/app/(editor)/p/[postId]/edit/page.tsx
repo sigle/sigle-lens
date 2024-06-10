@@ -9,6 +9,7 @@ import { EditorFormProvider } from "@/components/Editor/EditorFormProvider";
 import { EditorTipTap } from "@/components/Editor/EditorTiptap";
 import { EditorTitle } from "@/components/Editor/EditorTitle";
 import { EditorHeader } from "@/components/Editor/Header/EditorHeader";
+import { PublishDialog } from "@/components/Editor/Publish/PublishDialog";
 import { Callout, Container, Flex } from "@radix-ui/themes";
 import { IconInfoCircle } from "@tabler/icons-react";
 import { notFound, useParams } from "next/navigation";
@@ -68,8 +69,9 @@ const PostEditDraft = ({ postId }: { postId: string }) => {
         <EditorCoverImage />
         <EditorTipTap />
       </Container>
-      {/* <EditorSettings />
-      <PublishDialog postId={postId} /> */}
+      {/* TODO editor settings */}
+      {/* <EditorSettings /> */}
+      <PublishDialog postId={postId} />
     </EditorFormProvider>
   );
 };
