@@ -44,7 +44,7 @@ import { TipTapMobileScroll } from "./extensions/MobileScroll";
 import { TipTapPlaceholder } from "./extensions/Placeholder";
 import { SlashCommands } from "./extensions/SlashCommand/SlashCommands";
 import { slashCommands } from "./extensions/SlashCommand/commands";
-import { TipTapEmbed } from "./extensions/twitter";
+import { TipTapEmbed } from "./extensions/Twitter";
 import { useEditorStore } from "./store";
 
 const lowlight = createLowlight(common);
@@ -59,6 +59,8 @@ export const EditorTipTap = () => {
   const setEditor = useEditorStore((state) => state.setEditor);
   const { mutateAsync: uploadMedia, isPending: loadingUploadImage } =
     usePostsServicePostApiPostsByPostIdUploadMedia();
+
+  console.log("EditorTipTap -> loadingUploadImage", loadingUploadImage);
 
   const editor = useEditor({
     extensions: [
