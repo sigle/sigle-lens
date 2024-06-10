@@ -4,6 +4,7 @@ import {
   type PostsServiceGetApiPostsByPostIdDefaultResponse,
   usePostsServiceGetApiPostsByPostId,
 } from "@/__generated__/opanapi/queries";
+import { EditorCoverImage } from "@/components/Editor/EditorCoverImage";
 import { EditorFormProvider } from "@/components/Editor/EditorFormProvider";
 import { EditorTitle } from "@/components/Editor/EditorTitle";
 import { EditorHeader } from "@/components/Editor/Header/EditorHeader";
@@ -63,8 +64,8 @@ const PostEditDraft = ({ postId }: { postId: string }) => {
       <EditorHeader />
       <Container size="2">
         <EditorTitle />
-        {/* <EditorCoverImage />
-        <EditorTipTap /> */}
+        <EditorCoverImage />
+        {/* <EditorTipTap /> */}
       </Container>
       {/* <EditorSettings />
       <PublishDialog postId={postId} /> */}

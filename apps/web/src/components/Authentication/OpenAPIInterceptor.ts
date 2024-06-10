@@ -21,7 +21,8 @@ export const OpenAPIInterceptor = () => {
       // For file uploads to work we need to remove the Content-Type header
       if (isMultiPartRequest) {
         // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-        (request.headers as any)["Content-Type"] = undefined;
+        // biome-ignore lint/performance/noDelete: <explanation>
+        delete (request.headers as any)["Content-Type"];
       }
       return request;
     };

@@ -76,6 +76,21 @@ export const usePostsServicePostApiPostsByPostIdUpdate = <TData = Common.PostsSe
   requestBody: { title: string; content: string; metaTitle?: string; metaDescription?: string; coverImage?: string; };
 }, TContext>({ mutationFn: ({ postId, requestBody }) => PostsService.postApiPostsByPostIdUpdate({ postId, requestBody }) as unknown as Promise<TData>, ...options });
 /**
+* Upload media for a post.
+* @param data The data for the request.
+* @param data.postId
+* @param data.requestBody
+* @returns unknown Metadata uploaded
+* @throws ApiError
+*/
+export const usePostsServicePostApiPostsByPostIdUploadMedia = <TData = Common.PostsServicePostApiPostsByPostIdUploadMediaMutationResult, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<TData, TError, {
+  postId: string;
+  requestBody: { file: Blob | File; };
+}, TContext>, "mutationFn">) => useMutation<TData, TError, {
+  postId: string;
+  requestBody: { file: Blob | File; };
+}, TContext>({ mutationFn: ({ postId, requestBody }) => PostsService.postApiPostsByPostIdUploadMedia({ postId, requestBody }) as unknown as Promise<TData>, ...options });
+/**
 * Create a new post for the current profile.
 * @returns unknown Post created.
 * @throws ApiError

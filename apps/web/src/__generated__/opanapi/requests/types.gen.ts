@@ -39,6 +39,22 @@ export type PostApiPostsByPostIdUpdateResponse = {
     id: string;
 };
 
+export type PostApiPostsByPostIdUploadMediaData = {
+    postId: string;
+    requestBody: {
+        /**
+         * Profile media
+         */
+        file: (Blob | File);
+    };
+};
+
+export type PostApiPostsByPostIdUploadMediaResponse = {
+    cid: string;
+    url: string;
+    gatewayUrl: string;
+};
+
 export type PostApiPostsCreateResponse = {
     id: string;
 };
@@ -175,6 +191,21 @@ export type $OpenApiTs = {
                  */
                 default: {
                     id: string;
+                };
+            };
+        };
+    };
+    '/api/posts/{postId}/upload-media': {
+        post: {
+            req: PostApiPostsByPostIdUploadMediaData;
+            res: {
+                /**
+                 * Metadata uploaded
+                 */
+                default: {
+                    cid: string;
+                    url: string;
+                    gatewayUrl: string;
                 };
             };
         };
