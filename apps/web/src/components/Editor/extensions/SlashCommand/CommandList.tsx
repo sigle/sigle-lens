@@ -122,7 +122,7 @@ export const CommandList = forwardRef<CommandListRef, CommandListProps>(
         {embedItems.map(({ title, description, icon: Icon }, index) => (
           <CommandListItem
             key={title}
-            index={index}
+            index={basicItems.length + index}
             selectedIndex={selectedIndex}
             title={title}
             description={description}

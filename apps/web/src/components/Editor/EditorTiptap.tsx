@@ -145,7 +145,7 @@ export const EditorTipTap = () => {
   });
 
   return (
-    <div className="prose dark:prose-invert lg:prose-lg">
+    <div className="prose dark:prose-invert lg:prose-lg pb-5">
       <EditorContent className="editor" editor={editor} />
 
       {editor && !isMobile && <EditorBubbleMenu editor={editor} />}
