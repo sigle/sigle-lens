@@ -1,6 +1,9 @@
 import { PublicationBookmark } from "@/components/Publication/PublicationBookmark";
+import { PublicationCollect } from "@/components/Publication/PublicationCollect";
 import { PublicationHideDialog } from "@/components/Publication/PublicationHideDialog";
 import { PublicationLike } from "@/components/Publication/PublicationLike";
+import { PublicationReportDialog } from "@/components/Publication/PublicationReportDialog";
+import { PublicationShareDialog } from "@/components/Publication/PublicationShareDialog";
 import { getOpenActionModule } from "@/lib/collect";
 import { invariant } from "@/lib/invariant";
 import { getProfileAvatarUrl, getProfileHandle } from "@/lib/profile";
@@ -10,7 +13,6 @@ import { type Post, SessionType, useSession } from "@lens-protocol/react-web";
 import {
   AspectRatio,
   Avatar,
-  Badge,
   DropdownMenu,
   Flex,
   Heading,
@@ -166,15 +168,15 @@ export const PublicationCard = ({ publication }: PublicationCardProps) => {
               ) : null}
             </DropdownMenu.Content>
           </DropdownMenu.Root>
-          {/* {openActionModule ? (
+          {openActionModule ? (
             <div className="ml-5">
               <PublicationCollect publication={publication} />
             </div>
-          ) : null} */}
+          ) : null}
         </Flex>
       </div>
 
-      {/* <PublicationReportDialog
+      <PublicationReportDialog
         publication={publication}
         open={reportDialogOpen}
         onOpenChange={setReportDialogOpen}
@@ -183,7 +185,7 @@ export const PublicationCard = ({ publication }: PublicationCardProps) => {
         publication={publication}
         open={shareDialogOpen}
         onOpenChange={setShareDialogOpen}
-      /> */}
+      />
       <PublicationHideDialog
         publication={publication}
         open={hideDialogOpen}
