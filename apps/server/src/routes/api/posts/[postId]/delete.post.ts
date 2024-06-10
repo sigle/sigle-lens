@@ -12,14 +12,13 @@ defineRouteMeta({
 export default defineEventHandler(async (event) => {
   const postId = getRouterParam(event, "postId");
 
-  await db
-    .delete(posts)
-    .where(
-      and(
-        eq(posts.id as any, postId),
-        eq(posts.profileId, event.context.user.profileId),
-      ),
-    );
+  await db.delete(posts).where(
+    and(
+      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+      eq(posts.id as any, postId),
+      eq(posts.profileId, event.context.user.profileId),
+    ),
+  );
 
   event.context.$posthog.capture({
     distinctId: event.context.user.userId,

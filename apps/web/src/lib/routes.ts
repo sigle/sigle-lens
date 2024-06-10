@@ -57,6 +57,7 @@ export const Routes = {
 };
 
 type RouteBuilder<Params extends z.ZodSchema, Search extends z.ZodSchema> = {
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   (p?: z.input<Params>, options?: { search?: z.input<Search> }): any;
   useParams: () => z.output<Params>;
   useSearchParams: () => z.output<Search>;

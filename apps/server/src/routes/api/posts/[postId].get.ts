@@ -61,6 +61,7 @@ export default defineEventHandler((event) => {
     .from(posts)
     .where(
       and(
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         eq(posts.id as any, postId),
         eq(posts.profileId, event.context.user.profileId),
       ),

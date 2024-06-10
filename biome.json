@@ -7,25 +7,45 @@
     "enabled": true,
     "indentStyle": "space",
     "indentWidth": 2,
-    "ignore": [".next/**", "__generated__/**", ".output/**", ".nitro/**"]
+    "ignore": [
+      ".turbo/**",
+      ".next/**",
+      "__generated__/**",
+      ".output/**",
+      ".nitro/**"
+    ]
   },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
       "a11y": {
-        "noSvgWithoutTitle": "off"
+        "noSvgWithoutTitle": "off",
+        "useKeyWithClickEvents": "off"
       },
       "style": {
-        "noUselessElse": "off"
+        "noUselessElse": "off",
+        "noParameterAssign": "off"
       }
     },
-    "ignore": [".next/**", "__generated__/**", ".output/**", ".nitro/**"]
+    "ignore": [
+      ".turbo/**",
+      ".next/**",
+      "__generated__/**",
+      ".output/**",
+      ".nitro/**"
+    ]
   },
   "overrides": [
     {
       "include": ["*.json"],
-      "ignore": [".next/**", "__generated__/**", ".output/**", ".nitro/**"],
+      "ignore": [
+        ".turbo/**",
+        ".next/**",
+        "__generated__/**",
+        ".output/**",
+        ".nitro/**"
+      ],
       "formatter": {
         "indentStyle": "space",
         "indentWidth": 2
