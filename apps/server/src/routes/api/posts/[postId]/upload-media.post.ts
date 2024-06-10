@@ -1,5 +1,8 @@
+import { and, eq } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { z } from "zod";
+import { db } from "~/db/db";
+import { posts } from "~/db/schema";
 import { env } from "~/env";
 import { uploadImage } from "~/utils/fleek";
 import {
@@ -76,6 +79,26 @@ export default defineEventHandler(async (event) => {
     throw createError({
       status: 400,
       message: "Invalid file",
+    });
+  }
+
+  const post = db
+    .select({
+      id: posts.id,
+    })
+    .from(posts)
+    .where(
+      and(
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+        eq(posts.id as any, postId),
+        eq(posts.profileId, event.context.user.profileId),
+      ),
+    )
+    .then((rows) => rows[0]);
+  if (!post) {
+    throw createError({
+      status: 404,
+      message: "Post not found.",
     });
   }
 

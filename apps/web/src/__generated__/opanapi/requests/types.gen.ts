@@ -55,6 +55,22 @@ export type PostApiPostsByPostIdUploadMediaResponse = {
     gatewayUrl: string;
 };
 
+export type PostApiPostsByPostIdUploadMetadataData = {
+    postId: string;
+    requestBody: {
+        metadata: {
+            [key: string]: unknown;
+        };
+    };
+};
+
+export type PostApiPostsByPostIdUploadMetadataResponse = {
+    /**
+     * Arweave ID.
+     */
+    id: string;
+};
+
 export type PostApiPostsCreateResponse = {
     id: string;
 };
@@ -206,6 +222,22 @@ export type $OpenApiTs = {
                     cid: string;
                     url: string;
                     gatewayUrl: string;
+                };
+            };
+        };
+    };
+    '/api/posts/{postId}/upload-metadata': {
+        post: {
+            req: PostApiPostsByPostIdUploadMetadataData;
+            res: {
+                /**
+                 * Metadata uploaded.
+                 */
+                default: {
+                    /**
+                     * Arweave ID.
+                     */
+                    id: string;
                 };
             };
         };
