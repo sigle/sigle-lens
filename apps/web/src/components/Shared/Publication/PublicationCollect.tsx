@@ -8,7 +8,7 @@ import {
 import { Avatar, Badge, Button } from "@radix-ui/themes";
 import { IconCards } from "@tabler/icons-react";
 import { useState } from "react";
-import { PublicationCollectDialog } from "../Shared/Publication/PublicationCollectDialog";
+import { PublicationCollectDialog } from "./PublicationCollectDialog";
 
 interface PublicationCollectProps {
   publication: Post;
