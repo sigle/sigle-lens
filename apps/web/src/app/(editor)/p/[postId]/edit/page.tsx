@@ -5,8 +5,9 @@ import {
   usePostsServiceGetApiPostsByPostId,
 } from "@/__generated__/opanapi/queries";
 import { EditorFormProvider } from "@/components/Editor/EditorFormProvider";
+import { EditorTitle } from "@/components/Editor/EditorTitle";
 import { EditorHeader } from "@/components/Editor/Header/EditorHeader";
-import { Callout, Flex } from "@radix-ui/themes";
+import { Callout, Container, Flex } from "@radix-ui/themes";
 import { IconInfoCircle } from "@tabler/icons-react";
 import { notFound, useParams } from "next/navigation";
 import { PageEditorSkeleton } from "../../new/loading";
@@ -60,12 +61,12 @@ const PostEditDraft = ({ postId }: { postId: string }) => {
   return (
     <EditorFormProvider type="draft" post={post}>
       <EditorHeader />
-      {/* <Container size="2">
+      <Container size="2">
         <EditorTitle />
-        <EditorCoverImage />
-        <EditorTipTap />
+        {/* <EditorCoverImage />
+        <EditorTipTap /> */}
       </Container>
-      <EditorSettings />
+      {/* <EditorSettings />
       <PublishDialog postId={postId} /> */}
     </EditorFormProvider>
   );
