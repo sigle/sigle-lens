@@ -96,6 +96,7 @@ export default defineEventHandler(async (event) => {
     event: "post media uploaded",
     properties: {
       profileId: event.context.user.profileId,
+      postId,
       cid,
       size,
     },
