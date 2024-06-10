@@ -27,7 +27,6 @@ export const EditorSave = () => {
       onAutoSave();
     });
     return () => subscription.unsubscribe();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watch, editor]);
 
   const onAutoSave = useDebouncedCallback(

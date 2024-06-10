@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { toast } from "sonner";
 import { PageEditorSkeleton } from "./loading";
 
-export default function PostCreate({}) {
+export default function PostCreate() {
   const router = useRouter();
   const { mutate: createPost } = usePostsServicePostApiPostsCreate({
     onSuccess: (data) => {
@@ -19,9 +19,9 @@ export default function PostCreate({}) {
     },
   });
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     createPost();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <PageEditorSkeleton />;

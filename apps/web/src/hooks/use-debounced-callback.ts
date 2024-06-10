@@ -2,8 +2,10 @@
 import React from "react";
 
 // debounce function (defaults wait to .2 seconds)
+// biome-ignore lint/suspicious/noExplicitAny: any is fine
 const debounce = (func: any, wait = 200) => {
   let timeout: NodeJS.Timeout; // for the setTimeout function and so it can be cleared
+  // biome-ignore lint/suspicious/noExplicitAny: any is fine
   function executedFunction(...args: any) {
     // the function returned from debounce
     const later = () => {
@@ -23,22 +25,24 @@ const debounce = (func: any, wait = 200) => {
 
 // hook for using the debounce function
 export function useDebouncedCallback(
+  // biome-ignore lint/suspicious/noExplicitAny: any is fine
   callback: any,
   delay = 1000,
+  // biome-ignore lint/suspicious/noExplicitAny: any is fine
   deps: any[] = [],
 ) {
   // debounce the callback
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const debouncedCallback = React.useCallback(debounce(callback, delay), [
     delay,
     ...deps,
   ]); // with the delay
   // clean up on unmount or dependency change
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   React.useEffect(() => {
     return () => {
       debouncedCallback.cancel(); // cancel any pending calls
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [delay, ...deps]);
   // return the debounce function so we can use it
   return debouncedCallback;

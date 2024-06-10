@@ -12,6 +12,7 @@ export function PostHogInit() {
   const [isInitialized, setIsInitialized] = useState(false);
   const { loading: sessionLoading, data: session } = useSession();
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (!sessionLoading && session && env.NEXT_PUBLIC_POSTHOG_KEY) {
       posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY, {
@@ -43,7 +44,6 @@ export function PostHogInit() {
       });
     }
     // Do not add session to the dependencies, as we don't want to re-init posthog after the user login
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessionLoading]);
 
   if (!isInitialized) return null;

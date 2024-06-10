@@ -7,7 +7,7 @@
     "enabled": true,
     "indentStyle": "space",
     "indentWidth": 2,
-    "ignore": [".next", "__generated__", ".output", ".nitro"]
+    "ignore": [".next/**", "__generated__/**", ".output/**", ".nitro/**"]
   },
   "linter": {
     "enabled": true,
@@ -20,11 +20,12 @@
         "noUselessElse": "off"
       }
     },
-    "ignore": [".next", "__generated__", ".output", ".nitro"]
+    "ignore": [".next/**", "__generated__/**", ".output/**", ".nitro/**"]
   },
   "overrides": [
     {
       "include": ["*.json"],
+      "ignore": [".next/**", "__generated__/**", ".output/**", ".nitro/**"],
       "formatter": {
         "indentStyle": "space",
         "indentWidth": 2
