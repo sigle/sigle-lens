@@ -8,8 +8,8 @@
     "prepare": "nitro prepare",
     "preview": "node .output/server/index.mjs",
     "db:studio": "dotenvx run --env-file=.env.development -- drizzle-kit studio",
-    "db:generate": "drizzle-kit generate:sqlite",
-    "db:push": "dotenvx run --env-file=.env.development -- drizzle-kit push:sqlite"
+    "db:generate": "drizzle-kit generate",
+    "db:push": "dotenvx run --env-file=.env.development -- drizzle-kit push"
   },
   "dependencies": {
     "@dotenvx/dotenvx": "0.37.1",
@@ -18,19 +18,19 @@
     "@lens-protocol/client": "2.2.0",
     "@lens-protocol/metadata": "1.2.0",
     "@libsql/client": "0.6.0",
-    "@sentry/node": "7.114.0",
+    "@sentry/node": "8.8.0",
     "@t3-oss/env-core": "0.10.1",
-    "drizzle-orm": "0.30.10",
+    "drizzle-orm": "0.31.2",
     "h3": "1.11.1",
     "jwt-decode": "4.0.0",
     "nanoid": "5.0.7",
     "nitro-cors": "0.7.1",
     "posthog-node": "4.0.1",
-    "sharp": "0.33.3",
+    "sharp": "0.33.4",
     "zod": "3.23.8"
   },
   "devDependencies": {
-    "drizzle-kit": "0.21.0",
+    "drizzle-kit": "0.22.7",
     "nitropack": "npm:nitropack-nightly@2.10.0-28585081.346a4950"
   }
 }

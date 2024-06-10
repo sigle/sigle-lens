@@ -138,9 +138,7 @@ export type $OpenApiTs = {
     };
     '/api/posts/{postId}': {
         get: {
-            req: {
-                postId: string;
-            };
+            req: GetApiPostsByPostIdData;
             res: {
                 /**
                  * Post entry.
@@ -159,9 +157,7 @@ export type $OpenApiTs = {
     };
     '/api/posts/{postId}/delete': {
         post: {
-            req: {
-                postId: string;
-            };
+            req: PostApiPostsByPostIdDeleteData;
             res: {
                 /**
                  * OK
@@ -172,16 +168,7 @@ export type $OpenApiTs = {
     };
     '/api/posts/{postId}/update': {
         post: {
-            req: {
-                postId: string;
-                requestBody: {
-                    title: string;
-                    content: string;
-                    metaTitle?: string;
-                    metaDescription?: string;
-                    coverImage?: string;
-                };
-            };
+            req: PostApiPostsByPostIdUpdateData;
             res: {
                 /**
                  * Post updated.
@@ -206,12 +193,7 @@ export type $OpenApiTs = {
     };
     '/api/posts/list': {
         get: {
-            req: {
-                /**
-                 * Limit the number of posts returned.
-                 */
-                limit?: number;
-            };
+            req: GetApiPostsListData;
             res: {
                 /**
                  * Posts list.
@@ -231,14 +213,7 @@ export type $OpenApiTs = {
     };
     '/api/profile/upload-avatar': {
         post: {
-            req: {
-                requestBody: {
-                    /**
-                     * Profile media
-                     */
-                    file: (Blob | File);
-                };
-            };
+            req: PostApiProfileUploadAvatarData;
             res: {
                 /**
                  * Metadata uploaded
@@ -253,14 +228,7 @@ export type $OpenApiTs = {
     };
     '/api/profile/upload-cover': {
         post: {
-            req: {
-                requestBody: {
-                    /**
-                     * Profile cover
-                     */
-                    file: (Blob | File);
-                };
-            };
+            req: PostApiProfileUploadCoverData;
             res: {
                 /**
                  * Metadata uploaded
@@ -275,16 +243,7 @@ export type $OpenApiTs = {
     };
     '/api/profile/upload-metadata': {
         post: {
-            req: {
-                requestBody: {
-                    /**
-                     * Profile metadata
-                     */
-                    metadata?: {
-                        [key: string]: unknown;
-                    };
-                };
-            };
+            req: PostApiProfileUploadMetadataData;
             res: {
                 /**
                  * Metadata uploaded
