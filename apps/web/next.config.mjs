@@ -10,19 +10,16 @@ const nextConfig = {
     config.externals.push("pino-pretty", "lokijs", "encoding");
     return config;
   },
-
-  sentry: {
-    // Prevents source maps from being exposed in production
-    hideSourceMaps: false,
-    // Upload large source maps to Sentry
-    widenClientFileUpload: true,
-    // Disable logger to save bundle size
-    disableLogger: true,
-  },
 };
 
-const sentryWebpackPluginOptions = {
-  silent: true,
-};
-
-export default withSentryConfig(nextConfig, sentryWebpackPluginOptions);
+export default withSentryConfig(nextConfig, {
+  // TODO revert to true
+  // silent: true,
+  telemetry: false,
+  // Prevents source maps from being exposed in production
+  hideSourceMaps: false,
+  // Upload large source maps to Sentry
+  widenClientFileUpload: true,
+  // Disable logger to save bundle size
+  disableLogger: true,
+});
