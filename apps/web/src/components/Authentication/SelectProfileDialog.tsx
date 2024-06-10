@@ -1,25 +1,25 @@
 import {
-  Profile,
+  type Profile,
   useLogin,
   useProfilesManaged,
 } from "@lens-protocol/react-web";
 import { Callout, Dialog, Flex, Spinner } from "@radix-ui/themes";
-import { useAccount } from "wagmi";
 import { IconInfoCircle } from "@tabler/icons-react";
-import { useEffect, useState } from "react";
 import { usePostHog } from "posthog-js/react";
-import { useAuthenticationStore } from "./store";
-import { SignInWithWallet } from "./SignIn/SignInWallet";
-import { SignInWithLens } from "./SignIn/SignInLens";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { useAccount } from "wagmi";
+import { SignInWithLens } from "./SignIn/SignInLens";
+import { SignInWithWallet } from "./SignIn/SignInWallet";
+import { useAuthenticationStore } from "./store";
 
 export const SelectProfileDialog = () => {
   const { isConnected, address } = useAccount();
   const selectProfileOpen = useAuthenticationStore(
-    (state) => state.selectProfileOpen
+    (state) => state.selectProfileOpen,
   );
   const setSelectProfileOpen = useAuthenticationStore(
-    (state) => state.setSelectProfileOpen
+    (state) => state.setSelectProfileOpen,
   );
 
   // If during the flow the user switch to another wallet that is not connected
@@ -52,7 +52,7 @@ const ProfilesList = ({ address }: ProfilesListProps) => {
   } = useProfilesManaged({ for: address });
   const { execute: login, loading: loginLoading } = useLogin();
   const setSelectProfileOpen = useAuthenticationStore(
-    (state) => state.setSelectProfileOpen
+    (state) => state.setSelectProfileOpen,
   );
   const [selectedProfile, setSelectedProfile] = useState<Profile | null>(null);
 

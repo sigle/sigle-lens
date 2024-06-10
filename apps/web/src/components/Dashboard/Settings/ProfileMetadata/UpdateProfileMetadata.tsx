@@ -1,18 +1,18 @@
+import { useProfileServicePostApiProfileUploadMetadata } from "@/__generated__/opanapi/queries";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Profile, useSetProfileMetadata } from "@lens-protocol/react-web";
-import { Button, Flex, Text, TextArea, TextField } from "@radix-ui/themes";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import {
-  MetadataAttribute,
+  type MetadataAttribute,
   MetadataAttributeType,
   profile as profileMetadata,
 } from "@lens-protocol/metadata";
+import { type Profile, useSetProfileMetadata } from "@lens-protocol/react-web";
+import { Button, Flex, Text, TextArea, TextField } from "@radix-ui/themes";
 import { IconAt, IconBrandX } from "@tabler/icons-react";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { useProfileServicePostApiProfileUploadMetadata } from "@/__generated__/opanapi/queries";
-import { UploadProfilePicture } from "./UploadProfilePicture";
+import { z } from "zod";
 import { UploadProfileCoverPicture } from "./UploadProfileCoverPicture";
+import { UploadProfilePicture } from "./UploadProfilePicture";
 
 const updateProfileMetadataSchema = z.object({
   name: z.string().optional(),
@@ -67,7 +67,7 @@ export const UpdateProfileMetadata = ({
         undefined,
       website:
         profile.metadata?.attributes?.find(
-          (attribute) => attribute.key === "website"
+          (attribute) => attribute.key === "website",
         )?.value || undefined,
       x:
         profile.metadata?.attributes?.find((attribute) => attribute.key === "x")

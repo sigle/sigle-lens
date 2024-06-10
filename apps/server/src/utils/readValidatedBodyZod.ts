@@ -1,10 +1,10 @@
 import { formatZodError } from "@lens-protocol/metadata";
-import { H3Event } from "h3";
-import { z } from "zod";
+import type { H3Event } from "h3";
+import type { z } from "zod";
 
 export const readValidatedBodyZod = async <T, Event extends H3Event = H3Event>(
   event: Event,
-  schema: z.ZodType<T>
+  schema: z.ZodType<T>,
 ) => {
   const body = await readBody(event, { strict: true });
   const response = schema.safeParse(body);

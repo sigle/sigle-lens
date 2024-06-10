@@ -1,4 +1,4 @@
-import { Editor } from "@tiptap/core";
+import type { Editor } from "@tiptap/core";
 import { create } from "zustand";
 
 interface EditorState {

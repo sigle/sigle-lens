@@ -1,10 +1,10 @@
 "use client";
 
-import { Grid, Heading } from "@radix-ui/themes";
-import { SessionType, useSession } from "@lens-protocol/react-web";
 import { GetFamiliarCards } from "@/components/Dashboard/GetFamiliarCards";
-import { LatestPublication } from "@/components/Dashboard/LatestPublication";
 import { LatestDrafts } from "@/components/Dashboard/LatestDrafts";
+import { LatestPublication } from "@/components/Dashboard/LatestPublication";
+import { SessionType, useSession } from "@lens-protocol/react-web";
+import { Grid, Heading } from "@radix-ui/themes";
 
 export default function Dashboard() {
   const { data: session } = useSession();

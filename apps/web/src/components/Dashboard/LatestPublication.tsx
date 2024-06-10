@@ -1,3 +1,14 @@
+import { getOpenActionModule } from "@/lib/collect";
+import { getProfileAvatarUrl, getProfileHandle } from "@/lib/profile";
+import { Routes } from "@/lib/routes";
+import { PublicationMetadataMainFocusType } from "@lens-protocol/client";
+import {
+  LimitType,
+  type Post,
+  type Profile,
+  PublicationType,
+  usePublications,
+} from "@lens-protocol/react-web";
 import {
   Avatar,
   Badge,
@@ -8,19 +19,8 @@ import {
   Spinner,
   Text,
 } from "@radix-ui/themes";
-import Link from "next/link";
-import {
-  LimitType,
-  Post,
-  Profile,
-  PublicationType,
-  usePublications,
-} from "@lens-protocol/react-web";
 import { format } from "date-fns";
-import { PublicationMetadataMainFocusType } from "@lens-protocol/client";
-import { getProfileAvatarUrl, getProfileHandle } from "@/lib/profile";
-import { getOpenActionModule } from "@/lib/collect";
-import { Routes } from "@/lib/routes";
+import Link from "next/link";
 
 interface LatestPublicationProps {
   profile: Profile;
@@ -45,7 +45,7 @@ export const LatestPublication = ({ profile }: LatestPublicationProps) => {
       : null;
 
   const metaTitleAttribute = metadata?.attributes?.find(
-    (attribute) => attribute.key === "meta-title"
+    (attribute) => attribute.key === "meta-title",
   );
 
   const openActionModule = publication

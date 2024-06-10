@@ -1,11 +1,11 @@
+import { useLogoutWallet } from "@/hooks/use-logout-wallet";
+import { getProfileAvatarUrl, getProfileHandle } from "@/lib/profile";
+import { Routes } from "@/lib/routes";
 import { SessionType, useSession } from "@lens-protocol/react-web";
 import { Avatar, Button, DropdownMenu, IconButton } from "@radix-ui/themes";
+import { useTheme } from "next-themes";
 import Link from "next/link";
 import { usePostHog } from "posthog-js/react";
-import { useTheme } from "next-themes";
-import { getProfileAvatarUrl, getProfileHandle } from "@/lib/profile";
-import { useLogoutWallet } from "@/hooks/use-logout-wallet";
-import { Routes } from "@/lib/routes";
 
 export const UserDropdown = () => {
   const posthog = usePostHog();
@@ -47,10 +47,10 @@ export const UserDropdown = () => {
         {session.type === SessionType.WithProfile ? (
           <>
             <DropdownMenu.Item asChild>
-              <Link href={`/p/new`}>Write a story</Link>
+              <Link href={"/p/new"}>Write a story</Link>
             </DropdownMenu.Item>
             <DropdownMenu.Item asChild>
-              <Link href={`/dashboard/settings`}>Settings</Link>
+              <Link href={"/dashboard/settings"}>Settings</Link>
             </DropdownMenu.Item>
             <DropdownMenu.Item asChild>
               <Link

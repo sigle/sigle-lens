@@ -56,7 +56,7 @@ export default defineEventHandler(async (event) => {
   const lensId = decoded.id;
 
   // Get or create the user and linked profile.
-  let [user, profile] = await Promise.all([
+  const [user, profile] = await Promise.all([
     db
       .select({
         id: users.id,

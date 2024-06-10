@@ -1,4 +1,4 @@
-import { Profile, useFollow } from "@lens-protocol/react-web";
+import { type Profile, useFollow } from "@lens-protocol/react-web";
 import { Button, IconButton } from "@radix-ui/themes";
 import { IconUserPlus } from "@tabler/icons-react";
 import { usePostHog } from "posthog-js/react";

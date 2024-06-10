@@ -1,16 +1,16 @@
 "use client";
 
+import { useSignInWallet } from "@/hooks/use-sign-in-wallet";
+import { LogoImage } from "@/images/Logo";
 import { SessionType, useSession } from "@lens-protocol/react-web";
 import { Button, Flex, IconButton } from "@radix-ui/themes";
-import Link from "next/link";
-import { useTheme } from "next-themes";
 import { IconSun } from "@tabler/icons-react";
+import { useTheme } from "next-themes";
+import Link from "next/link";
 import { usePostHog } from "posthog-js/react";
-import { LogoImage } from "@/images/Logo";
-import { useSignInWallet } from "@/hooks/use-sign-in-wallet";
+import { RegisterProfileDialog } from "../Authentication/RegisterProfileDialog";
 import { SelectProfileDialog } from "../Authentication/SelectProfileDialog";
 import { useAuthenticationStore } from "../Authentication/store";
-import { RegisterProfileDialog } from "../Authentication/RegisterProfileDialog";
 import { UserDropdown } from "./UserDropdown";
 
 export const Header = () => {
@@ -19,7 +19,7 @@ export const Header = () => {
   const { data: session, loading: loadingSession } = useSession();
   const { resolvedTheme, setTheme } = useTheme();
   const setRegisterProfileOpen = useAuthenticationStore(
-    (state) => state.setRegisterProfileOpen
+    (state) => state.setRegisterProfileOpen,
   );
 
   const onThemeChange = () => {

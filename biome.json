@@ -1,0 +1,55 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.8.1/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "ignore": [
+      ".turbo/**",
+      ".next/**",
+      "__generated__/**",
+      ".output/**",
+      ".nitro/**"
+    ]
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "a11y": {
+        "noSvgWithoutTitle": "off",
+        "useKeyWithClickEvents": "off"
+      },
+      "style": {
+        "noUselessElse": "off",
+        "noParameterAssign": "off"
+      }
+    },
+    "ignore": [
+      ".turbo/**",
+      ".next/**",
+      "__generated__/**",
+      ".output/**",
+      ".nitro/**"
+    ]
+  },
+  "overrides": [
+    {
+      "include": ["*.json"],
+      "ignore": [
+        ".turbo/**",
+        ".next/**",
+        "__generated__/**",
+        ".output/**",
+        ".nitro/**"
+      ],
+      "formatter": {
+        "indentStyle": "space",
+        "indentWidth": 2
+      }
+    }
+  ]
+}

@@ -3,11 +3,19 @@
   "private": true,
   "packageManager": "pnpm@9.1.0",
   "scripts": {
-    "format": "prettier --write '**/*' --ignore-unknown"
+    "format": "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true",
+    "prepare": "husky"
   },
   "devDependencies": {
-    "prettier": "3.2.5",
+    "@biomejs/biome": "1.8.1",
+    "husky": "9.0.11",
+    "lint-staged": "15.2.5",
     "turbo": "2.0.3"
+  },
+  "lint-staged": {
+    "*": [
+      "biome check --apply --no-errors-on-unmatched --files-ignore-unknown=true"
+    ]
   },
   "pnpm": {
     "patchedDependencies": {

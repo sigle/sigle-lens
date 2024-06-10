@@ -1,5 +1,6 @@
+import { getBoringAvatarUrl } from "@/lib/profile";
 import {
-  Profile,
+  type Profile,
   useProfileManagers,
   useUpdateProfileManagers,
 } from "@lens-protocol/react-web";
@@ -14,11 +15,10 @@ import {
   Text,
 } from "@radix-ui/themes";
 import { IconInfoCircle, IconPlus } from "@tabler/icons-react";
-import { useState } from "react";
-import { getBoringAvatarUrl } from "@/lib/profile";
-import { AddManagerDialog } from "./AddManagerDialog";
-import { toast } from "sonner";
 import { usePostHog } from "posthog-js/react";
+import { useState } from "react";
+import { toast } from "sonner";
+import { AddManagerDialog } from "./AddManagerDialog";
 
 export const ProfileManagers = ({ profile }: { profile: Profile }) => {
   const [addManagerDialogOpen, setAddManagerDialogOpen] = useState(false);

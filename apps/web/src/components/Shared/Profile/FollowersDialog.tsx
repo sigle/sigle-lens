@@ -1,12 +1,12 @@
-import { Dialog, Flex, Text } from "@radix-ui/themes";
+import { useLensInfiniteScroll } from "@/hooks/use-lens-infinite-scroll";
 import {
   LimitType,
-  ProfileId,
+  type ProfileId,
   useProfileFollowers,
 } from "@lens-protocol/react-web";
-import { useLensInfiniteScroll } from "@/hooks/use-lens-infinite-scroll";
-import { FollowUserCardSkeleton } from "./FollowUserCardSkeleton";
+import { Dialog, Flex, Text } from "@radix-ui/themes";
 import { FollowUserCard } from "./FollowUserCard";
+import { FollowUserCardSkeleton } from "./FollowUserCardSkeleton";
 
 interface FollowersDialogProps {
   profileId: ProfileId;
@@ -41,7 +41,7 @@ const FollowersDialogContent = ({
     useProfileFollowers({
       of: profileId,
       limit: LimitType.Fifty,
-    })
+    }),
   );
 
   if (followersLoading) {

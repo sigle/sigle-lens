@@ -1,5 +1,5 @@
 import {
-  PostsServiceGetApiPostsListDefaultResponse,
+  type PostsServiceGetApiPostsListDefaultResponse,
   usePostsServiceGetApiPostsList,
 } from "@/__generated__/opanapi/queries";
 import { Button, Card, Flex, Heading, Spinner, Text } from "@radix-ui/themes";

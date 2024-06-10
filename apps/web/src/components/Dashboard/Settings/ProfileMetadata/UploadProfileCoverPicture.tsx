@@ -1,11 +1,11 @@
+import { useProfileServicePostApiProfileUploadCover } from "@/__generated__/opanapi/queries";
+import { cn } from "@/lib/cn";
+import { resolveImageUrl } from "@/lib/resolve-image-url";
 import { Avatar, Spinner, Text } from "@radix-ui/themes";
 import { IconPencil } from "@tabler/icons-react";
 import { usePostHog } from "posthog-js/react";
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { resolveImageUrl } from "@/lib/resolve-image-url";
-import { cn } from "@/lib/cn";
-import { useProfileServicePostApiProfileUploadCover } from "@/__generated__/opanapi/queries";
 import { toast } from "sonner";
 
 interface UploadProfileCoverPictureProps {
@@ -21,6 +21,7 @@ export const UploadProfileCoverPicture = ({
   const { mutate: uploadImage, isPending: loadingUploadImage } =
     useProfileServicePostApiProfileUploadCover();
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
     if (!file) return;
@@ -31,6 +32,7 @@ export const UploadProfileCoverPicture = ({
     formData.append("file", file);
     uploadImage(
       {
+        // biome-ignore lint/suspicious/noExplicitAny: wrong type returned by nitro
         requestBody: formData as any,
       },
       {
@@ -38,13 +40,13 @@ export const UploadProfileCoverPicture = ({
           setPicture(data.url);
           posthog.capture("profile_cover_image_upload_success", {});
         },
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         onError: (error: any) => {
           posthog.capture("profile_cover_image_upload_error", {});
           toast.error(error.message);
         },
-      }
+      },
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -73,7 +75,7 @@ export const UploadProfileCoverPicture = ({
             size="9"
             color="gray"
             className={cn("w-full rounded-2 border border-gray-6", {
-              ["opacity-25"]: loadingUploadImage,
+              "opacity-25": loadingUploadImage,
             })}
           />
           {loadingUploadImage ? (

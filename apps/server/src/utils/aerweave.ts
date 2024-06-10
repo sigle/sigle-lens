@@ -1,5 +1,5 @@
-import type { H3Event } from "h3";
 import Irys from "@irys/sdk";
+import type { H3Event } from "h3";
 import { env } from "~/env";
 
 interface ArweaveTag {
@@ -19,7 +19,7 @@ export const aerweaveUploadFile = async (
     metadata,
   }: {
     metadata: object;
-  }
+  },
 ) => {
   const arweaveTags: ArweaveTag[] = [
     {

@@ -1,10 +1,14 @@
-import { Profile, SessionType, useSession } from "@lens-protocol/react-web";
+import { getProfileAvatarUrl, getProfileHandle } from "@/lib/profile";
+import { Routes } from "@/lib/routes";
+import {
+  type Profile,
+  SessionType,
+  useSession,
+} from "@lens-protocol/react-web";
 import { Avatar, Flex, Text } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
-import { getProfileAvatarUrl, getProfileHandle } from "@/lib/profile";
-import { UnfollowButton } from "./UnfollowButton";
 import { FollowButton } from "./FollowButton";
-import { Routes } from "@/lib/routes";
+import { UnfollowButton } from "./UnfollowButton";
 
 interface FollowUserCardProps {
   profile: Profile;
@@ -27,7 +31,7 @@ export const FollowUserCard = ({ profile }: FollowUserCardProps) => {
           router.push(
             Routes.userProfile({
               username: profile.handle ? profile.handle.localName : profile.id,
-            })
+            }),
           )
         }
       >

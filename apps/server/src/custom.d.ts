@@ -1,6 +1,6 @@
-import * as Sentry from "@sentry/node";
-import { type PostHog } from "posthog-node";
-import { type AuthenticatedUser } from "./middleware/2.auth";
+import type * as Sentry from "@sentry/node";
+import type { PostHog } from "posthog-node";
+import type { AuthenticatedUser } from "./middleware/2.auth";
 
 declare module "h3" {
   interface H3EventContext {

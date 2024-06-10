@@ -3,13 +3,13 @@
  * https://www.flightcontrol.dev/blog/fix-nextjs-routing-to-have-full-type-safety
  */
 
-import { z } from "zod";
 import {
-  ReadonlyURLSearchParams,
+  type ReadonlyURLSearchParams,
   useParams as useNextParams,
   useSearchParams as useNextSearchParams,
 } from "next/navigation";
 import queryString from "query-string";
+import { z } from "zod";
 
 /**
  * Get a url for a route
@@ -43,7 +43,7 @@ export const Routes = {
     ({ username }) => `/u/${username}`,
     z.object({
       username: z.string(),
-    })
+    }),
   ),
   publication: makeRoute(
     ({ id }) => `/p/${id}`,
@@ -52,11 +52,12 @@ export const Routes = {
     }),
     z.object({
       referral: z.string().optional().nullable(),
-    })
+    }),
   ),
 };
 
 type RouteBuilder<Params extends z.ZodSchema, Search extends z.ZodSchema> = {
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   (p?: z.input<Params>, options?: { search?: z.input<Search> }): any;
   useParams: () => z.output<Params>;
   useSearchParams: () => z.output<Search>;
@@ -66,7 +67,7 @@ type RouteBuilder<Params extends z.ZodSchema, Search extends z.ZodSchema> = {
 function makeRoute<Params extends z.ZodSchema, Search extends z.ZodSchema>(
   fn: (p: z.input<Params>) => string,
   paramsSchema: Params = {} as Params,
-  search: Search = {} as Search
+  search: Search = {} as Search,
 ): RouteBuilder<Params, Search> {
   const routeBuilder: RouteBuilder<Params, Search> = (params, options) => {
     const baseUrl = fn(params);
@@ -78,12 +79,12 @@ function makeRoute<Params extends z.ZodSchema, Search extends z.ZodSchema>(
   routeBuilder.useParams = function useParams(): z.output<Params> {
     const routeName =
       Object.entries(Routes).find(
-        ([, route]) => (route as unknown) === routeBuilder
+        ([, route]) => (route as unknown) === routeBuilder,
       )?.[0] || "(unknown route)";
     const res = paramsSchema.safeParse(useNextParams());
     if (!res.success) {
       throw new Error(
-        `Invalid route params for route ${routeName}: ${res.error.message}`
+        `Invalid route params for route ${routeName}: ${res.error.message}`,
       );
     }
     return res.data;
@@ -92,14 +93,14 @@ function makeRoute<Params extends z.ZodSchema, Search extends z.ZodSchema>(
   routeBuilder.useSearchParams = function useSearchParams(): z.output<Search> {
     const routeName =
       Object.entries(Routes).find(
-        ([, route]) => (route as unknown) === routeBuilder
+        ([, route]) => (route as unknown) === routeBuilder,
       )?.[0] || "(unknown route)";
     const res = search.safeParse(
-      convertURLSearchParamsToObject(useNextSearchParams())
+      convertURLSearchParamsToObject(useNextSearchParams()),
     );
     if (!res.success) {
       throw new Error(
-        `Invalid search params for route ${routeName}: ${res.error.message}`
+        `Invalid search params for route ${routeName}: ${res.error.message}`,
       );
     }
     return res.data;
@@ -111,7 +112,7 @@ function makeRoute<Params extends z.ZodSchema, Search extends z.ZodSchema>(
   Object.defineProperty(routeBuilder, "params", {
     get() {
       throw new Error(
-        "Routes.[route].params is only for type usage, not runtime. Use it like `typeof Routes.[routes].params`"
+        "Routes.[route].params is only for type usage, not runtime. Use it like `typeof Routes.[routes].params`",
       );
     },
   });
@@ -120,7 +121,7 @@ function makeRoute<Params extends z.ZodSchema, Search extends z.ZodSchema>(
 }
 
 export function convertURLSearchParamsToObject(
-  params: ReadonlyURLSearchParams | null
+  params: ReadonlyURLSearchParams | null,
 ): Record<string, string | string[]> {
   if (!params) {
     return {};

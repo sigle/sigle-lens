@@ -1,9 +1,9 @@
 "use client";
 
-import { Heading } from "@radix-ui/themes";
-import { SessionType, useSession } from "@lens-protocol/react-web";
-import { ProfileMetadata } from "@/components/Dashboard/Settings/ProfileMetadata/ProfileMetadata";
 import { ProfileManagers } from "@/components/Dashboard/Settings/ProfileManagers/ProfileManagers";
+import { ProfileMetadata } from "@/components/Dashboard/Settings/ProfileMetadata/ProfileMetadata";
+import { SessionType, useSession } from "@lens-protocol/react-web";
+import { Heading } from "@radix-ui/themes";
 
 export default function Settings() {
   const { data: session } = useSession();

@@ -1,9 +1,9 @@
-import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import posthog from "posthog-js";
+import { env } from "@/env";
 import { SessionType, useSession } from "@lens-protocol/react-web";
 import * as Sentry from "@sentry/nextjs";
-import { env } from "@/env";
+import { usePathname, useSearchParams } from "next/navigation";
+import posthog from "posthog-js";
+import { useEffect, useState } from "react";
 
 /**
  * Initialise PostHog when the session finish loading
@@ -12,6 +12,7 @@ export function PostHogInit() {
   const [isInitialized, setIsInitialized] = useState(false);
   const { loading: sessionLoading, data: session } = useSession();
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (!sessionLoading && session && env.NEXT_PUBLIC_POSTHOG_KEY) {
       posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY, {
@@ -43,7 +44,6 @@ export function PostHogInit() {
       });
     }
     // Do not add session to the dependencies, as we don't want to re-init posthog after the user login
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessionLoading]);
 
   if (!isInitialized) return null;
@@ -62,7 +62,7 @@ export function PostHogPageview() {
     if (pathname) {
       let url = window.origin + pathname;
       if (searchParams.toString()) {
-        url = url + `?${searchParams.toString()}`;
+        url = `${url}?${searchParams.toString()}`;
       }
       posthog.capture("$pageview", {
         $current_url: url,

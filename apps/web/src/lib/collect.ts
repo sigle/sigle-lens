@@ -1,12 +1,12 @@
 import { OpenActionModuleType } from "@lens-protocol/client";
-import {
+import type {
   MultirecipientFeeCollectOpenActionSettings,
   Post,
   SimpleCollectOpenActionSettings,
 } from "@lens-protocol/react-web";
 
 export const getOpenActionModule = (
-  publication: Post
+  publication: Post,
 ):
   | MultirecipientFeeCollectOpenActionSettings
   | SimpleCollectOpenActionSettings
@@ -15,7 +15,7 @@ export const getOpenActionModule = (
     (module) =>
       module.type === OpenActionModuleType.SimpleCollectOpenActionModule ||
       module.type ===
-        OpenActionModuleType.MultirecipientFeeCollectOpenActionModule
+        OpenActionModuleType.MultirecipientFeeCollectOpenActionModule,
   ) as
     | MultirecipientFeeCollectOpenActionSettings
     | SimpleCollectOpenActionSettings

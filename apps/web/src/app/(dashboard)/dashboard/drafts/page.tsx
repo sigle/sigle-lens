@@ -1,6 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import {
+  type PostsServiceGetApiPostsByPostIdDefaultResponse,
+  usePostsServiceGetApiPostsList,
+  usePostsServicePostApiPostsByPostIdDelete,
+} from "@/__generated__/opanapi/queries";
 import {
   Button,
   Card,
@@ -11,14 +15,10 @@ import {
   Spinner,
   Text,
 } from "@radix-ui/themes";
+import { IconDotsVertical } from "@tabler/icons-react";
 import { format } from "date-fns";
 import Link from "next/link";
-import { IconDotsVertical } from "@tabler/icons-react";
-import {
-  PostsServiceGetApiPostsByPostIdDefaultResponse,
-  usePostsServiceGetApiPostsList,
-  usePostsServicePostApiPostsByPostIdDelete,
-} from "@/__generated__/opanapi/queries";
+import { useState } from "react";
 import { toast } from "sonner";
 
 export default function DashboardDrafts() {
@@ -61,7 +61,7 @@ export default function DashboardDrafts() {
               No drafts yet
             </Text>
             <Button color="gray" highContrast asChild>
-              <Link href={`/p/new`}>Write a story</Link>
+              <Link href={"/p/new"}>Write a story</Link>
             </Button>
           </Flex>
         ) : null}
@@ -89,7 +89,7 @@ const Draft = ({
           description: error.message,
         });
       },
-    }
+    },
   );
 
   const onDelete = async () => {

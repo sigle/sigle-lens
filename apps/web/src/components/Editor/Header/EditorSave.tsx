@@ -1,12 +1,12 @@
+import { usePostsServicePostApiPostsByPostIdUpdate } from "@/__generated__/opanapi/queries";
+import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
 import { Callout, Text } from "@radix-ui/themes";
+import { IconInfoCircle } from "@tabler/icons-react";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { useParams } from "next/navigation";
-import { IconInfoCircle } from "@tabler/icons-react";
-import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
+import type { EditorPostFormData } from "../EditorFormProvider";
 import { useEditorStore } from "../store";
-import { EditorPostFormData } from "../EditorFormProvider";
-import { usePostsServicePostApiPostsByPostIdUpdate } from "@/__generated__/opanapi/queries";
 
 export const EditorSave = () => {
   const params = useParams();
@@ -27,7 +27,6 @@ export const EditorSave = () => {
       onAutoSave();
     });
     return () => subscription.unsubscribe();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watch, editor]);
 
   const onAutoSave = useDebouncedCallback(
@@ -47,11 +46,11 @@ export const EditorSave = () => {
           onError: () => {
             setSaveState("error");
           },
-        }
+        },
       );
     },
     2000,
-    [editor]
+    [editor],
   );
 
   if (saveState === "error") {
