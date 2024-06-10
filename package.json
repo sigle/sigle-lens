@@ -6,6 +6,7 @@
     "format": "prettier --write '**/*' --ignore-unknown"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.8.1",
     "prettier": "3.2.5",
     "turbo": "2.0.3"
   },
