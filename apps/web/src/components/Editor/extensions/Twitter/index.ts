@@ -1,6 +1,6 @@
 import { Node, nodePasteRule } from "@tiptap/core";
 import { ReactNodeViewRenderer } from "@tiptap/react";
-import { EmbedComponent, globalPasteRegex, isValidUrl } from "./Component";
+import { EmbedComponent, globalPasteRegex, isValidUrl } from "./component";
 
 declare module "@tiptap/core" {
   interface Commands<ReturnType> {
