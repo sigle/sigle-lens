@@ -47,10 +47,10 @@ export const UserDropdown = () => {
         {session.type === SessionType.WithProfile ? (
           <>
             <DropdownMenu.Item asChild>
-              <Link href={`/p/new`}>Write a story</Link>
+              <Link href={"/p/new"}>Write a story</Link>
             </DropdownMenu.Item>
             <DropdownMenu.Item asChild>
-              <Link href={`/dashboard/settings`}>Settings</Link>
+              <Link href={"/dashboard/settings"}>Settings</Link>
             </DropdownMenu.Item>
             <DropdownMenu.Item asChild>
               <Link

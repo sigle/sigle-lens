@@ -73,7 +73,7 @@ export const UploadProfilePicture = ({
             size="9"
             color="gray"
             className={cn("rounded-2 border border-gray-6", {
-              ["opacity-25"]: loadingUploadImage,
+              "opacity-25": loadingUploadImage,
             })}
           />
           {loadingUploadImage ? (
