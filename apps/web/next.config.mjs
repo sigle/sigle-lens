@@ -13,8 +13,7 @@ const nextConfig = {
 };
 
 export default withSentryConfig(nextConfig, {
-  // TODO revert to true
-  // silent: true,
+  silent: true,
   telemetry: false,
   // Prevents source maps from being exposed in production
   hideSourceMaps: false,
