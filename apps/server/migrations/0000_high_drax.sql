@@ -5,9 +5,9 @@ CREATE TABLE `posts` (
 	`meta_title` text,
 	`meta_description` text,
 	`cover_image` text,
+	`profile_id` text NOT NULL,
 	`created_at` integer NOT NULL,
-	`updated_at` integer,
-	`profile_id` text NOT NULL
+	`updated_at` integer
 );
 --> statement-breakpoint
 CREATE TABLE `profiles` (
