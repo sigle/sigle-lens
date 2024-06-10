@@ -1,6 +1,6 @@
+import { useAuthenticationStore } from "@/components/Authentication/store";
 import { useModal } from "connectkit";
 import { useAccount } from "wagmi";
-import { useAuthenticationStore } from "@/components/Authentication/store";
 
 export const useSignInWallet = () => {
   const { isConnected } = useAccount();
@@ -12,7 +12,7 @@ export const useSignInWallet = () => {
     onDisconnect: () => {},
   });
   const setSelectProfileOpen = useAuthenticationStore(
-    (state) => state.setSelectProfileOpen
+    (state) => state.setSelectProfileOpen,
   );
 
   const signInWithWallet = async () => {

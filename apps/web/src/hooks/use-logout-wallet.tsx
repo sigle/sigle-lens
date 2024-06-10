@@ -1,7 +1,7 @@
 import { useLogout } from "@lens-protocol/react-web";
+import * as Sentry from "@sentry/nextjs";
 import { usePostHog } from "posthog-js/react";
 import { useDisconnect } from "wagmi";
-import * as Sentry from "@sentry/nextjs";
 
 export const useLogoutWallet = () => {
   const { execute: logout } = useLogout();

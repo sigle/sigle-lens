@@ -5,6 +5,8 @@
   },
   "formatter": {
     "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
     "ignore": [".next", "__generated__", ".output", ".nitro"]
   },
   "linter": {

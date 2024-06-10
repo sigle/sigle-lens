@@ -17,8 +17,8 @@ export default defineEventHandler(async (event) => {
     .where(
       and(
         eq(posts.id as any, postId),
-        eq(posts.profileId, event.context.user.profileId)
-      )
+        eq(posts.profileId, event.context.user.profileId),
+      ),
     );
 
   event.context.$posthog.capture({

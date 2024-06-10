@@ -1,5 +1,5 @@
-import { PaginatedReadResult } from "@lens-protocol/react-web";
-import { RefCallback } from "react";
+import type { PaginatedReadResult } from "@lens-protocol/react-web";
+import type { RefCallback } from "react";
 import { useInView } from "react-cool-inview";
 
 export function useLensInfiniteScroll<

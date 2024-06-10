@@ -14,7 +14,7 @@ const debounce = (func: any, wait = 200) => {
     clearTimeout(timeout); // this clears the timeout each time the function is run again preventing later from running until we stop calling the function
     timeout = setTimeout(later, wait); // this sets the time out to run after the wait period
   }
-  executedFunction.cancel = function () {
+  executedFunction.cancel = () => {
     // so can be cancelled
     clearTimeout(timeout); // clears the timeout
   };
@@ -25,7 +25,7 @@ const debounce = (func: any, wait = 200) => {
 export function useDebouncedCallback(
   callback: any,
   delay = 1000,
-  deps: any[] = []
+  deps: any[] = [],
 ) {
   // debounce the callback
   // eslint-disable-next-line react-hooks/exhaustive-deps

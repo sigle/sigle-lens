@@ -1,14 +1,12 @@
 import { relations, sql } from "drizzle-orm";
-import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { nanoid } from "nanoid";
 
 export const users = sqliteTable("users", {
   // id refers to the user evm address
   id: text("id").primaryKey(),
 
-  createdAt: text("created_at")
-    .default(sql`CURRENT_TIMESTAMP`)
-    .notNull(),
+  createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
 });
 
 export type InsertUser = typeof users.$inferInsert;
@@ -18,9 +16,7 @@ export const profiles = sqliteTable("profiles", {
   // id refers to the lens id
   id: text("id").primaryKey(),
 
-  createdAt: text("created_at")
-    .default(sql`CURRENT_TIMESTAMP`)
-    .notNull(),
+  createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
 });
 
 export const profilesRelations = relations(profiles, ({ many }) => ({
@@ -46,7 +42,7 @@ export const posts = sqliteTable("posts", {
     .$defaultFn(() => new Date())
     .notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp" }).$onUpdate(
-    () => new Date()
+    () => new Date(),
   ),
 });
 

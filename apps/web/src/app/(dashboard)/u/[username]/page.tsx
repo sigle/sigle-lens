@@ -1,13 +1,13 @@
 "use client";
 
+import { ProfileHeader } from "@/components/Profile/ProfileHeader";
+import { ProfileInfo } from "@/components/Profile/ProfileInfo";
+import { FadeSlideBottom } from "@/components/ui/animations/FadeSlideBottom";
 import { useProfile } from "@lens-protocol/react-web";
 import { Callout, Container, Heading } from "@radix-ui/themes";
-import { notFound } from "next/navigation";
 import { IconInfoCircle } from "@tabler/icons-react";
-import { ProfileInfo } from "@/components/Profile/ProfileInfo";
+import { notFound } from "next/navigation";
 import { PageProfileSkeleton } from "./loading";
-import { FadeSlideBottom } from "@/components/ui/animations/FadeSlideBottom";
-import { ProfileHeader } from "@/components/Profile/ProfileHeader";
 
 export default function Home({ params }: { params: { username: string } }) {
   const {

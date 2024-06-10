@@ -1,11 +1,11 @@
+import { useProfileServicePostApiProfileUploadCover } from "@/__generated__/opanapi/queries";
+import { cn } from "@/lib/cn";
+import { resolveImageUrl } from "@/lib/resolve-image-url";
 import { Avatar, Spinner, Text } from "@radix-ui/themes";
 import { IconPencil } from "@tabler/icons-react";
 import { usePostHog } from "posthog-js/react";
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { resolveImageUrl } from "@/lib/resolve-image-url";
-import { cn } from "@/lib/cn";
-import { useProfileServicePostApiProfileUploadCover } from "@/__generated__/opanapi/queries";
 import { toast } from "sonner";
 
 interface UploadProfileCoverPictureProps {
@@ -42,7 +42,7 @@ export const UploadProfileCoverPicture = ({
           posthog.capture("profile_cover_image_upload_error", {});
           toast.error(error.message);
         },
-      }
+      },
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

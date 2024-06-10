@@ -1,4 +1,5 @@
-import { Profile } from "@lens-protocol/react-web";
+import { getProfileAvatarUrl, getProfileHandle } from "@/lib/profile";
+import type { Profile } from "@lens-protocol/react-web";
 import {
   Avatar,
   Card,
@@ -10,7 +11,6 @@ import {
 } from "@radix-ui/themes";
 import { IconChevronRight, IconWallet } from "@tabler/icons-react";
 import { useDisconnect } from "wagmi";
-import { getProfileAvatarUrl, getProfileHandle } from "@/lib/profile";
 
 interface SignInWithLensProps {
   profiles: Profile[];

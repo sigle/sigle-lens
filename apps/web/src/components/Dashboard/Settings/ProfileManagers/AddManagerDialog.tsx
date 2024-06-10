@@ -8,11 +8,11 @@ import {
   Text,
   TextField,
 } from "@radix-ui/themes";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { isAddress } from "viem";
-import { toast } from "sonner";
 import { usePostHog } from "posthog-js/react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { isAddress } from "viem";
+import { z } from "zod";
 
 const addManagerSchema = z.object({
   address: z.string().refine((value) => isAddress(value), {

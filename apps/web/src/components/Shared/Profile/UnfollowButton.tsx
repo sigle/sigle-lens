@@ -1,4 +1,4 @@
-import { Profile, useUnfollow } from "@lens-protocol/react-web";
+import { type Profile, useUnfollow } from "@lens-protocol/react-web";
 import { Button, IconButton } from "@radix-ui/themes";
 import { IconUserMinus } from "@tabler/icons-react";
 import { usePostHog } from "posthog-js/react";

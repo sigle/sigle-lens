@@ -1,4 +1,4 @@
-import { Profile, ProfilePictureSet } from "@lens-protocol/react-web";
+import type { Profile, ProfilePictureSet } from "@lens-protocol/react-web";
 import { resolveImageUrl } from "./resolve-image-url";
 
 export const getProfileAvatarUrl = (
@@ -7,7 +7,7 @@ export const getProfileAvatarUrl = (
    * The type of image to get. If not available, will fallback to raw.
    * Defaults to "optimized".
    */
-  type: "optimized" | "thumbnail" | "raw" = "optimized"
+  type: "optimized" | "thumbnail" | "raw" = "optimized",
 ): string => {
   const profileMetadata = profile.metadata;
   let profileAvatar: string | undefined;
@@ -16,7 +16,7 @@ export const getProfileAvatarUrl = (
   } else if (profileMetadata?.picture?.__typename === "NftImage") {
     profileAvatar = resolveProfilePictureSet(
       profileMetadata.picture.image,
-      type
+      type,
     );
   }
   if (profileAvatar) {
@@ -29,7 +29,7 @@ export const getProfileAvatarUrl = (
 
 const resolveProfilePictureSet = (
   profilePictureSet: ProfilePictureSet,
-  type: "optimized" | "thumbnail" | "raw"
+  type: "optimized" | "thumbnail" | "raw",
 ): string => {
   let profileAvatar: string;
   if (type === "optimized") {
@@ -51,7 +51,7 @@ export const getProfileCoverUrl = (
   /**
    * The type of image to get. If not available, will fallback to raw.
    * Defaults to "optimized".
-   */ type: "optimized" | "raw" = "optimized"
+   */ type: "optimized" | "raw" = "optimized",
 ): string => {
   const profileMetadata = profile.metadata;
   let profileCover: string | undefined;
@@ -73,7 +73,7 @@ export const getProfileCoverUrl = (
 // TODO replace with Lens avatar
 export const getBoringAvatarUrl = (
   text: string,
-  type: "optimized" | "thumbnail" | "raw" = "optimized"
+  type: "optimized" | "thumbnail" | "raw" = "optimized",
 ): string => {
   const size = type === "thumbnail" ? 40 : 120;
   return `https://source.boringavatars.com/marble/${size}/${text}?square&colors=6558FF,FF6E3C,B9F3DE,D0C9FF,FFDAAE`;

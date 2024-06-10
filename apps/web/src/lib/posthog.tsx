@@ -1,9 +1,9 @@
-import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import posthog from "posthog-js";
+import { env } from "@/env";
 import { SessionType, useSession } from "@lens-protocol/react-web";
 import * as Sentry from "@sentry/nextjs";
-import { env } from "@/env";
+import { usePathname, useSearchParams } from "next/navigation";
+import posthog from "posthog-js";
+import { useEffect, useState } from "react";
 
 /**
  * Initialise PostHog when the session finish loading

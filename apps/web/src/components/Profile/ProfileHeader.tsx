@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { env } from "@/env";
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 import { cn } from "@/lib/cn";
 import {
   getProfileAvatarUrl,
   getProfileCoverUrl,
   getProfileHandle,
 } from "@/lib/profile";
-import { Profile, SessionType, useSession } from "@lens-protocol/react-web";
+import { Routes } from "@/lib/routes";
+import {
+  type Profile,
+  SessionType,
+  useSession,
+} from "@lens-protocol/react-web";
 import {
   Avatar,
   Button,
@@ -15,13 +21,11 @@ import {
 } from "@radix-ui/themes";
 import { IconDotsVertical, IconPencil } from "@tabler/icons-react";
 import Link from "next/link";
-import { FollowButton } from "../Shared/Profile/FollowButton";
-import { UnfollowButton } from "../Shared/Profile/UnfollowButton";
-import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
-import { Routes } from "@/lib/routes";
-import { env } from "@/env";
 import { usePostHog } from "posthog-js/react";
+import { useState } from "react";
+import { FollowButton } from "../Shared/Profile/FollowButton";
 import { ReportProfileDialog } from "../Shared/Profile/ReportProfileDialog";
+import { UnfollowButton } from "../Shared/Profile/UnfollowButton";
 
 interface ProfileHeaderProps {
   profile: Profile;
@@ -35,7 +39,7 @@ export const ProfileHeader = ({ profile }: ProfileHeaderProps) => {
 
   const onCopyLink = () => {
     copyToClipboard(
-      `${env.NEXT_PUBLIC_APP_URL}${Routes.userProfile({ username: profile.handle ? profile.handle.localName : profile.id })}`
+      `${env.NEXT_PUBLIC_APP_URL}${Routes.userProfile({ username: profile.handle ? profile.handle.localName : profile.id })}`,
     );
     posthog.capture("profile_link_copied", {
       profileId: profile.id,

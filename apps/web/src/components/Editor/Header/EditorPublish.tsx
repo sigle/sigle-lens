@@ -1,8 +1,8 @@
 import { Button } from "@radix-ui/themes";
 import { IconRocket } from "@tabler/icons-react";
 import { useFormContext } from "react-hook-form";
+import type { EditorPostFormData } from "../EditorFormProvider";
 import { useEditorStore } from "../store";
-import { EditorPostFormData } from "../EditorFormProvider";
 
 export const EditorPublish = () => {
   const { watch } = useFormContext<EditorPostFormData>();

@@ -1,8 +1,8 @@
+import type { PostsServiceGetApiPostsByPostIdDefaultResponse } from "@/__generated__/opanapi/queries";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
-import { z } from "zod";
 import { isAddress } from "viem";
-import { PostsServiceGetApiPostsByPostIdDefaultResponse } from "@/__generated__/opanapi/queries";
+import { z } from "zod";
 
 const editorPostSchema = z.object({
   type: z.enum(["draft", "published"] as const),
@@ -50,7 +50,7 @@ const editorPostSchema = z.object({
                     message: "Invalid Ethereum address",
                   }),
                 split: z.coerce.number().int().min(0).max(100),
-              })
+              }),
             )
             .min(1)
             .max(5)
@@ -64,7 +64,7 @@ const editorPostSchema = z.object({
             // No duplicate recipients
             .refine((recipients) => {
               const uniqueRecipients = new Set(
-                recipients.map((recipient) => recipient.recipient)
+                recipients.map((recipient) => recipient.recipient),
               );
               return uniqueRecipients.size === recipients.length;
             }, "Duplicate recipients found"),

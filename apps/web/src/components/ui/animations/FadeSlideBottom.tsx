@@ -10,7 +10,7 @@ export const FadeSlideBottom = ({
       {...props}
       className={cn(
         "animate-in duration-500 fade-in slide-in-from-bottom-1",
-        className
+        className,
       )}
     >
       {children}

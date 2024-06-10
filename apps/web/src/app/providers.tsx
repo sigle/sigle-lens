@@ -1,24 +1,24 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { polygonAmoy, polygon } from "viem/chains";
-import { createConfig, WagmiProvider } from "wagmi";
-import {
-  LensProvider,
-  LensConfig,
-  production,
-  development,
-} from "@lens-protocol/react-web";
-import { bindings as wagmiBindings } from "@lens-protocol/wagmi";
-import { ConnectKitProvider, getDefaultConfig } from "connectkit";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { PostHogProvider } from "posthog-js/react";
-import posthog from "posthog-js";
-import { Toaster } from "sonner";
-import { ThemeProvider } from "next-themes";
-import { Theme } from "@radix-ui/themes";
 import { env } from "@/env";
 import { PostHogInit } from "@/lib/posthog";
+import {
+  type LensConfig,
+  LensProvider,
+  development,
+  production,
+} from "@lens-protocol/react-web";
+import { bindings as wagmiBindings } from "@lens-protocol/wagmi";
+import { Theme } from "@radix-ui/themes";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ConnectKitProvider, getDefaultConfig } from "connectkit";
+import { ThemeProvider } from "next-themes";
+import dynamic from "next/dynamic";
+import posthog from "posthog-js";
+import { PostHogProvider } from "posthog-js/react";
+import { Toaster } from "sonner";
+import { polygon, polygonAmoy } from "viem/chains";
+import { WagmiProvider, createConfig } from "wagmi";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,7 +38,7 @@ const config = createConfig(
     appIcon: `${env.NEXT_PUBLIC_APP_URL}/images/icon-192x192.png`,
     chains: [env.NEXT_PUBLIC_LENS_ENV === "production" ? polygon : polygonAmoy],
     ssr: true,
-  })
+  }),
 );
 
 const lensConfig: LensConfig = {
@@ -53,11 +53,11 @@ const lensConfig: LensConfig = {
 const OpenAPIInterceptor = dynamic(
   () =>
     import("@/components/Authentication/OpenAPIInterceptor").then(
-      (mod) => mod.OpenAPIInterceptor
+      (mod) => mod.OpenAPIInterceptor,
     ),
   {
     ssr: false,
-  }
+  },
 );
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {

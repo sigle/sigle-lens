@@ -1,13 +1,13 @@
-import { Profile } from "@lens-protocol/react-web";
-import { Heading, Link, Text } from "@radix-ui/themes";
-import NextLink from "next/link";
-import { useState } from "react";
-import { IconLink } from "@tabler/icons-react";
-import { getProfileHandle } from "@/lib/profile";
 import { cn } from "@/lib/cn";
 import { prettifyUrl } from "@/lib/prettify-url";
-import { FollowingDialog } from "../Shared/Profile/FollowingDialog";
+import { getProfileHandle } from "@/lib/profile";
+import type { Profile } from "@lens-protocol/react-web";
+import { Heading, Link, Text } from "@radix-ui/themes";
+import { IconLink } from "@tabler/icons-react";
+import NextLink from "next/link";
+import { useState } from "react";
 import { FollowersDialog } from "../Shared/Profile/FollowersDialog";
+import { FollowingDialog } from "../Shared/Profile/FollowingDialog";
 
 interface ProfileInfoProps {
   profile: Profile;
@@ -19,10 +19,10 @@ export const ProfileInfo = ({ profile }: ProfileInfoProps) => {
   >(false);
 
   const metaWebsite = profile.metadata?.attributes?.find(
-    (attribute) => attribute.key === "website"
+    (attribute) => attribute.key === "website",
   );
   const metaX = profile.metadata?.attributes?.find(
-    (attribute) => attribute.key === "x"
+    (attribute) => attribute.key === "x",
   );
 
   return (

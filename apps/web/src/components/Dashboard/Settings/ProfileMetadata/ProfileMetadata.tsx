@@ -1,8 +1,8 @@
-import { Profile } from "@lens-protocol/react-web";
+import { getProfileAvatarUrl, getProfileHandle } from "@/lib/profile";
+import type { Profile } from "@lens-protocol/react-web";
 import { Avatar, Button, Card, Flex, Heading, Text } from "@radix-ui/themes";
 import { IconPencil } from "@tabler/icons-react";
 import { useState } from "react";
-import { getProfileAvatarUrl, getProfileHandle } from "@/lib/profile";
 import { UpdateProfileMetadata } from "./UpdateProfileMetadata";
 
 export const ProfileMetadata = ({ profile }: { profile: Profile }) => {

@@ -1,15 +1,15 @@
 "use client";
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import { cn } from "@/lib/cn";
 import { Flex, IconButton } from "@radix-ui/themes";
 import {
   IconArrowLeft,
   IconLayoutSidebarRightExpand,
 } from "@tabler/icons-react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { cn } from "@/lib/cn";
+import type { EditorPostFormData } from "../EditorFormProvider";
 import { useEditorStore } from "../store";
-import { EditorPostFormData } from "../EditorFormProvider";
 import { EditorPublish } from "./EditorPublish";
 import { EditorSave } from "./EditorSave";
 
@@ -24,7 +24,7 @@ export const EditorHeader = () => {
   const menuOpen = useEditorStore((state) => state.menuOpen);
   const setMenuOpen = useEditorStore((state) => state.setMenuOpen);
   const [scrollDirection, setScrollDirection] = useState<"down" | "up" | null>(
-    null
+    null,
   );
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export const EditorHeader = () => {
         {
           "top-0": scrollDirection === "up",
           "-top-[80px]": scrollDirection === "down",
-        }
+        },
       )}
     >
       <Flex justify="between" align="center" className="flex-1">

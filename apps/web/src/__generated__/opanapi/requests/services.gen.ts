@@ -3,7 +3,7 @@
 import type { CancelablePromise } from './core/CancelablePromise';
 import { OpenAPI } from './core/OpenAPI';
 import { request as __request } from './core/request';
-import type { GetResponse, GetHealthResponse, GetApiPostsByPostIdData, GetApiPostsByPostIdResponse, PostApiPostsByPostIdDeleteData, PostApiPostsByPostIdDeleteResponse, PostApiPostsByPostIdUpdateData, PostApiPostsByPostIdUpdateResponse, PostApiPostsCreateResponse, GetApiPostsListData, GetApiPostsListResponse, PostApiProfileUploadAvatarData, PostApiProfileUploadAvatarResponse, PostApiProfileUploadCoverData, PostApiProfileUploadCoverResponse, PostApiProfileUploadMetadataData, PostApiProfileUploadMetadataResponse, GetNitroOpenapiJsonResponse, GetNitroScalarResponse, GetNitroSwaggerResponse } from './types.gen';
+import type { GetApiPostsByPostIdData, GetApiPostsByPostIdResponse, GetApiPostsListData, GetApiPostsListResponse, GetHealthResponse, GetNitroOpenapiJsonResponse, GetNitroScalarResponse, GetNitroSwaggerResponse, GetResponse, PostApiPostsByPostIdDeleteData, PostApiPostsByPostIdDeleteResponse, PostApiPostsByPostIdUpdateData, PostApiPostsByPostIdUpdateResponse, PostApiPostsCreateResponse, PostApiProfileUploadAvatarData, PostApiProfileUploadAvatarResponse, PostApiProfileUploadCoverData, PostApiProfileUploadCoverResponse, PostApiProfileUploadMetadataData, PostApiProfileUploadMetadataResponse } from './types.gen';
 
 export class AppRoutesService {
     /**

@@ -1,14 +1,14 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  Profile,
+  type Profile,
   ProfileReportReason,
   useReportProfile,
 } from "@lens-protocol/react-web";
 import { Button, Dialog, Select, Text, TextArea } from "@radix-ui/themes";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { usePostHog } from "posthog-js/react";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { z } from "zod";
 
 const reportProfileSchema = z.object({
   reason: z.string(),

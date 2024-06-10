@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
-import { useAccessToken } from "@lens-protocol/react-web";
 import { OpenAPI } from "@/__generated__/opanapi/requests";
+import { useAccessToken } from "@lens-protocol/react-web";
+import { useEffect } from "react";
 
 export const OpenAPIInterceptor = () => {
   const accessToken = useAccessToken();

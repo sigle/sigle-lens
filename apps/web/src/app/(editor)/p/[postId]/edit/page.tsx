@@ -1,15 +1,15 @@
 "use client";
 
-import { Callout, Flex } from "@radix-ui/themes";
-import { notFound, useParams } from "next/navigation";
-import { IconInfoCircle } from "@tabler/icons-react";
-import { PageEditorSkeleton } from "../../new/loading";
 import {
-  PostsServiceGetApiPostsByPostIdDefaultResponse,
+  type PostsServiceGetApiPostsByPostIdDefaultResponse,
   usePostsServiceGetApiPostsByPostId,
 } from "@/__generated__/opanapi/queries";
 import { EditorFormProvider } from "@/components/Editor/EditorFormProvider";
 import { EditorHeader } from "@/components/Editor/Header/EditorHeader";
+import { Callout, Flex } from "@radix-ui/themes";
+import { IconInfoCircle } from "@tabler/icons-react";
+import { notFound, useParams } from "next/navigation";
+import { PageEditorSkeleton } from "../../new/loading";
 
 export default function PostEdit() {
   const params = useParams();

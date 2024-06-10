@@ -1,11 +1,11 @@
+import { useLogoutWallet } from "@/hooks/use-logout-wallet";
+import { getProfileAvatarUrl, getProfileHandle } from "@/lib/profile";
+import { Routes } from "@/lib/routes";
 import { SessionType, useSession } from "@lens-protocol/react-web";
 import { Avatar, Button, DropdownMenu, IconButton } from "@radix-ui/themes";
+import { useTheme } from "next-themes";
 import Link from "next/link";
 import { usePostHog } from "posthog-js/react";
-import { useTheme } from "next-themes";
-import { getProfileAvatarUrl, getProfileHandle } from "@/lib/profile";
-import { useLogoutWallet } from "@/hooks/use-logout-wallet";
-import { Routes } from "@/lib/routes";
 
 export const UserDropdown = () => {
   const posthog = usePostHog();

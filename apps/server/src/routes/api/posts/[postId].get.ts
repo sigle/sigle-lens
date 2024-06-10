@@ -62,8 +62,8 @@ export default defineEventHandler((event) => {
     .where(
       and(
         eq(posts.id as any, postId),
-        eq(posts.profileId, event.context.user.profileId)
-      )
+        eq(posts.profileId, event.context.user.profileId),
+      ),
     )
     .then((rows) => rows[0]);
 

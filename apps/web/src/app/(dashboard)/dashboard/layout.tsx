@@ -1,9 +1,9 @@
 "use client";
+import { AuthProtect } from "@/components/Authentication/AuthProtect";
+import { cn } from "@/lib/cn";
 import { Button, Container, Select } from "@radix-ui/themes";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { cn } from "@/lib/cn";
-import { AuthProtect } from "@/components/Authentication/AuthProtect";
 
 export default function DashboardLayout({
   children,

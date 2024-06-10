@@ -1,10 +1,10 @@
-import { Button, Dialog, Text, TextField } from "@radix-ui/themes";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { IconArrowRight, IconSearch } from "@tabler/icons-react";
-import { useAccount } from "wagmi";
 import { useLensClient } from "@/hooks/use-lens-client";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button, Dialog, Text, TextField } from "@radix-ui/themes";
+import { IconArrowRight, IconSearch } from "@tabler/icons-react";
+import { useForm } from "react-hook-form";
+import { useAccount } from "wagmi";
+import { z } from "zod";
 import { useAuthenticationStore } from "./store";
 
 const registerProfileSchema = z.object({
@@ -16,10 +16,10 @@ type RegisterProfileFormData = z.infer<typeof registerProfileSchema>;
 export const RegisterProfileDialog = () => {
   const { address } = useAccount();
   const registerProfileOpen = useAuthenticationStore(
-    (state) => state.registerProfileOpen
+    (state) => state.registerProfileOpen,
   );
   const setRegisterProfileOpen = useAuthenticationStore(
-    (state) => state.setRegisterProfileOpen
+    (state) => state.setRegisterProfileOpen,
   );
   const lensClient = useLensClient();
 

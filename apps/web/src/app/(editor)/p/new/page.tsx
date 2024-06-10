@@ -1,10 +1,10 @@
 "use client";
 
+import { usePostsServicePostApiPostsCreate } from "@/__generated__/opanapi/queries";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import { PageEditorSkeleton } from "./loading";
-import { usePostsServicePostApiPostsCreate } from "@/__generated__/opanapi/queries";
 
 export default function PostCreate({}) {
   const router = useRouter();
