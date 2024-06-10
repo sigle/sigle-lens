@@ -37,7 +37,7 @@ import { EditorBottomInfo } from "./BottomInfo";
 import { EditorBubbleMenu } from "./BubbleMenu";
 import type { EditorPostFormData } from "./EditorFormProvider";
 import { EditorFloatingMenu } from "./FloatingMenu";
-import styles from "./editor-tiptap.module.css";
+import "./editor-tiptap.css";
 import { CodeBlockComponent } from "./extensions/CodeBlock";
 import { TipTapImage } from "./extensions/Image";
 import { TipTapMobileScroll } from "./extensions/MobileScroll";
@@ -59,8 +59,6 @@ export const EditorTipTap = () => {
   const setEditor = useEditorStore((state) => state.setEditor);
   const { mutateAsync: uploadMedia, isPending: loadingUploadImage } =
     usePostsServicePostApiPostsByPostIdUploadMedia();
-
-  console.log("EditorTipTap -> loadingUploadImage", loadingUploadImage);
 
   const editor = useEditor({
     extensions: [
@@ -148,7 +146,7 @@ export const EditorTipTap = () => {
 
   return (
     <div className="prose dark:prose-invert lg:prose-lg">
-      <EditorContent className={styles.editor} editor={editor} />
+      <EditorContent className="editor" editor={editor} />
 
       {editor && !isMobile && <EditorBubbleMenu editor={editor} />}
       {editor && !isMobile && <EditorFloatingMenu editor={editor} />}
