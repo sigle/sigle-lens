@@ -69,6 +69,7 @@ const PostEditDraft = ({ postId }: { postId: string }) => {
         <EditorCoverImage />
         <EditorTipTap />
       </Container>
+      {/* TODO editor settings */}
       {/* <EditorSettings /> */}
       <PublishDialog postId={postId} />
     </EditorFormProvider>
