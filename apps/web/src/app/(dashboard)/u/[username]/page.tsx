@@ -1,5 +1,6 @@
 "use client";
 
+import { Feed } from "@/components/Profile/Feed/ProfileFeed";
 import { ProfileHeader } from "@/components/Profile/ProfileHeader";
 import { ProfileInfo } from "@/components/Profile/ProfileInfo";
 import { FadeSlideBottom } from "@/components/ui/animations/FadeSlideBottom";
@@ -43,12 +44,14 @@ export default function Home({ params }: { params: { username: string } }) {
     <FadeSlideBottom>
       <ProfileHeader profile={profile} />
 
-      <Container size="2" px="4">
+      <Container size="2" px="4" className="pb-10">
         <ProfileInfo profile={profile} />
 
         <Heading className="mt-10" size="5">
           Latest articles
         </Heading>
+
+        <Feed profile={profile} />
       </Container>
     </FadeSlideBottom>
   );
