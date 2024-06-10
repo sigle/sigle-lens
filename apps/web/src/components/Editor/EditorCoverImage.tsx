@@ -109,7 +109,6 @@ export const EditorCoverImage = () => {
           )
         ) : (
           <div className="relative mx-auto">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={preview || resolvedWatchCoverImage || ""}
               className={cn("rounded-2", {
