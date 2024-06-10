@@ -3,7 +3,7 @@
 import type { CancelablePromise } from './core/CancelablePromise';
 import { OpenAPI } from './core/OpenAPI';
 import { request as __request } from './core/request';
-import type { GetApiPostsByPostIdData, GetApiPostsByPostIdResponse, GetApiPostsListData, GetApiPostsListResponse, GetHealthResponse, GetNitroOpenapiJsonResponse, GetNitroScalarResponse, GetNitroSwaggerResponse, GetResponse, PostApiPostsByPostIdDeleteData, PostApiPostsByPostIdDeleteResponse, PostApiPostsByPostIdUpdateData, PostApiPostsByPostIdUpdateResponse, PostApiPostsCreateResponse, PostApiProfileUploadAvatarData, PostApiProfileUploadAvatarResponse, PostApiProfileUploadCoverData, PostApiProfileUploadCoverResponse, PostApiProfileUploadMetadataData, PostApiProfileUploadMetadataResponse } from './types.gen';
+import type { GetApiPostsByPostIdData, GetApiPostsByPostIdResponse, GetApiPostsListData, GetApiPostsListResponse, GetHealthResponse, GetNitroOpenapiJsonResponse, GetNitroScalarResponse, GetNitroSwaggerResponse, GetResponse, PostApiPostsByPostIdDeleteData, PostApiPostsByPostIdDeleteResponse, PostApiPostsByPostIdUpdateData, PostApiPostsByPostIdUpdateResponse, PostApiPostsByPostIdUploadMediaData, PostApiPostsByPostIdUploadMediaResponse, PostApiPostsCreateResponse, PostApiProfileUploadAvatarData, PostApiProfileUploadAvatarResponse, PostApiProfileUploadCoverData, PostApiProfileUploadCoverResponse, PostApiProfileUploadMetadataData, PostApiProfileUploadMetadataResponse } from './types.gen';
 
 export class AppRoutesService {
     /**
@@ -77,6 +77,26 @@ export class PostsService {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/posts/{postId}/update',
+            path: {
+                postId: data.postId
+            },
+            body: data.requestBody,
+            mediaType: 'undefined'
+        });
+    }
+    
+    /**
+     * Upload media for a post.
+     * @param data The data for the request.
+     * @param data.postId
+     * @param data.requestBody
+     * @returns unknown Metadata uploaded
+     * @throws ApiError
+     */
+    public static postApiPostsByPostIdUploadMedia(data: PostApiPostsByPostIdUploadMediaData): CancelablePromise<PostApiPostsByPostIdUploadMediaResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/posts/{postId}/upload-media',
             path: {
                 postId: data.postId
             },
