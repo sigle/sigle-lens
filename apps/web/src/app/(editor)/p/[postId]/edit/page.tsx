@@ -6,6 +6,7 @@ import {
 } from "@/__generated__/opanapi/queries";
 import { EditorCoverImage } from "@/components/Editor/EditorCoverImage";
 import { EditorFormProvider } from "@/components/Editor/EditorFormProvider";
+import { EditorTipTap } from "@/components/Editor/EditorTiptap";
 import { EditorTitle } from "@/components/Editor/EditorTitle";
 import { EditorHeader } from "@/components/Editor/Header/EditorHeader";
 import { Callout, Container, Flex } from "@radix-ui/themes";
@@ -65,7 +66,7 @@ const PostEditDraft = ({ postId }: { postId: string }) => {
       <Container size="2">
         <EditorTitle />
         <EditorCoverImage />
-        {/* <EditorTipTap /> */}
+        <EditorTipTap />
       </Container>
       {/* <EditorSettings />
       <PublishDialog postId={postId} /> */}
