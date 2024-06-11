@@ -1,13 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useUpdateProfileManagers } from "@lens-protocol/react-web";
-import {
-  Button,
-  Dialog,
-  Flex,
-  Spinner,
-  Text,
-  TextField,
-} from "@radix-ui/themes";
+import { Button, Dialog, Flex, Text, TextField } from "@radix-ui/themes";
 import { usePostHog } from "posthog-js/react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";

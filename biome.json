@@ -23,6 +23,9 @@
         "noSvgWithoutTitle": "off",
         "useKeyWithClickEvents": "off"
       },
+      "correctness": {
+        "noUnusedImports": "error"
+      },
       "style": {
         "noUselessElse": "off",
         "noParameterAssign": "off"
