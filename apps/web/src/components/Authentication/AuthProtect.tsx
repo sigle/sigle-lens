@@ -26,6 +26,21 @@ export const AuthProtect = ({ children }: AuthProtectProps) => {
       </Flex>
     );
   }
+  if (session?.type === SessionType.JustWallet) {
+    return (
+      <Flex justify="center" py="7">
+        <Callout.Root color="gray" className="max-w-md">
+          <Callout.Icon>
+            <IconInfoCircle />
+          </Callout.Icon>
+          <Callout.Text>
+            Your wallet isn't linked to any Lens profile. Please sign in with a
+            Lens profile to access this page.
+          </Callout.Text>
+        </Callout.Root>
+      </Flex>
+    );
+  }
 
   return (
     <Flex justify="center" py="7">
