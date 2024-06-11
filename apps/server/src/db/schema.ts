@@ -6,7 +6,12 @@ export const users = sqliteTable("users", {
   // id refers to the user evm address
   id: text("id").primaryKey(),
 
-  createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" })
+    .$defaultFn(() => new Date())
+    .notNull(),
+  updatedAt: integer("updated_at", { mode: "timestamp" }).$onUpdate(
+    () => new Date(),
+  ),
 });
 
 export type InsertUser = typeof users.$inferInsert;
@@ -16,7 +21,12 @@ export const profiles = sqliteTable("profiles", {
   // id refers to the lens id
   id: text("id").primaryKey(),
 
-  createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" })
+    .$defaultFn(() => new Date())
+    .notNull(),
+  updatedAt: integer("updated_at", { mode: "timestamp" }).$onUpdate(
+    () => new Date(),
+  ),
 });
 
 export const profilesRelations = relations(profiles, ({ many }) => ({
@@ -37,7 +47,6 @@ export const posts = sqliteTable("posts", {
 
   profileId: text("profile_id").notNull(),
 
-  // TODO apply the same to other tables
   createdAt: integer("created_at", { mode: "timestamp" })
     .$defaultFn(() => new Date())
     .notNull(),
