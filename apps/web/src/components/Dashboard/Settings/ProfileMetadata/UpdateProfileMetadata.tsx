@@ -154,11 +154,11 @@ export const UpdateProfileMetadata = ({
 
         <div className="space-y-1">
           <Text as="div" size="2">
-            Bio
+            Bio - Markdown supported (limited to bold, italic, links)
           </Text>
           <TextArea
             placeholder="Describe yourself in a few words (supports markdown)"
-            rows={3}
+            rows={4}
             {...register("bio")}
           />
           {errors.bio && (
