@@ -12,6 +12,10 @@ export const RegisterProfileDialog = () => {
     (state) => state.setRegisterProfileOpen,
   );
 
+  const onMintProfile = () => {
+    setRegisterProfileOpen(false);
+  };
+
   return (
     <Dialog.Root
       open={registerProfileOpen}
@@ -40,7 +44,7 @@ export const RegisterProfileDialog = () => {
           highContrast
           asChild
         >
-          <Link href="/mint">
+          <Link href="/mint" onClick={onMintProfile}>
             Mint your profile <IconArrowRight size={16} />
           </Link>
         </Button>
