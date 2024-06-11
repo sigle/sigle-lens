@@ -16,13 +16,7 @@ interface PublicationAuthorSectionProps {
 export const PublicationAuthorSection = ({
   publication,
 }: PublicationAuthorSectionProps) => {
-  const {
-    data: publications,
-    // TODO loading
-    // loading,
-    // TODO error
-    // error,
-  } = usePublications({
+  const { data: publications } = usePublications({
     limit: LimitType.Ten,
     where: {
       from: [publication.by.id],

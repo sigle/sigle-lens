@@ -70,7 +70,6 @@ export const getProfileCoverUrl = (
   return profileCover;
 };
 
-// TODO replace with Lens avatar
 export const getBoringAvatarUrl = (
   text: string,
   type: "optimized" | "thumbnail" | "raw" = "optimized",

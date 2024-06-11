@@ -141,7 +141,6 @@ export const generateLensMetadataFromForm = async ({
     title: post.title,
     content: post.content,
     locale: "en",
-    // TODO add tags to the editor
     tags: [],
     // We return an empty array as the SDK is expecting at least one attachment if the field is defined
     attributes: metadataAttributes.length > 0 ? metadataAttributes : undefined,
