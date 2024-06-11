@@ -2,6 +2,7 @@
 
 import { MintProfileChooseHandleForm } from "@/components/MintProfile/ChooseHandleForm";
 import { FadeSlideBottom } from "@/components/ui/animations/FadeSlideBottom";
+import { env } from "@/env";
 import { PolygonLogo } from "@/images/PolygonLogo";
 import { useCreateProfile } from "@lens-protocol/react-web";
 import {
@@ -10,9 +11,10 @@ import {
   Card,
   Container,
   Heading,
+  Link,
   Text,
 } from "@radix-ui/themes";
-import { IconArrowRight, IconCheck } from "@tabler/icons-react";
+import { IconArrowRight, IconCheck, IconInfoCircle } from "@tabler/icons-react";
 import { useState } from "react";
 import { useAccount } from "wagmi";
 
@@ -90,6 +92,24 @@ export default function MintPage() {
                 </Text>
               </div>
             </Card>
+
+            {env.NEXT_PUBLIC_LENS_ENV === "development" ? (
+              <Callout.Root className="mt-5" variant="soft" color="gray">
+                <Callout.Icon>
+                  <IconInfoCircle />
+                </Callout.Icon>
+                <Callout.Text>
+                  On testnet you can mint a profile for free. You only need to
+                  cover the gas fees.
+                  <br />
+                  You can get free testnet MATIC{" "}
+                  <Link href="https://www.alchemy.com/faucets/polygon-amoy">
+                    here
+                  </Link>
+                  .
+                </Callout.Text>
+              </Callout.Root>
+            ) : null}
 
             <Button
               className="mt-5 w-full"
