@@ -12,13 +12,13 @@
     "db:push": "dotenvx run --env-file=.env.development -- drizzle-kit push"
   },
   "dependencies": {
-    "@dotenvx/dotenvx": "0.37.1",
+    "@dotenvx/dotenvx": "0.44.1",
     "@fleekxyz/sdk": "2.0.0-staging.1",
     "@irys/sdk": "0.1.24",
     "@lens-protocol/client": "2.2.0",
     "@lens-protocol/metadata": "1.2.0",
     "@libsql/client": "0.6.0",
-    "@sentry/node": "8.8.0",
+    "@sentry/node": "8.9.1",
     "@t3-oss/env-core": "0.10.1",
     "drizzle-orm": "0.31.2",
     "h3": "1.11.1",
