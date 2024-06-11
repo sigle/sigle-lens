@@ -1,12 +1,11 @@
-import { PublicationBookmark } from "@/components/Publication/PublicationBookmark";
-import { PublicationCollect } from "@/components/Publication/PublicationCollect";
-import { PublicationHideDialog } from "@/components/Publication/PublicationHideDialog";
-import { PublicationLike } from "@/components/Publication/PublicationLike";
-import { PublicationReportDialog } from "@/components/Publication/PublicationReportDialog";
-import { PublicationShareDialog } from "@/components/Publication/PublicationShareDialog";
+import { PublicationBookmark } from "@/components/Shared/Publication/PublicationBookmark";
+import { PublicationHideDialog } from "@/components/Shared/Publication/PublicationHideDialog";
+import { PublicationLike } from "@/components/Shared/Publication/PublicationLike";
+import { PublicationReportDialog } from "@/components/Shared/Publication/PublicationReportDialog";
+import { PublicationShareDialog } from "@/components/Shared/Publication/PublicationShareDialog";
 import { getOpenActionModule } from "@/lib/collect";
-import { invariant } from "@/lib/invariant";
 import { getProfileAvatarUrl, getProfileHandle } from "@/lib/profile";
+import { serializeLensPost } from "@/lib/publication";
 import { resolveImageUrl } from "@/lib/resolve-image-url";
 import { Routes } from "@/lib/routes";
 import { type Post, SessionType, useSession } from "@lens-protocol/react-web";
@@ -24,6 +23,7 @@ import { IconDotsVertical } from "@tabler/icons-react";
 import { format } from "date-fns";
 import Link from "next/link";
 import { useState } from "react";
+import { PublicationCollect } from "../PublicationCollect";
 
 interface PublicationCardProps {
   publication: Post;
@@ -34,29 +34,7 @@ export const PublicationCard = ({ publication }: PublicationCardProps) => {
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
   const [shareDialogOpen, setShareDialogOpen] = useState(false);
   const [hideDialogOpen, setHideDialogOpen] = useState(false);
-
-  // Get the correct metadata type to get proper typechecking
-  const metadata =
-    publication.metadata.__typename === "ArticleMetadataV3"
-      ? publication.metadata
-      : null;
-
-  invariant(metadata, "metadata should be defined");
-
-  const excerptAttribute = metadata.attributes?.find(
-    (attribute) => attribute.key === "excerpt",
-  );
-  const metaTitleAttribute = metadata.attributes?.find(
-    (attribute) => attribute.key === "meta-title",
-  );
-  const metaDescriptionAttribute = metadata.attributes?.find(
-    (attribute) => attribute.key === "meta-description",
-  );
-  const coverImageAttribute =
-    metadata.attachments?.[0] &&
-    metadata.attachments[0].__typename === "PublicationMetadataMediaImage"
-      ? metadata.attachments[0]
-      : null;
+  const post = serializeLensPost(publication);
   const openActionModule = getOpenActionModule(publication);
 
   return (
@@ -110,21 +88,18 @@ export const PublicationCard = ({ publication }: PublicationCardProps) => {
                   wordBreak: "break-word",
                 }}
               >
-                {metaTitleAttribute?.value || metadata?.title}
+                {post.metaTitle || post.title}
               </Heading>
               <Text as="p" size="2" className="line-clamp-1 md:line-clamp-3">
-                {metaDescriptionAttribute?.value || excerptAttribute?.value}
+                {post.metaDescription || post.excerpt}
               </Text>
             </div>
-            {coverImageAttribute ? (
+            {post.coverImage ? (
               <div className="w-[100px] max-w-full overflow-hidden md:w-[180px]">
                 <AspectRatio ratio={16 / 10}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={resolveImageUrl(
-                      coverImageAttribute.image.optimized?.uri ||
-                        coverImageAttribute.image.raw.uri,
-                    )}
+                    src={resolveImageUrl(post.coverImage)}
                     alt="Cover card"
                     className="size-full rounded-2 object-cover"
                   />
