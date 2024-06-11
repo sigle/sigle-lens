@@ -25,18 +25,20 @@ export default defineEventHandler(async (event) => {
     return;
   }
 
-  const accessToken = event.headers
+  const identityToken = event.headers
     .get("authorization")
     ?.replace("Bearer ", "");
 
-  if (!accessToken) {
+  if (!identityToken) {
     throw createError({
       status: 401,
       message: "Unauthorized",
     });
   }
 
-  const isTokenValid = await lensClient.authentication.verify(accessToken);
+  const isTokenValid = await lensClient.authentication.verify({
+    identityToken,
+  });
   if (!isTokenValid) {
     throw createError({
       status: 401,
@@ -44,7 +46,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const decoded = jwtDecode<LensJwtPayload>(accessToken);
+  const decoded = jwtDecode<LensJwtPayload>(identityToken);
   if (!decoded.id || !decoded.evmAddress) {
     throw createError({
       status: 401,
