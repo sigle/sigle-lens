@@ -1,4 +1,5 @@
 "use client";
+import { useAuthenticationStore } from "@/components/Authentication/store";
 import { useSignInWallet } from "@/hooks/use-sign-in-wallet";
 import {
   type Post,
@@ -21,6 +22,9 @@ export const PublicationBookmark = ({
   const posthog = usePostHog();
   const { data: session } = useSession();
   const { signInWithWallet } = useSignInWallet();
+  const setRegisterProfileOpen = useAuthenticationStore(
+    (state) => state.setRegisterProfileOpen,
+  );
   const { execute: toggleBookmark, loading: bookmarkLoading } =
     useBookmarkToggle();
 
@@ -30,7 +34,7 @@ export const PublicationBookmark = ({
       return;
     }
     if (session?.type !== SessionType.WithProfile) {
-      toast("You need a Lens account to bookmark this post.");
+      setRegisterProfileOpen(true);
       return;
     }
 
