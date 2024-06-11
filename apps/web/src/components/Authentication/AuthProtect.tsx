@@ -1,6 +1,7 @@
 import { SessionType, useSession } from "@lens-protocol/react-web";
-import { Callout, Flex, Spinner } from "@radix-ui/themes";
-import { IconInfoCircle } from "@tabler/icons-react";
+import { Button, Callout, Flex, Spinner } from "@radix-ui/themes";
+import { IconArrowRight, IconInfoCircle } from "@tabler/icons-react";
+import Link from "next/link";
 
 interface AuthProtectProps {
   children?: React.ReactNode;
@@ -34,9 +35,14 @@ export const AuthProtect = ({ children }: AuthProtectProps) => {
             <IconInfoCircle />
           </Callout.Icon>
           <Callout.Text>
-            Your wallet isn't linked to any Lens profile. Please sign in with a
-            Lens profile to access this page.
+            Your wallet isn't linked to any Lens profile. Please sign in with or
+            create a Lens profile to access this page.
           </Callout.Text>
+          <Button className="mt-2" highContrast asChild>
+            <Link href="/mint">
+              Mint your profile <IconArrowRight size={16} />
+            </Link>
+          </Button>
         </Callout.Root>
       </Flex>
     );
