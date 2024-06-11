@@ -2,7 +2,7 @@ import { lensClient } from "@/lib/lens";
 import { serializeLensPost } from "@/lib/publication";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-// import { PostClient } from "./page-client";
+import { PostClient } from "./PageClient";
 
 type Props = {
   params: { postId: string };
@@ -32,6 +32,5 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default function Post({ params }: Props) {
-  // return <PostClient params={params} />;
-  return null;
+  return <PostClient params={params} />;
 }
