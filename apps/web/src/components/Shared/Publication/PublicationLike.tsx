@@ -1,4 +1,5 @@
 "use client";
+import { useAuthenticationStore } from "@/components/Authentication/store";
 import { useSignInWallet } from "@/hooks/use-sign-in-wallet";
 import {
   type Post,
@@ -20,6 +21,9 @@ export const PublicationLike = ({ publication }: PublicationLikeProps) => {
   const posthog = usePostHog();
   const { data: session } = useSession();
   const { signInWithWallet } = useSignInWallet();
+  const setRegisterProfileOpen = useAuthenticationStore(
+    (state) => state.setRegisterProfileOpen,
+  );
   const { execute: toggleReaction, loading: reactionLoading } =
     useReactionToggle();
 
@@ -29,7 +33,7 @@ export const PublicationLike = ({ publication }: PublicationLikeProps) => {
       return;
     }
     if (session?.type !== SessionType.WithProfile) {
-      toast.error("You need a Lens account to like this post.");
+      setRegisterProfileOpen(true);
       return;
     }
 

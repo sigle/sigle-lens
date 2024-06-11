@@ -1,4 +1,10 @@
-import { type Profile, useUnfollow } from "@lens-protocol/react-web";
+import { useAuthenticationStore } from "@/components/Authentication/store";
+import {
+  type Profile,
+  SessionType,
+  useSession,
+  useUnfollow,
+} from "@lens-protocol/react-web";
 import { Button, IconButton } from "@radix-ui/themes";
 import { IconUserMinus } from "@tabler/icons-react";
 import { usePostHog } from "posthog-js/react";
@@ -11,9 +17,18 @@ interface UnfollowProps {
 
 export const UnfollowButton = ({ profile, type }: UnfollowProps) => {
   const posthog = usePostHog();
+  const setRegisterProfileOpen = useAuthenticationStore(
+    (state) => state.setRegisterProfileOpen,
+  );
+  const { data: session } = useSession();
   const { execute: unfollow, loading: loadingUnfollowing } = useUnfollow();
 
   const onUnfollow = async () => {
+    if (session?.type !== SessionType.WithProfile) {
+      setRegisterProfileOpen(true);
+      return;
+    }
+
     const result = await unfollow({
       profile,
     });
@@ -28,11 +43,16 @@ export const UnfollowButton = ({ profile, type }: UnfollowProps) => {
     toast.message("Unfollowed successfully.");
   };
 
+  const isLoggedLensProfile = session?.type === SessionType.WithProfile;
+  const isDisabled = isLoggedLensProfile
+    ? !profile.operations.canUnfollow || loadingUnfollowing
+    : false;
+
   if (type === "icon") {
     return (
       <IconButton
         variant="outline"
-        disabled={!profile.operations.canUnfollow || loadingUnfollowing}
+        disabled={isDisabled}
         loading={loadingUnfollowing}
         onClick={onUnfollow}
         title="Unfollow"
@@ -45,7 +65,7 @@ export const UnfollowButton = ({ profile, type }: UnfollowProps) => {
   return (
     <Button
       variant="outline"
-      disabled={!profile.operations.canUnfollow || loadingUnfollowing}
+      disabled={isDisabled}
       loading={loadingUnfollowing}
       onClick={onUnfollow}
     >
