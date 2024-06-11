@@ -7,6 +7,7 @@ import {
   usePublications,
 } from "@lens-protocol/react-web";
 import { Avatar, Badge, Container, Flex, Text } from "@radix-ui/themes";
+import { ProfileMarkdownDescription } from "../Shared/Profile/MarkdownDescription";
 import { PublicationCard } from "../Shared/Publication/Card/PublicationCard";
 
 interface PublicationAuthorSectionProps {
@@ -56,10 +57,11 @@ export const PublicationAuthorSection = ({
             </Badge>
           </Flex>
 
-          {/* TODO format bio markdown limited */}
           {publication.by.metadata?.bio ? (
-            <Text as="p" color="gray" size="2">
-              {publication.by.metadata.bio}
+            <Text as="p" color="gray" size="2" asChild>
+              <ProfileMarkdownDescription
+                content={publication.by.metadata.bio}
+              />
             </Text>
           ) : null}
         </div>

@@ -8,6 +8,7 @@ import NextLink from "next/link";
 import { useState } from "react";
 import { FollowersDialog } from "../Shared/Profile/FollowersDialog";
 import { FollowingDialog } from "../Shared/Profile/FollowingDialog";
+import { ProfileMarkdownDescription } from "../Shared/Profile/MarkdownDescription";
 
 interface ProfileInfoProps {
   profile: Profile;
@@ -69,10 +70,9 @@ export const ProfileInfo = ({ profile }: ProfileInfoProps) => {
         </div>
       </div>
 
-      {/* TODO format bio markdown limited */}
       {profile.metadata?.bio ? (
-        <Text mt="3" as="p" color="gray" size="2">
-          {profile.metadata.bio}
+        <Text mt="3" as="p" color="gray" size="2" asChild>
+          <ProfileMarkdownDescription content={profile.metadata.bio} />
         </Text>
       ) : null}
 
