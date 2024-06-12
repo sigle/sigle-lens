@@ -93,6 +93,11 @@ export type GetApiPostsListResponse = Array<{
     updatedAt?: string;
 }>;
 
+export type GetApiProfileResponse = {
+    id: string;
+    whitelisted: boolean;
+};
+
 export type PostApiProfileUploadAvatarData = {
     requestBody: {
         /**
@@ -271,6 +276,19 @@ export type $OpenApiTs = {
                     createdAt: string;
                     updatedAt?: string;
                 }>;
+            };
+        };
+    };
+    '/api/profile': {
+        get: {
+            res: {
+                /**
+                 * User Profile
+                 */
+                default: {
+                    id: string;
+                    whitelisted: boolean;
+                };
             };
         };
     };

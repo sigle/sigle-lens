@@ -1,7 +1,7 @@
 // generated with @7nohe/openapi-react-query-codegen@1.4.1 
 
 import { UseQueryOptions, useSuspenseQuery } from "@tanstack/react-query";
-import { AppRoutesService, InternalService, PostsService } from "../requests/services.gen";
+import { AppRoutesService, InternalService, PostsService, ProfileService } from "../requests/services.gen";
 import * as Common from "./common";
 /**
 * @returns unknown OK
@@ -33,6 +33,12 @@ export const usePostsServiceGetApiPostsByPostIdSuspense = <TData = Common.PostsS
 export const usePostsServiceGetApiPostsListSuspense = <TData = Common.PostsServiceGetApiPostsListDefaultResponse, TError = unknown, TQueryKey extends Array<unknown> = unknown[]>({ limit }: {
   limit?: number;
 } = {}, queryKey?: TQueryKey, options?: Omit<UseQueryOptions<TData, TError>, "queryKey" | "queryFn">) => useSuspenseQuery<TData, TError>({ queryKey: Common.UsePostsServiceGetApiPostsListKeyFn({ limit }, queryKey), queryFn: () => PostsService.getApiPostsList({ limit }) as TData, ...options });
+/**
+* Return the current user profile.
+* @returns unknown User Profile
+* @throws ApiError
+*/
+export const useProfileServiceGetApiProfileSuspense = <TData = Common.ProfileServiceGetApiProfileDefaultResponse, TError = unknown, TQueryKey extends Array<unknown> = unknown[]>(queryKey?: TQueryKey, options?: Omit<UseQueryOptions<TData, TError>, "queryKey" | "queryFn">) => useSuspenseQuery<TData, TError>({ queryKey: Common.UseProfileServiceGetApiProfileKeyFn(queryKey), queryFn: () => ProfileService.getApiProfile() as TData, ...options });
 /**
 * @returns unknown OK
 * @throws ApiError

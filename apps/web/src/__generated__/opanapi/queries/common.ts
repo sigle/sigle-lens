@@ -22,6 +22,10 @@ export const usePostsServiceGetApiPostsListKey = "PostsServiceGetApiPostsList";
 export const UsePostsServiceGetApiPostsListKeyFn = ({ limit }: {
   limit?: number;
 } = {}, queryKey?: Array<unknown>) => [usePostsServiceGetApiPostsListKey, ...(queryKey ?? [{ limit }])];
+export type ProfileServiceGetApiProfileDefaultResponse = Awaited<ReturnType<typeof ProfileService.getApiProfile>>;
+export type ProfileServiceGetApiProfileQueryResult<TData = ProfileServiceGetApiProfileDefaultResponse, TError = unknown> = UseQueryResult<TData, TError>;
+export const useProfileServiceGetApiProfileKey = "ProfileServiceGetApiProfile";
+export const UseProfileServiceGetApiProfileKeyFn = (queryKey?: Array<unknown>) => [useProfileServiceGetApiProfileKey, ...(queryKey ?? [])];
 export type InternalServiceGetNitroOpenapiJsonDefaultResponse = Awaited<ReturnType<typeof InternalService.getNitroOpenapiJson>>;
 export type InternalServiceGetNitroOpenapiJsonQueryResult<TData = InternalServiceGetNitroOpenapiJsonDefaultResponse, TError = unknown> = UseQueryResult<TData, TError>;
 export const useInternalServiceGetNitroOpenapiJsonKey = "InternalServiceGetNitroOpenapiJson";

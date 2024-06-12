@@ -6,11 +6,13 @@ import { Avatar, Button, DropdownMenu, IconButton } from "@radix-ui/themes";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { usePostHog } from "posthog-js/react";
+import { useAppSession } from "../Authentication/Session";
 
 export const UserDropdown = () => {
   const posthog = usePostHog();
   const { resolvedTheme, setTheme } = useTheme();
   const { data: session } = useSession();
+  const { appSession } = useAppSession();
   const { logoutWithWallet } = useLogoutWallet();
 
   const onThemeChange = () => {
@@ -44,7 +46,7 @@ export const UserDropdown = () => {
         ) : null}
       </DropdownMenu.Trigger>
       <DropdownMenu.Content align="end" color="gray" variant="soft">
-        {session.type === SessionType.WithProfile ? (
+        {session.type === SessionType.WithProfile && appSession?.whitelisted ? (
           <>
             <DropdownMenu.Item asChild>
               <Link href={"/p/new"}>Write a story</Link>

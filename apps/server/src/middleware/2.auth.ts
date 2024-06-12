@@ -69,6 +69,7 @@ export default defineEventHandler(async (event) => {
     db
       .select({
         id: profiles.id,
+        whitelisted: profiles.whitelisted,
       })
       .from(profiles)
       .where(eq(profiles.id, lensId))
@@ -97,6 +98,7 @@ export default defineEventHandler(async (event) => {
       .insert(profiles)
       .values({
         id: lensId,
+        whitelisted: false,
       })
       .returning();
 
@@ -106,6 +108,17 @@ export default defineEventHandler(async (event) => {
       properties: {
         lensId: lensId,
       },
+    });
+  }
+
+  /**
+   * Only allows requests from whitelisted profiles.
+   * Allow all requests to the /api/profile endpoint so the profile can be fetched.
+   */
+  if (event.path !== "/api/profile" && (!profile || !profile.whitelisted)) {
+    throw createError({
+      status: 401,
+      message: "Profile is not whitelisted",
     });
   }
 
