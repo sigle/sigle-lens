@@ -11,6 +11,10 @@ export const HomeLogin = () => {
         <Heading as="h1" size="4">
           Welcome to Sigle!
         </Heading>
+        <Text as="p" className="mt-4">
+          Sigle is a secured and open-source writing platform for web3 content
+          creators, NFT projects, crypto analysts and more.
+        </Text>
         <Text as="p" className="mt-2">
           Connect your wallet to get started.
         </Text>
