@@ -34,7 +34,7 @@ export default defineEventHandler((event) => {
   const profile = db
     .select({
       id: profiles.id,
-      whitelist: profiles.whitelisted,
+      whitelisted: profiles.whitelisted,
     })
     .from(profiles)
     .where(eq(profiles.id, event.context.user.profileId))

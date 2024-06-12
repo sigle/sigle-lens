@@ -12,7 +12,10 @@ export const HomeWithProfile = () => {
 
   useEffect(() => {
     // Redirect to the user profile page if the user is logged in and whitelisted
-    if (session?.type === SessionType.WithProfile && appSession?.whitelisted) {
+    if (
+      session?.type === SessionType.WithProfile &&
+      appSession?.whitelisted === true
+    ) {
       router.push(
         Routes.userProfile({
           username: session.profile.handle
