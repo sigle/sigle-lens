@@ -3,7 +3,7 @@
 import type { CancelablePromise } from './core/CancelablePromise';
 import { OpenAPI } from './core/OpenAPI';
 import { request as __request } from './core/request';
-import type { GetApiPostsByPostIdData, GetApiPostsByPostIdResponse, GetApiPostsListData, GetApiPostsListResponse, GetHealthResponse, GetNitroOpenapiJsonResponse, GetNitroScalarResponse, GetNitroSwaggerResponse, GetResponse, PostApiPostsByPostIdDeleteData, PostApiPostsByPostIdDeleteResponse, PostApiPostsByPostIdUpdateData, PostApiPostsByPostIdUpdateResponse, PostApiPostsByPostIdUploadMediaData, PostApiPostsByPostIdUploadMediaResponse, PostApiPostsByPostIdUploadMetadataData, PostApiPostsByPostIdUploadMetadataResponse, PostApiPostsCreateResponse, PostApiProfileUploadAvatarData, PostApiProfileUploadAvatarResponse, PostApiProfileUploadCoverData, PostApiProfileUploadCoverResponse, PostApiProfileUploadMetadataData, PostApiProfileUploadMetadataResponse } from './types.gen';
+import type { GetApiPostsByPostIdData, GetApiPostsByPostIdResponse, GetApiPostsListData, GetApiPostsListResponse, GetApiProfileResponse, GetHealthResponse, GetNitroOpenapiJsonResponse, GetNitroScalarResponse, GetNitroSwaggerResponse, GetResponse, PostApiPostsByPostIdDeleteData, PostApiPostsByPostIdDeleteResponse, PostApiPostsByPostIdUpdateData, PostApiPostsByPostIdUpdateResponse, PostApiPostsByPostIdUploadMediaData, PostApiPostsByPostIdUploadMediaResponse, PostApiPostsByPostIdUploadMetadataData, PostApiPostsByPostIdUploadMetadataResponse, PostApiPostsCreateResponse, PostApiProfileUploadAvatarData, PostApiProfileUploadAvatarResponse, PostApiProfileUploadCoverData, PostApiProfileUploadCoverResponse, PostApiProfileUploadMetadataData, PostApiProfileUploadMetadataResponse } from './types.gen';
 
 export class AppRoutesService {
     /**
@@ -157,6 +157,18 @@ export class PostsService {
 }
 
 export class ProfileService {
+    /**
+     * Return the current user profile.
+     * @returns unknown User Profile
+     * @throws ApiError
+     */
+    public static getApiProfile(): CancelablePromise<GetApiProfileResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/profile'
+        });
+    }
+    
     /**
      * Upload avatar for a profile.
      * @param data The data for the request.

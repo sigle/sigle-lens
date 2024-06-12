@@ -34,6 +34,12 @@ export const usePostsServiceGetApiPostsList = <TData = Common.PostsServiceGetApi
   limit?: number;
 } = {}, queryKey?: TQueryKey, options?: Omit<UseQueryOptions<TData, TError>, "queryKey" | "queryFn">) => useQuery<TData, TError>({ queryKey: Common.UsePostsServiceGetApiPostsListKeyFn({ limit }, queryKey), queryFn: () => PostsService.getApiPostsList({ limit }) as TData, ...options });
 /**
+* Return the current user profile.
+* @returns unknown User Profile
+* @throws ApiError
+*/
+export const useProfileServiceGetApiProfile = <TData = Common.ProfileServiceGetApiProfileDefaultResponse, TError = unknown, TQueryKey extends Array<unknown> = unknown[]>(queryKey?: TQueryKey, options?: Omit<UseQueryOptions<TData, TError>, "queryKey" | "queryFn">) => useQuery<TData, TError>({ queryKey: Common.UseProfileServiceGetApiProfileKeyFn(queryKey), queryFn: () => ProfileService.getApiProfile() as TData, ...options });
+/**
 * @returns unknown OK
 * @throws ApiError
 */

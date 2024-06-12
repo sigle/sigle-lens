@@ -1,7 +1,7 @@
 // generated with @7nohe/openapi-react-query-codegen@1.4.1 
 
 import { type QueryClient } from "@tanstack/react-query";
-import { AppRoutesService, InternalService, PostsService } from "../requests/services.gen";
+import { AppRoutesService, InternalService, PostsService, ProfileService } from "../requests/services.gen";
 import * as Common from "./common";
 /**
 * @returns unknown OK
@@ -33,6 +33,12 @@ export const prefetchUsePostsServiceGetApiPostsByPostId = (queryClient: QueryCli
 export const prefetchUsePostsServiceGetApiPostsList = (queryClient: QueryClient, { limit }: {
   limit?: number;
 } = {}) => queryClient.prefetchQuery({ queryKey: Common.UsePostsServiceGetApiPostsListKeyFn({ limit }), queryFn: () => PostsService.getApiPostsList({ limit }) });
+/**
+* Return the current user profile.
+* @returns unknown User Profile
+* @throws ApiError
+*/
+export const prefetchUseProfileServiceGetApiProfile = (queryClient: QueryClient) => queryClient.prefetchQuery({ queryKey: Common.UseProfileServiceGetApiProfileKeyFn(), queryFn: () => ProfileService.getApiProfile() });
 /**
 * @returns unknown OK
 * @throws ApiError
