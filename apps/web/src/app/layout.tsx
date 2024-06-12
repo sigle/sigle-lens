@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { SessionProvider } from "@/components/Authentication/Session";
 import { env } from "@/env";
 import { cn } from "@/lib/cn";
 import { Providers } from "./providers";
@@ -38,7 +39,9 @@ export default function RootLayout({
         className={cn(inter.className, "antialiased")}
         suppressHydrationWarning
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <SessionProvider>{children}</SessionProvider>
+        </Providers>
       </body>
     </html>
   );
