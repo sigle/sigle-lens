@@ -10,6 +10,7 @@ import Link from "next/link";
 import { usePostHog } from "posthog-js/react";
 import { RegisterProfileDialog } from "../Authentication/RegisterProfileDialog";
 import { SelectProfileDialog } from "../Authentication/SelectProfileDialog";
+import { useAppSession } from "../Authentication/Session";
 import { useAuthenticationStore } from "../Authentication/store";
 import { UserDropdown } from "./UserDropdown";
 
@@ -17,6 +18,7 @@ export const Header = () => {
   const posthog = usePostHog();
   const { signInWithWallet } = useSignInWallet();
   const { data: session, loading: loadingSession } = useSession();
+  const { appSession } = useAppSession();
   const { resolvedTheme, setTheme } = useTheme();
   const setRegisterProfileOpen = useAuthenticationStore(
     (state) => state.setRegisterProfileOpen,
@@ -66,19 +68,15 @@ export const Header = () => {
         {session?.type === SessionType.JustWallet ||
         session?.type === SessionType.WithProfile ? (
           <Flex align="center" gap="5">
-            {session?.type === SessionType.WithProfile ? (
+            {session?.type === SessionType.WithProfile &&
+            appSession?.whitelisted ? (
               <Button color="gray" highContrast asChild>
                 <Link href="/dashboard">Dashboard</Link>
               </Button>
             ) : null}
             {session?.type === SessionType.JustWallet ? (
-              <Button
-                variant="ghost"
-                color="gray"
-                highContrast
-                onClick={() => setRegisterProfileOpen(true)}
-              >
-                Write on Sigle
+              <Button variant="ghost" color="gray" highContrast asChild>
+                <Link href="/">Write on Sigle</Link>
               </Button>
             ) : null}
             <UserDropdown />
