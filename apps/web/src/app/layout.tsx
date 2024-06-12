@@ -21,6 +21,10 @@ export const metadata: Metadata = {
   openGraph: {
     images: [`${env.NEXT_PUBLIC_APP_URL}/images/share.png`],
   },
+  robots: {
+    follow: false,
+    index: false,
+  },
   twitter: {
     creator: "@sigleapp",
     site: "www.sigle.io",
