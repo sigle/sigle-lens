@@ -114,7 +114,7 @@ export default defineEventHandler(async (event) => {
   /**
    * Only allows requests from whitelisted profiles.
    */
-  if (!profile.whitelisted) {
+  if (!profile || !profile.whitelisted) {
     throw createError({
       status: 401,
       message: "Profile is not whitelisted",
