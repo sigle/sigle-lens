@@ -113,8 +113,9 @@ export default defineEventHandler(async (event) => {
 
   /**
    * Only allows requests from whitelisted profiles.
+   * Allow all requests to the /api/profile endpoint so the profile can be fetched.
    */
-  if (!profile || !profile.whitelisted) {
+  if (event.path !== "/api/profile" && (!profile || !profile.whitelisted)) {
     throw createError({
       status: 401,
       message: "Profile is not whitelisted",
