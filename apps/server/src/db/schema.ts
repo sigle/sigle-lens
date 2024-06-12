@@ -20,6 +20,7 @@ export type SelectUser = typeof users.$inferSelect;
 export const profiles = sqliteTable("profiles", {
   // id refers to the lens id
   id: text("id").primaryKey(),
+  whitelisted: integer("whitelisted", { mode: "boolean" }).notNull(),
 
   createdAt: integer("created_at", { mode: "timestamp" })
     .$defaultFn(() => new Date())
