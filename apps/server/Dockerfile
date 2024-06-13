@@ -1,4 +1,4 @@
-ARG NODE_VERSION=20
+ARG NODE_VERSION=22
 
 FROM node:${NODE_VERSION}-alpine AS base
 
@@ -25,7 +25,7 @@ RUN turbo prune --scope=@sigle/$APP_NAME --docker
 
 # Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat python3 g++ make
 RUN apk update
 WORKDIR /app
 
