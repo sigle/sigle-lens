@@ -2,7 +2,9 @@
 import { PostHog } from "posthog-node";
 import { env } from "~/env";
 
-const posthog = new PostHog(env.POSTHOG_API_KEY || "dev");
+const posthog = new PostHog(env.POSTHOG_API_KEY || "dev", {
+  host: env.POSTHOG_API_HOST,
+});
 
 // if (env.NODE_ENV === "development") {
 //   posthog.debug(true);
