@@ -8,6 +8,14 @@ ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable pnpm
 RUN pnpm install turbo --global
 
+# Get the required runtime dependencies
+FROM base AS prod-deps
+WORKDIR /app
+COPY . .
+WORKDIR /app/apps/$APP_NAME
+RUN node scripts/docker-runtime-deps.mjs
+RUN pnpm install --prod
+
 FROM base AS builder
 # Set working directory
 WORKDIR /app
