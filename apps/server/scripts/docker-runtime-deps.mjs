@@ -10,6 +10,7 @@ import { dirname, join } from "node:path";
 
 const __dirname = dirname(new URL(import.meta.url).pathname);
 const packageJsonPath = join(__dirname, "..", "package.json");
+const rootPackageJsonPath = join(__dirname, "..", "..", "..", "package.json");
 const dependenciesToInstall = [
   "@libsql/client",
   "drizzle-orm",
@@ -26,8 +27,16 @@ async function main() {
       acc[key] = dependencies[key];
       return acc;
     }, {});
+  packageJson.scripts = undefined;
   writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
-  console.log("Docker runtime dependencies replaced");
+  console.log("Package.json cleaned");
+
+  // Remove the keys causing problem from the root package.json
+  const rootPackageJson = JSON.parse(readFileSync(rootPackageJsonPath, "utf8"));
+  rootPackageJson.pnpm = undefined;
+  rootPackageJson.scripts = undefined;
+  writeFileSync(rootPackageJsonPath, JSON.stringify(rootPackageJson, null, 2));
+  console.log("Root package.json cleaned");
 }
 
 main().catch((e) => {

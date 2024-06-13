@@ -1,4 +1,4 @@
-ARG NODE_VERSION=22
+ARG NODE_VERSION=20
 
 FROM node:${NODE_VERSION}-alpine AS base
 
@@ -8,20 +8,21 @@ ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable pnpm
 RUN pnpm install turbo --global
 
-# Get the required runtime dependencies
-FROM base AS prod-deps
-WORKDIR /app
-COPY . .
-WORKDIR /app/apps/$APP_NAME
-RUN node scripts/docker-runtime-deps.mjs
-RUN pnpm install --prod
-
 FROM base AS builder
 # Set working directory
 WORKDIR /app
 COPY . .
 RUN turbo prune --scope=@sigle/$APP_NAME --docker
 
+# Get the required runtime dependencies
+FROM base AS prod-deps
+WORKDIR /app
+COPY --from=builder /app/out/full/ .
+RUN cat package.json
+WORKDIR /app/apps/$APP_NAME
+RUN node scripts/docker-runtime-deps.mjs
+RUN pnpm install --prod
+run ls -la
 
 # Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
@@ -51,10 +52,13 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nitro
 
 # Copy the built project
+COPY --from=prod-deps /app/node_modules ../../node_modules
+COPY --from=prod-deps /app/apps/$APP_NAME/node_modules ./node_modules
 COPY --from=installer --chown=nitro:nodejs /app/apps/$APP_NAME/.output ./.output
 COPY --from=installer --chown=nitro:nodejs /app/apps/$APP_NAME/package.json ./package.json
 COPY ./apps/$APP_NAME/.env.testnet ./.env.testnet
 COPY ./apps/$APP_NAME/migrations ./migrations
+COPY ./apps/$APP_NAME/scripts ./scripts
 
 USER nitro
 
