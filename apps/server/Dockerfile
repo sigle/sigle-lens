@@ -44,6 +44,7 @@ RUN adduser --system --uid 1001 nitro
 
 # Copy the built project
 COPY --from=installer --chown=nitro:nodejs /app/apps/$APP_NAME/.output ./.output
+COPY --from=installer --chown=nitro:nodejs /app/apps/$APP_NAME/package.json ./package.json
 COPY ./apps/$APP_NAME/.env.testnet ./.env.testnet
 COPY ./apps/$APP_NAME/migrations ./migrations
 
