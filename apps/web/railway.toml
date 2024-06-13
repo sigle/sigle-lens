@@ -5,7 +5,7 @@ dockerfilePath = "/apps/web/Dockerfile"
 
 [deploy]
 numReplicas = 1
-healthcheckPath = "/health"
+healthcheckPath = "/api/health"
 healthcheckTimeout = 300
 sleepApplication = true
 restartPolicyType = "ON_FAILURE"
