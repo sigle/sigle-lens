@@ -6,6 +6,7 @@ export const env = createEnv({
     NODE_ENV: z.enum(["development", "production"]),
     SENTRY_DSN: z.string().url().optional(),
     POSTHOG_API_KEY: z.string().optional(),
+    POSTHOG_API_HOST: z.string().optional(),
     LENS_ENV: z.enum(["development", "production"]),
     LENS_APP_ID: z.string().min(1),
     IRYS_PRIVATE_KEY: z.string().min(1),

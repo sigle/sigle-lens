@@ -16,7 +16,7 @@ export function PostHogInit() {
   useEffect(() => {
     if (!sessionLoading && session && env.NEXT_PUBLIC_POSTHOG_KEY) {
       posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY, {
-        api_host: "https://app.posthog.com",
+        api_host: env.NEXT_PUBLIC_POSTHOG_HOST,
         // Disable automatic pageview capture, as we capture manually
         capture_pageview: false,
         // We use our own events here

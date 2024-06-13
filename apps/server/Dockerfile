@@ -36,14 +36,17 @@ RUN pnpm turbo run build --filter=@sigle/$APP_NAME...
 
 
 FROM base AS runner
-WORKDIR /app
+WORKDIR /app/apps/$APP_NAME
 
 # Don't run production as root
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nitro
 
+# Copy the built project
 COPY --from=installer --chown=nitro:nodejs /app/apps/$APP_NAME/.output ./.output
+COPY ./apps/$APP_NAME/.env.testnet ./.env.testnet
+COPY ./apps/$APP_NAME/migrations ./migrations
 
 USER nitro
 
-CMD node apps/$APP_NAME/.output/server/index.mjs
+CMD pnpm dotenvx run -- node ./scripts/drizzle-migrate.mjs && pnpm dotenvx run -- node .output/server/index.mjs

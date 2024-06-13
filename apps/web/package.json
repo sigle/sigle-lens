@@ -10,6 +10,7 @@
     "codegen": "openapi-rq -i http://localhost:3001/_nitro/openapi.json --output ./src/__generated__/opanapi"
   },
   "dependencies": {
+    "@dotenvx/dotenvx": "0.44.1",
     "@hookform/resolvers": "3.6.0",
     "@lens-protocol/client": "2.2.0",
     "@lens-protocol/metadata": "1.2.0",
