@@ -4,4 +4,9 @@ export default defineNitroConfig({
   experimental: {
     openAPI: true,
   },
+  storage: {
+    lens: {
+      driver: "lruCache",
+    },
+  },
 });
