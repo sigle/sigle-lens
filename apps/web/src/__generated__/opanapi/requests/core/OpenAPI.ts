@@ -1,3 +1,4 @@
+import { env } from '@/env';
 import type { ApiRequestOptions } from './ApiRequestOptions';
 
 type Headers = Record<string, string>;
@@ -40,7 +41,7 @@ export type OpenAPIConfig = {
 };
 
 export const OpenAPI: OpenAPIConfig = {
-	BASE: 'http://localhost:3001',
+	BASE: env.NEXT_PUBLIC_API_URL,
 	CREDENTIALS: 'include',
 	ENCODE_PATH: undefined,
 	HEADERS: undefined,
