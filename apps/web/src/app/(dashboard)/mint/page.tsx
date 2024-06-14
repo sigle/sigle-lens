@@ -3,6 +3,7 @@
 import { MintProfileChooseHandleForm } from "@/components/MintProfile/ChooseHandleForm";
 import { FadeSlideBottom } from "@/components/ui/animations/FadeSlideBottom";
 import { env } from "@/env";
+import { useSignInWallet } from "@/hooks/use-sign-in-wallet";
 import { PolygonLogo } from "@/images/PolygonLogo";
 import { useCreateProfile } from "@lens-protocol/react-web";
 import {
@@ -22,6 +23,7 @@ const price = 8;
 
 export default function MintPage() {
   const { address } = useAccount();
+  const { signInWithWallet } = useSignInWallet();
   const {
     execute: createProfile,
     loading: isCreating,
@@ -33,7 +35,10 @@ export default function MintPage() {
 
   const handleMint = async () => {
     if (!handle) return;
-    if (!address) return;
+    if (!address) {
+      signInWithWallet();
+      return;
+    }
 
     const result = await createProfile({ localName: handle, to: address });
 

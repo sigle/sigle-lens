@@ -11,7 +11,6 @@ import { usePostHog } from "posthog-js/react";
 import { RegisterProfileDialog } from "../Authentication/RegisterProfileDialog";
 import { SelectProfileDialog } from "../Authentication/SelectProfileDialog";
 import { useAppSession } from "../Authentication/Session";
-import { useAuthenticationStore } from "../Authentication/store";
 import { UserDropdown } from "./UserDropdown";
 
 export const Header = () => {
@@ -20,9 +19,6 @@ export const Header = () => {
   const { data: session, loading: loadingSession } = useSession();
   const { appSession } = useAppSession();
   const { resolvedTheme, setTheme } = useTheme();
-  const setRegisterProfileOpen = useAuthenticationStore(
-    (state) => state.setRegisterProfileOpen,
-  );
 
   const onThemeChange = () => {
     const newTheme = resolvedTheme === "dark" ? "light" : "dark";
