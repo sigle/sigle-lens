@@ -20,11 +20,9 @@ RUN turbo prune --scope=@sigle/$APP_NAME --docker
 FROM base AS prod-deps
 WORKDIR /app
 COPY --from=builder /app/out/full/ .
-RUN cat package.json
 WORKDIR /app/apps/$APP_NAME
 RUN node scripts/docker-runtime-deps.mjs
 RUN pnpm install --prod
-run ls -la
 
 
 # Add lockfile and package.json's of isolated subworkspace

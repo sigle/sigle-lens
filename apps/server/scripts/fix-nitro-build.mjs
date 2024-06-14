@@ -8,27 +8,45 @@ import { dirname, join } from "node:path";
 
 const __dirname = dirname(new URL(import.meta.url).pathname);
 const directoryPath = join(__dirname, "..", "./.output");
-const importToFind = `import 'lodash/isObject';`;
-const importToReplace = `import 'lodash/isObject.js';`;
 
-function getAllFiles(dirPath, arrayOfFiles) {
+// Array of find/replace operations
+const operations = [
+  {
+    find: `import 'lodash/isObject';`,
+    replace: `import 'lodash/isObject.js';`,
+  },
+  {
+    find: `from 'lodash/isObject';`,
+    replace: `from 'lodash/isObject.js';`,
+  },
+];
+
+function getAllFiles(dirPath, arrayOfFiles = []) {
   const files = readdirSync(dirPath);
-  arrayOfFiles = arrayOfFiles || [];
   for (const file of files) {
-    if (statSync(join(dirPath, file)).isDirectory()) {
-      arrayOfFiles = getAllFiles(join(dirPath, file), arrayOfFiles);
+    const filePath = join(dirPath, file);
+    if (statSync(filePath).isDirectory()) {
+      arrayOfFiles = getAllFiles(filePath, arrayOfFiles);
     } else {
-      arrayOfFiles.push(join(dirPath, file));
+      arrayOfFiles.push(filePath);
     }
   }
   return arrayOfFiles;
 }
 
-function replaceImportInFile(filePath) {
-  const fileContent = readFileSync(filePath, "utf8");
-  if (fileContent.includes(importToFind)) {
-    const updatedContent = fileContent.replace(importToFind, importToReplace);
-    writeFileSync(filePath, updatedContent, "utf8");
+function replaceImportsInFile(filePath, operations) {
+  let fileContent = readFileSync(filePath, "utf8");
+  let fileUpdated = false;
+
+  for (const { find, replace } of operations) {
+    if (fileContent.includes(find)) {
+      fileContent = fileContent.replace(new RegExp(find, "g"), replace);
+      fileUpdated = true;
+    }
+  }
+
+  if (fileUpdated) {
+    writeFileSync(filePath, fileContent, "utf8");
     console.log(`Replaced in file: ${filePath}`);
   }
 }
@@ -38,7 +56,10 @@ async function main() {
   const jsFiles = allFiles.filter(
     (file) => file.endsWith(".js") || file.endsWith(".mjs"),
   );
-  jsFiles.forEach(replaceImportInFile);
+
+  for (const file of jsFiles) {
+    replaceImportsInFile(file, operations);
+  }
 
   console.info("Nitro build fix succeeded");
   process.exit(0);
