@@ -22,7 +22,7 @@
     "@t3-oss/env-core": "0.10.1",
     "drizzle-orm": "0.31.2",
     "h3": "1.11.1",
-    "jwt-decode": "4.0.0",
+    "jose": "5.4.0",
     "nanoid": "5.0.7",
     "nitro-cors": "0.7.1",
     "posthog-node": "4.0.1",

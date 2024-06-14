@@ -1,12 +1,13 @@
 import { eq } from "drizzle-orm";
-import { type JwtPayload, jwtDecode } from "jwt-decode";
+import * as jose from "jose";
 import { db } from "~/db/db";
 import { profiles, users } from "~/db/schema";
 import { lensClient } from "~/lib/lens";
 
-interface LensJwtPayload extends JwtPayload {
+interface LensJwtPayload {
   id?: string;
   evmAddress?: string;
+  role?: "profile_identity";
 }
 
 export interface AuthenticatedUser {
@@ -46,8 +47,12 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const decoded = jwtDecode<LensJwtPayload>(identityToken);
-  if (!decoded.id || !decoded.evmAddress) {
+  const decoded = jose.decodeJwt<LensJwtPayload>(identityToken);
+  if (
+    !decoded.id ||
+    !decoded.evmAddress ||
+    decoded.role !== "profile_identity"
+  ) {
     throw createError({
       status: 401,
       message: "Unauthorized",
