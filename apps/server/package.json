@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "nitro build",
+    "build": "nitro build && node scripts/fix-nitro-build.mjs",
     "dev": "dotenvx run --env-file=.env.development.local --env-file=.env.development -- nitro dev",
     "prepare": "nitro prepare",
     "preview": "node .output/server/index.mjs",

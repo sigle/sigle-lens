@@ -45,7 +45,6 @@ RUN pnpm install
 COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
 RUN pnpm turbo run build --filter=@sigle/$APP_NAME...
-RUN node scripts/fix-nitro-build.mjs
 
 
 FROM base AS runner
