@@ -3,6 +3,12 @@ import * as Sentry from "@sentry/node";
 import { H3Error } from "h3";
 import { env } from "~/env";
 
+const ignoreErrors = [
+  401, // Unauthorized
+  404, // Not Found
+  422, // Unprocessable Entity
+];
+
 export default defineNitroPlugin((nitroApp) => {
   Sentry.init({
     dsn: env.SENTRY_DSN,
@@ -14,11 +20,9 @@ export default defineNitroPlugin((nitroApp) => {
   });
 
   nitroApp.hooks.hook("error", (error) => {
-    // Do not handle 404s and 422s
-    if (error instanceof H3Error) {
-      if (error.statusCode === 404 || error.statusCode === 422) {
-        return;
-      }
+    // Do not report 401s, 404s and 422s
+    if (error instanceof H3Error && ignoreErrors.includes(error.statusCode)) {
+      return;
     }
 
     Sentry.captureException(error);
