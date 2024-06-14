@@ -1,18 +1,15 @@
-import { eq } from "drizzle-orm";
-import * as jose from "jose";
-import { db } from "~/db/db";
-import { profiles, users } from "~/db/schema";
-import { lensClient } from "~/lib/lens";
-
-interface LensJwtPayload {
-  id?: string;
-  evmAddress?: string;
-  role?: "profile_identity";
-}
+import { createUserData, validateLensToken } from "~/utils/auth";
 
 export interface AuthenticatedUser {
   userId: string;
   profileId: string;
+}
+
+interface LensCacheToken {
+  evmAddress: string;
+  lensId: string;
+  whitelisted: boolean;
+  date: number;
 }
 
 /**
@@ -37,82 +34,38 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const isTokenValid = await lensClient.authentication.verify({
-    identityToken,
-  });
-  if (!isTokenValid) {
-    throw createError({
-      status: 401,
-      message: "Unauthorized",
-    });
+  let evmAddress: string;
+  let lensId: string;
+  let whitelisted: boolean;
+  let cachedData =
+    await useStorage("lens").getItem<LensCacheToken>(identityToken);
+
+  // Clear the cache after 10 minutes
+  if (cachedData && Date.now() - cachedData.date > 600000) {
+    await useStorage("lens").removeItem(identityToken);
+    cachedData = null;
   }
 
-  const decoded = jose.decodeJwt<LensJwtPayload>(identityToken);
-  if (
-    !decoded.id ||
-    !decoded.evmAddress ||
-    decoded.role !== "profile_identity"
-  ) {
-    throw createError({
-      status: 401,
-      message: "Unauthorized",
+  if (cachedData) {
+    evmAddress = cachedData.evmAddress;
+    lensId = cachedData.lensId;
+    whitelisted = cachedData.whitelisted;
+  } else {
+    const data = await validateLensToken(identityToken);
+    evmAddress = data.evmAddress;
+    lensId = data.lensId;
+
+    const { profile } = await createUserData(event, {
+      evmAddress,
+      lensId,
     });
-  }
+    whitelisted = profile.whitelisted;
 
-  const evmAddress = decoded.evmAddress.toLowerCase();
-  const lensId = decoded.id;
-
-  // Get or create the user and linked profile.
-  const [user, profile] = await Promise.all([
-    db
-      .select({
-        id: users.id,
-      })
-      .from(users)
-      .where(eq(users.id, evmAddress))
-      .then((rows) => rows[0]),
-    db
-      .select({
-        id: profiles.id,
-        whitelisted: profiles.whitelisted,
-      })
-      .from(profiles)
-      .where(eq(profiles.id, lensId))
-      .then((rows) => rows[0]),
-  ]);
-
-  if (!user) {
-    const insertedUsers = await db
-      .insert(users)
-      .values({
-        id: evmAddress,
-      })
-      .returning();
-
-    event.context.$posthog.capture({
-      distinctId: insertedUsers[0].id,
-      event: "user created",
-      properties: {
-        address: evmAddress,
-      },
-    });
-  }
-
-  if (!profile) {
-    const insertedProfiles = await db
-      .insert(profiles)
-      .values({
-        id: lensId,
-        whitelisted: false,
-      })
-      .returning();
-
-    event.context.$posthog.capture({
-      distinctId: insertedProfiles[0].id,
-      event: "profile created",
-      properties: {
-        lensId: lensId,
-      },
+    await useStorage("lens").setItem<LensCacheToken>(identityToken, {
+      evmAddress,
+      lensId,
+      whitelisted: profile.whitelisted,
+      date: Date.now(),
     });
   }
 
@@ -120,7 +73,7 @@ export default defineEventHandler(async (event) => {
    * Only allows requests from whitelisted profiles.
    * Allow all requests to the /api/profile endpoint so the profile can be fetched.
    */
-  if (event.path !== "/api/profile" && (!profile || !profile.whitelisted)) {
+  if (event.path !== "/api/profile" && !whitelisted) {
     throw createError({
       status: 401,
       message: "Profile is not whitelisted",
