@@ -60,6 +60,16 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+      
+      - name: Install Fly cli
+        if: github.event_name != 'pull_request'
+        uses: superfly/flyctl-actions/setup-flyctl@v1
+
+      - name: Deploy to Fly
+        if: github.event_name != 'pull_request'
+        run: flyctl deploy --remote-only --config apps/server/fly.toml --image ghcr.io/sigle/sigle-lens/server@${{ steps.build-and-push.outputs.digest }}
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN_SERVER_TESTNET }}
 
   build-publish-web:
     runs-on: ubuntu-latest
