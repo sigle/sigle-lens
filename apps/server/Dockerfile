@@ -8,11 +8,13 @@ ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable pnpm
 RUN pnpm install turbo --global
 
+
 FROM base AS builder
 # Set working directory
 WORKDIR /app
 COPY . .
 RUN turbo prune --scope=@sigle/$APP_NAME --docker
+
 
 # Get the required runtime dependencies
 FROM base AS prod-deps
@@ -23,6 +25,7 @@ WORKDIR /app/apps/$APP_NAME
 RUN node scripts/docker-runtime-deps.mjs
 RUN pnpm install --prod
 run ls -la
+
 
 # Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
@@ -42,6 +45,7 @@ RUN pnpm install
 COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
 RUN pnpm turbo run build --filter=@sigle/$APP_NAME...
+RUN node scripts/fix-nitro-build.mjs
 
 
 FROM base AS runner
