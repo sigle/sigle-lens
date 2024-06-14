@@ -48,6 +48,8 @@ RUN pnpm turbo run build --filter=@sigle/$APP_NAME...
 FROM base AS runner
 WORKDIR /app/apps/$APP_NAME
 
+ENV NODE_ENV production
+
 # Don't run production as root
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nitro
