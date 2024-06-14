@@ -17,4 +17,4 @@ image = "ghcr.io/sigle/sigle-lens/server:main"
 
 [[vm]]
   size = 'shared-cpu-1x'
-  memory = '256mb'
+  memory = '512mb'
