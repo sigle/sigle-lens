@@ -12,13 +12,6 @@ export const size = {
 
 export const contentType = "image/png";
 
-const interRegularPromise = fetch(
-  new URL("../../../../../public/fonts/Inter-Regular.ttf", import.meta.url),
-).then((res) => res.arrayBuffer());
-const interMediumPromise = fetch(
-  new URL("../../../../../public/fonts/Inter-Medium.ttf", import.meta.url),
-).then((res) => res.arrayBuffer());
-
 // Image generation
 export default async function Image({
   params,
@@ -37,10 +30,18 @@ export default async function Image({
     return Response.json({ error: "Not found" }, { status: 404 });
   }
 
-  const [interRegular, interMedium] = await Promise.all([
-    interRegularPromise,
-    interMediumPromise,
-  ]);
+  // Disable font loading for now as it's throwing an error when loading the local font
+  // const interRegularPromise = fetch(
+  //   new URL("@/assets/fonts/Inter-Regular.ttf", import.meta.url),
+  // ).then((res) => res.arrayBuffer());
+  // const interMediumPromise = fetch(
+  //   new URL("@/assets/fonts/Inter-Medium.ttf", import.meta.url),
+  // ).then((res) => res.arrayBuffer());
+
+  // const [interRegular, interMedium] = await Promise.all([
+  //   interRegularPromise,
+  //   interMediumPromise,
+  // ]);
 
   const profile = publication.by as unknown as Profile;
   const avatar = getProfileAvatarUrl(profile);
@@ -113,20 +114,20 @@ export default async function Image({
     </div>,
     {
       ...size,
-      fonts: [
-        {
-          name: "Inter",
-          data: interRegular,
-          style: "normal",
-          weight: 400,
-        },
-        {
-          name: "Inter",
-          data: interMedium,
-          style: "normal",
-          weight: 500,
-        },
-      ],
+      // fonts: [
+      //   {
+      //     name: "Inter",
+      //     data: interRegular,
+      //     style: "normal",
+      //     weight: 400,
+      //   },
+      //   {
+      //     name: "Inter",
+      //     data: interMedium,
+      //     style: "normal",
+      //     weight: 500,
+      //   },
+      // ],
     },
   );
 }
