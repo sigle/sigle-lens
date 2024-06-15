@@ -1,3 +1,4 @@
+import type { ProfileFragment } from "@lens-protocol/client";
 import type { Profile, ProfilePictureSet } from "@lens-protocol/react-web";
 import { resolveImageUrl } from "./resolve-image-url";
 
@@ -78,7 +79,9 @@ export const getBoringAvatarUrl = (
   return `https://source.boringavatars.com/marble/${size}/${text}?square&colors=6558FF,FF6E3C,B9F3DE,D0C9FF,FFDAAE`;
 };
 
-export const getProfileHandle = (profile: Profile): string => {
+export const getProfileHandle = (
+  profile: Profile | ProfileFragment,
+): string => {
   return profile.handle
     ? `${profile.handle.namespace}/${profile.handle.localName}`
     : profile.id;

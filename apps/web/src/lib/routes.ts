@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Inspired by:
  * https://www.flightcontrol.dev/blog/fix-nextjs-routing-to-have-full-type-safety
@@ -57,8 +59,8 @@ export const Routes = {
 };
 
 type RouteBuilder<Params extends z.ZodSchema, Search extends z.ZodSchema> = {
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  (p?: z.input<Params>, options?: { search?: z.input<Search> }): any;
+  (p?: z.input<Params>, options?: { search?: z.input<Search> }): string;
+  parse: (input: z.input<Params>) => z.output<Params>;
   useParams: () => z.output<Params>;
   useSearchParams: () => z.output<Search>;
   params: z.output<Params>;
@@ -76,13 +78,27 @@ function makeRoute<Params extends z.ZodSchema, Search extends z.ZodSchema>(
     return [baseUrl, searchString ? `?${searchString}` : ""].join("");
   };
 
+  routeBuilder.parse = function parse(args: z.input<Params>): z.output<Params> {
+    const res = paramsSchema.safeParse(args);
+    if (!res.success) {
+      const routeName =
+        Object.entries(Routes).find(
+          ([, route]) => (route as unknown) === routeBuilder,
+        )?.[0] || "(unknown route)";
+      throw new Error(
+        `Invalid route params for route ${routeName}: ${res.error.message}`,
+      );
+    }
+    return res.data;
+  };
+
   routeBuilder.useParams = function useParams(): z.output<Params> {
-    const routeName =
-      Object.entries(Routes).find(
-        ([, route]) => (route as unknown) === routeBuilder,
-      )?.[0] || "(unknown route)";
     const res = paramsSchema.safeParse(useNextParams());
     if (!res.success) {
+      const routeName =
+        Object.entries(Routes).find(
+          ([, route]) => (route as unknown) === routeBuilder,
+        )?.[0] || "(unknown route)";
       throw new Error(
         `Invalid route params for route ${routeName}: ${res.error.message}`,
       );
@@ -91,14 +107,14 @@ function makeRoute<Params extends z.ZodSchema, Search extends z.ZodSchema>(
   };
 
   routeBuilder.useSearchParams = function useSearchParams(): z.output<Search> {
-    const routeName =
-      Object.entries(Routes).find(
-        ([, route]) => (route as unknown) === routeBuilder,
-      )?.[0] || "(unknown route)";
     const res = search.safeParse(
       convertURLSearchParamsToObject(useNextSearchParams()),
     );
     if (!res.success) {
+      const routeName =
+        Object.entries(Routes).find(
+          ([, route]) => (route as unknown) === routeBuilder,
+        )?.[0] || "(unknown route)";
       throw new Error(
         `Invalid search params for route ${routeName}: ${res.error.message}`,
       );
