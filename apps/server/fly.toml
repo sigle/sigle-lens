@@ -15,6 +15,9 @@ image = "ghcr.io/sigle/sigle-lens/server:main"
   min_machines_running = 0
   processes = ['app']
 
+[deploy]
+  release_command = "pnpm dotenvx run -- node ./scripts/drizzle-migrate.mjs"
+
 [[vm]]
   size = 'shared-cpu-1x'
   memory = '512mb'

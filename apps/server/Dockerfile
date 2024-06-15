@@ -66,4 +66,4 @@ COPY ./apps/$APP_NAME/scripts ./scripts
 
 USER nitro
 
-CMD pnpm dotenvx run -- node ./scripts/drizzle-migrate.mjs && pnpm dotenvx run -- node .output/server/index.mjs
+CMD pnpm dotenvx run -- node .output/server/index.mjs
