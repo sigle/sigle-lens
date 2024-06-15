@@ -5,7 +5,8 @@ FROM node:${NODE_VERSION}-alpine AS base
 ENV APP_NAME="server"
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable pnpm
+COPY --link ./package.json ./
+RUN corepack enable && corepack install
 RUN pnpm install turbo --global
 
 

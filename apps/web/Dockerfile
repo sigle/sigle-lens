@@ -7,7 +7,8 @@ ARG RELEASE_ENV
 ENV APP_NAME="web"
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable pnpm
+COPY --link ./package.json ./
+RUN corepack enable && corepack install
 RUN pnpm install turbo --global
 
 
