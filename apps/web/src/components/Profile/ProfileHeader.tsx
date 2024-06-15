@@ -1,3 +1,5 @@
+"use client";
+
 import { env } from "@/env";
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 import { cn } from "@/lib/cn";

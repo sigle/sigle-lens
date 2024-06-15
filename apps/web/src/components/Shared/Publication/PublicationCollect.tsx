@@ -1,3 +1,5 @@
+"use client";
+
 import { getProfileAvatarUrl, getProfileHandle } from "@/lib/profile";
 import { OpenActionCategoryType } from "@lens-protocol/client";
 import {

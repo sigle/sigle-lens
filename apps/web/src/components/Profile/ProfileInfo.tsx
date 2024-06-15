@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/lib/cn";
 import { prettifyUrl } from "@/lib/prettify-url";
 import { getProfileHandle } from "@/lib/profile";

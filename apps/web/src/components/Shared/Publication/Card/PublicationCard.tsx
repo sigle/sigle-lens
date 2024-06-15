@@ -1,3 +1,5 @@
+"use client";
+
 import { PublicationBookmark } from "@/components/Shared/Publication/PublicationBookmark";
 import { PublicationHideDialog } from "@/components/Shared/Publication/PublicationHideDialog";
 import { PublicationLike } from "@/components/Shared/Publication/PublicationLike";
