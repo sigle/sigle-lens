@@ -17,6 +17,8 @@ services:
         - path: ./apps/server/
           target: /app/apps/server
           action: sync
+          ignore:
+            - ./apps/server/sqlite.db
     volumes:
       - ./apps/server/sqlite.db/:/app/apps/server/sqlite.db
 
