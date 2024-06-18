@@ -1,4 +1,3 @@
-import { resolveImageUrl } from "@/lib/resolve-image-url";
 import TipTapImageBase, { type ImageOptions } from "@tiptap/extension-image";
 import { ReactNodeViewRenderer } from "@tiptap/react";
 import { nanoid } from "nanoid";
@@ -41,6 +40,12 @@ export const TipTapImage = TipTapImageBase.extend<
       uploadId: {
         default: null,
       },
+
+      // Attribute used to override the src attribute with a preview while the file is being
+      // propagated to IPFS.
+      preloadUrl: {
+        default: null,
+      },
     };
   },
 
@@ -67,32 +72,28 @@ export const TipTapImage = TipTapImageBase.extend<
           this.options
             .uploadFile(file)
             .then((imageUrl) => {
-              const resolvedImageUrl = resolveImageUrl(imageUrl);
-              // Once the file is uploaded, we preload it so there is no flickering.
-              const image = new Image();
-              image.src = resolvedImageUrl;
-              image.onload = () => {
-                const transaction = editor.state.tr;
-                editor.state.doc.descendants((node, pos) => {
-                  if (
-                    node.type.name === "image" &&
-                    node.attrs.uploadId === uploadId
-                  ) {
-                    const attrs = {
-                      ...node.attrs,
-                      src: imageUrl,
-                      uploadId: undefined,
-                    };
-                    const newNode = node.type.create(
-                      attrs,
-                      node.content,
-                      node.marks,
-                    );
-                    transaction.replaceWith(pos, pos + node.nodeSize, newNode);
-                  }
-                });
-                editor.view.dispatch(transaction);
-              };
+              // The file can take some time to propagate to IPFS. So we keep the local preview of the file
+              const transaction = editor.state.tr;
+              editor.state.doc.descendants((node, pos) => {
+                if (
+                  node.type.name === "image" &&
+                  node.attrs.uploadId === uploadId
+                ) {
+                  const attrs = {
+                    ...node.attrs,
+                    src: imageUrl,
+                    uploadId: undefined,
+                    preloadUrl: preview,
+                  };
+                  const newNode = node.type.create(
+                    attrs,
+                    node.content,
+                    node.marks,
+                  );
+                  transaction.replaceWith(pos, pos + node.nodeSize, newNode);
+                }
+              });
+              editor.view.dispatch(transaction);
             })
             .catch((error) => {
               // If the upload fails, we remove the image node from the document

@@ -5,7 +5,9 @@ import { type NodeViewProps, NodeViewWrapper } from "@tiptap/react";
 
 export const ImageComponent = (props: NodeViewProps) => {
   const alt = props.node.attrs.alt || "";
-  const src = resolveImageUrl(props.node.attrs.src || "");
+  const src = props.node.attrs.preloadUrl
+    ? props.node.attrs.preloadUrl
+    : resolveImageUrl(props.node.attrs.src || "");
   const uploadId = props.node.attrs.uploadId;
 
   return (
