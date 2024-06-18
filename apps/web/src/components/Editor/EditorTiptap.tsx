@@ -38,6 +38,7 @@ import { EditorBubbleMenu } from "./BubbleMenu";
 import type { EditorPostFormData } from "./EditorFormProvider";
 import { EditorFloatingMenu } from "./FloatingMenu";
 import "./editor-tiptap.css";
+import { toast } from "sonner";
 import { CodeBlockComponent } from "./extensions/CodeBlock";
 import { TipTapImage } from "./extensions/Image";
 import { TipTapMobileScroll } from "./extensions/MobileScroll";
@@ -97,16 +98,29 @@ export const EditorTipTap = () => {
 
           const formData = new FormData();
           formData.append("file", file);
-          const data = await uploadMedia({
-            postId,
-            // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-            requestBody: formData as any,
-          });
 
-          posthog.capture("editor_image_upload_success", {
-            postId,
-          });
-          return data.url;
+          try {
+            const data = await uploadMedia({
+              postId,
+              // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+              requestBody: formData as any,
+            });
+
+            posthog.capture("editor_image_upload_success", {
+              postId,
+            });
+            return data.url;
+            // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+          } catch (error: any) {
+            toast.error("Failed to upload image", {
+              description: error.message,
+            });
+            posthog.capture("editor_image_upload_error", {
+              postId,
+              error: error.message,
+            });
+            throw error;
+          }
         },
       }),
       // Marks
