@@ -11,7 +11,7 @@ interface SessionProviderProps {
 
 export const SessionProvider = ({ children }: SessionProviderProps) => {
   const setSession = useSessionStore((state) => state.setSession);
-  const { data: session } = useSession({});
+  const { data: session } = useSession();
   const { data: profile } = useProfileServiceGetApiProfile(undefined, {
     enabled: session?.type === SessionType.WithProfile,
   });

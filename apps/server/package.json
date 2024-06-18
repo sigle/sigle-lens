@@ -12,10 +12,10 @@
     "db:push": "dotenvx run --env-file=.env.development -- drizzle-kit push"
   },
   "dependencies": {
-    "@dotenvx/dotenvx": "0.44.1",
-    "@fleekxyz/sdk": "1.4.2",
-    "@irys/sdk": "0.2.2",
-    "@lens-protocol/client": "2.2.0",
+    "@dotenvx/dotenvx": "0.44.5",
+    "@fleek-platform/sdk": "2.1.4",
+    "@irys/sdk": "0.2.3",
+    "@lens-protocol/client": "2.3.0",
     "@lens-protocol/metadata": "1.2.0",
     "@libsql/client": "0.4.3",
     "@sentry/node": "8.9.2",
