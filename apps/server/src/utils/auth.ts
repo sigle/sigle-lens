@@ -3,6 +3,7 @@ import type { H3Event } from "h3";
 import * as jose from "jose";
 import { db } from "~/db/db";
 import { profiles, users } from "~/db/schema";
+import { env } from "~/env";
 import { lensClient } from "~/lib/lens";
 
 interface LensJwtPayload {
@@ -97,7 +98,8 @@ export const createUserData = async (
       .insert(profiles)
       .values({
         id: lensId,
-        whitelisted: false,
+        // Always whitelist profiles in development
+        whitelisted: env.NODE_ENV === "development",
       })
       .returning();
 
