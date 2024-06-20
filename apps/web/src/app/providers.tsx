@@ -46,9 +46,6 @@ const lensConfig: LensConfig = {
     env.NEXT_PUBLIC_LENS_ENV === "production" ? production : development,
 };
 
-/**
- *
- */
 const OpenAPIInterceptor = dynamic(
   () =>
     import("@/components/Authentication/OpenAPIInterceptor").then(
